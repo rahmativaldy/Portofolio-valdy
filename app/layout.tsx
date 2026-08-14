@@ -105,14 +105,17 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        {/* Theme initializer — run before hydration so the browser matches the default dark theme immediately */}
+        {/* Theme initializer — run before hydration so the browser matches stored theme or system preference */}
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function () {
             try {
-              var theme = localStorage.getItem('theme') || 'dark';
+              var theme = localStorage.getItem('theme');
+              if (!theme) {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              }
               document.documentElement.classList.toggle('dark', theme === 'dark');
             } catch (e) {
               // Ignore if localStorage is unavailable

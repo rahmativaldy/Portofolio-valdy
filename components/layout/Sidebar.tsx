@@ -51,7 +51,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         isOpen ? 'translate-x-0 md:flex' : '-translate-x-full md:hidden'
       }`}
     >
-      {/* Sidebar top bar */}
+      {/* Sidebar top bar (fixed) */}
       <div className="h-14 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-5 shrink-0">
         <span className="text-xs font-mono font-medium tracking-wider uppercase text-zinc-400 dark:text-zinc-500">
           Workspace
@@ -70,14 +70,14 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       </div>
 
       {/* Fixed Profile Identity Block */}
-      <div className="shrink-0 border-b border-zinc-200 dark:border-zinc-800 py-3">
+      <div className="shrink-0 border-b border-zinc-200 dark:border-zinc-800 py-2">
         <ProfileIdentity />
       </div>
 
       {/* Dedicated Scrollable Navigation Container */}
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
         <nav className="p-3 space-y-1" role="navigation" aria-label="Sidebar Navigation">
-          <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1.5 font-medium">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1 font-semibold">
             Navigation
           </div>
           {NAV_ITEMS.map((item, index) => {
@@ -90,9 +90,9 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 onClick={() => {
                   handleNavigation(item.id);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs font-mono tracking-tight rounded-md transition-colors group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
+                className={`w-full flex items-center gap-3 px-3 py-2 text-xs font-mono tracking-tight rounded-md transition-colors group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
                   isActive 
-                    ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 font-semibold shadow-xs' 
+                    ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold shadow-xs' 
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-100'
                 }`}
               >

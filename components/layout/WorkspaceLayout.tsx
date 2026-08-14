@@ -5,7 +5,6 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { ContentArea } from './ContentArea';
 import { StatusBar } from './StatusBar';
-import { CustomCursor } from '@/components/visual/CustomCursor';
 
 interface WorkspaceLayoutProps {
   children: React.ReactNode;
@@ -78,9 +77,6 @@ export function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
 
       {/* Status Bar */}
       <StatusBar />
-
-      {/* Interactive Custom Animated Cursor */}
-      <CustomCursor />
     </div>
   );
 }
