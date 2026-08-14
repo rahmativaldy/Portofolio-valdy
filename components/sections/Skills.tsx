@@ -7,77 +7,60 @@ export function Skills() {
   const { setActiveSection } = useWorkspace();
 
   return (
-    <section className="py-12 md:py-14 lg:py-16 px-4 md:px-8 lg:px-12 max-w-6xl xl:max-w-7xl mx-auto space-y-16 animate-fadeIn" id="skills">
+    <section className="py-8 md:py-12 px-6 md:px-10 max-w-6xl xl:max-w-7xl mx-auto space-y-12 animate-fadeIn" id="skills">
       {/* Section Header */}
-      <header className="max-w-3xl space-y-5">
-        <div className="inline-flex items-center gap-3">
-          <span className="text-xs font-mono uppercase tracking-[0.35em] text-blue-600 dark:text-blue-400 font-medium">
-            Toolkit
-          </span>
-          <span className="h-px flex-1 bg-blue-500/20 dark:bg-blue-500/30" aria-hidden="true" />
+      <header className="border-b border-zinc-200 dark:border-zinc-800 pb-8 space-y-3">
+        <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          Toolkit & Technology Inventory
         </div>
-        <div className="space-y-4">
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-[1.1]">
-            The tools and technologies I actually use to design and build.
-          </h2>
-          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
-            A practical technical inventory of the technologies, frameworks, and workflows I rely on for interface design, mobile product development, and connected web experiences.
-          </p>
-        </div>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight">
+          Technologies & Tools
+        </h1>
+        <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+          A categorized inventory of the technologies, state architectures, frameworks, and workflow tools I use to design, build, and ship digital products.
+        </p>
       </header>
 
-      {/* Conceptual Technology Inventory Groups */}
-      <div className="space-y-16">
+      {/* Categorized Inventory Groups */}
+      <div className="space-y-12">
         {SKILL_GROUPS.map((group) => (
           <section
             key={group.id}
-            className="border-t border-zinc-200/80 dark:border-zinc-800/70 pt-10 grid gap-8 md:grid-cols-[140px_1fr] items-start"
+            className="border-t border-zinc-200 dark:border-zinc-800 pt-8 grid gap-6 md:grid-cols-12 items-start"
           >
-            {/* Large Decorative Numbering */}
-            <div
-              className="text-4xl md:text-5xl font-mono font-light tracking-tight text-zinc-300 dark:text-zinc-700/80 leading-none select-none"
-              aria-hidden="true"
-            >
+            {/* Sequence ID */}
+            <div className="md:col-span-2 font-mono text-3xl font-light text-zinc-400 dark:text-zinc-600 select-none">
               {group.id}
             </div>
 
-            {/* Category Content */}
-            <div className="space-y-8">
-              {/* Category Header & Description */}
-              <div className="space-y-3">
-                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+            {/* Content Area */}
+            <div className="md:col-span-10 space-y-6">
+              <div className="space-y-1.5">
+                <h2 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
                   {group.category}
-                </h3>
-                <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+                </h2>
+                <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   {group.description}
                 </p>
               </div>
 
-              {/* Items Inventory Grid */}
-              <div className="grid gap-6 sm:grid-cols-2">
+              {/* Skill Items Grid */}
+              <div className="grid gap-4 sm:grid-cols-2">
                 {group.items.map((item) => (
                   <div
                     key={item.name}
-                    className="group space-y-1.5 transition-opacity duration-200 hover:opacity-100 focus-within:opacity-100"
+                    className="p-3.5 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#141417] space-y-1"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span
-                        className={`tracking-tight ${
-                          item.isPrimary
-                            ? 'text-base md:text-lg font-semibold text-zinc-950 dark:text-white'
-                            : 'text-sm font-medium text-zinc-700 dark:text-zinc-300'
-                        }`}
-                      >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className={`font-mono text-sm ${item.isPrimary ? 'font-bold text-zinc-950 dark:text-white' : 'font-medium text-zinc-700 dark:text-zinc-300'}`}>
                         {item.name}
                       </span>
-
                       {item.projectRef && (
-                        <span className="text-[11px] font-mono tracking-wider uppercase text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">
                           {item.projectRef}
                         </span>
                       )}
                     </div>
-
                     <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
                       {item.context}
                     </p>
@@ -85,42 +68,36 @@ export function Skills() {
                 ))}
               </div>
 
-              {/* Group Footnote */}
-              <div className="pt-2 flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
-                <span className="h-px flex-1 bg-zinc-200/60 dark:bg-zinc-800/50" aria-hidden="true" />
-                <span className="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                  {group.footnote}
-                </span>
+              {/* Footnote */}
+              <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 pt-1">
+                Note: {group.footnote}
               </div>
             </div>
           </section>
         ))}
       </div>
 
-      {/* Editorial Design & Development Workflow Sequence */}
-      <section className="border-t border-zinc-200/80 dark:border-zinc-800/70 pt-10 space-y-8">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
-            Workflow Pipeline
-          </span>
-          <span className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" aria-hidden="true" />
+      {/* Workflow Pipeline */}
+      <section className="border-t border-zinc-200 dark:border-zinc-800 pt-8 space-y-6">
+        <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          Design to Engineering Workflow Pipeline
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           {WORKFLOW_PIPELINE.map((item) => (
             <div
               key={item.step}
-              className="space-y-3 p-5 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50/50 dark:bg-zinc-900/30 backdrop-blur-sm"
+              className="p-4 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#141417] space-y-2"
             >
-              <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+              <div className="flex items-center justify-between text-xs font-mono text-zinc-400 dark:text-zinc-500">
                 <span>{item.step}</span>
-                <span className="uppercase tracking-wider text-xs">{item.phase}</span>
+                <span className="uppercase">{item.phase}</span>
               </div>
               <div>
-                <p className="text-base font-semibold text-zinc-950 dark:text-white">
+                <p className="text-sm font-mono font-bold text-zinc-950 dark:text-white">
                   {item.tool}
                 </p>
-                <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   {item.detail}
                 </p>
               </div>
@@ -129,29 +106,27 @@ export function Skills() {
         </div>
       </section>
 
-      {/* Contextual Navigation */}
-      <footer className="pt-6 border-t border-zinc-200/60 dark:border-zinc-800/50 flex flex-wrap items-center justify-between gap-4 text-sm">
-        <div className="flex flex-wrap items-center gap-6">
+      {/* Navigation Footer */}
+      <footer className="pt-6 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+        <div className="flex items-center gap-4">
           <button
             type="button"
             onClick={() => setActiveSection('projects')}
-            className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-blue-600 dark:text-blue-300 transition motion-safe:transition-transform duration-200 hover:-translate-x-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 cursor-pointer"
+            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
           >
-            Selected work
-            <span aria-hidden="true">→</span>
+            Explore Projects →
           </button>
           <button
             type="button"
             onClick={() => setActiveSection('experience')}
-            className="inline-flex items-center gap-2 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-300 transition motion-safe:transition-transform duration-200 hover:-translate-x-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 cursor-pointer"
+            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
           >
-            My journey
-            <span aria-hidden="true">→</span>
+            View Journey →
           </button>
         </div>
 
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-          Rahmat Workspace · Personal Technical Inventory
+        <p className="text-zinc-400 dark:text-zinc-500">
+          Rahmat Workspace · Toolkit & Workflow Architecture
         </p>
       </footer>
     </section>

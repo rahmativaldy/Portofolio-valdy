@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useWorkspace } from '@/context/WorkspaceContext';
 
 interface HeaderProps {
   isSidebarOpen: boolean;
@@ -36,7 +35,6 @@ const initialHeaderState: HeaderState = {
 };
 
 export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
-  const { triggerCommandPalette } = useWorkspace();
   const [state, dispatch] = React.useReducer(headerReducer, initialHeaderState);
 
   React.useEffect(() => {
@@ -78,12 +76,12 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
   };
 
   return (
-    <header className="h-14 border-b border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0e0e10] flex items-center justify-between px-4 md:px-8 select-none transition-colors duration-150">
+    <header className="h-14 border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0f0f11] flex items-center justify-between px-4 md:px-6 select-none transition-colors duration-150">
       {/* Left side: Hamburger control */}
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuToggle}
-          className={`p-3 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition cursor-pointer ${
+          className={`p-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition cursor-pointer ${
             isSidebarOpen ? 'md:hidden' : 'md:inline-flex'
           }`}
           aria-label="Toggle navigation"
@@ -95,32 +93,28 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
       </div>
 
       {/* Right side: Search workspace field & Theme switcher */}
-      <div className="flex items-center gap-4">
-        {/* Search button styled like a minimal search bar */}
-        <button
-          onClick={triggerCommandPalette}
-          className="flex items-center gap-2 px-3 py-2 md:py-1.5 bg-zinc-50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-400 transition duration-150 cursor-pointer min-h-[44px] md:min-h-0"
-          aria-label="Open Search"
-        >
-          <svg className="w-4 h-4 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="flex items-center gap-3">
+        {/* Global Search Workspace Field */}
+        <div className="relative flex items-center">
+          <svg className="w-3.5 h-3.5 absolute left-3 text-zinc-400 dark:text-zinc-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <span className="inline md:hidden font-medium">Search</span>
-          <span className="hidden md:inline">Search workspace...</span>
-          <kbd className="hidden md:inline-block px-1 bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded text-[9px] font-mono font-medium">⌘K</kbd>
-        </button>
+          <input
+            type="text"
+            placeholder="Search workspace..."
+            className="w-40 sm:w-56 md:w-64 pl-8 pr-3 py-1.5 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
+          />
+        </div>
 
         {/* Theme Toggle Button */}
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={toggleTheme}
-            className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition cursor-pointer"
-            aria-label={themeLabel}
-            title={themeLabel}
-          >
-            {themeIcon}
-          </button>
-        </div>
+        <button 
+          onClick={toggleTheme}
+          className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition cursor-pointer"
+          aria-label={themeLabel}
+          title={themeLabel}
+        >
+          {themeIcon}
+        </button>
       </div>
     </header>
   );

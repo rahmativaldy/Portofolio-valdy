@@ -6,110 +6,115 @@ import { PROJECTS } from '@/data/projects';
 import { Project } from '@/types';
 import { ProjectModal } from './ProjectModal';
 
-const FEATURED_PROJECT_IDS = ['nusago-mobile', 'rahmat-workspace'];
-
 export function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const featuredProjects = PROJECTS.filter((project) =>
-    FEATURED_PROJECT_IDS.includes(project.id),
-  );
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-12 max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto space-y-16 animate-fadeIn" id="projects">
+    <section className="py-8 md:py-12 px-6 md:px-10 max-w-6xl xl:max-w-7xl mx-auto space-y-12 animate-fadeIn" id="projects">
       {/* Section Header */}
-      <div className="max-w-3xl space-y-4">
-        <p className="text-xs font-mono uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400 font-semibold">
-          Featured Projects
-        </p>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
+      <header className="border-b border-zinc-200 dark:border-zinc-800 pb-8 space-y-3">
+        <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          Project Inventory & Case Studies
+        </div>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight">
           Selected Work
-        </h2>
-        <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          Real products built across mobile and web. Click any project to view technical decisions, architectural details, and key learnings.
+        </h1>
+        <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl leading-relaxed">
+          Real products built across mobile and web. Click any project card to open the technical case study details, architecture decisions, and key learnings.
         </p>
-      </div>
+      </header>
 
-      {/* Large Editorial Project Cards */}
-      <div className="space-y-16 md:space-y-20">
-        {featuredProjects.map((project, index) => {
+      {/* Editorial Case Study List */}
+      <div className="space-y-12">
+        {PROJECTS.map((project, index) => {
           const roleText =
             project.id === 'nusago-mobile'
-              ? 'Mobile Development · UI/UX'
-              : 'Frontend Development · UI/UX';
-          const techText = project.technologies.slice(0, 6).join(' · ');
+              ? 'Mobile Engineering · UI/UX'
+              : project.id === 'rahmat-workspace'
+              ? 'Frontend Engineering · UI/UX'
+              : project.id === 'nusago-api'
+              ? 'Backend API Engineering'
+              : 'Frontend Web Engineering';
 
           return (
             <article
               key={project.id}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer rounded-2xl border border-zinc-200/80 dark:border-white/10 bg-white dark:bg-[#111113] p-6 md:p-8 lg:p-10 shadow-sm transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md"
+              className="group cursor-pointer rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#141417] p-6 md:p-8 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
             >
-              <div className="space-y-8">
-                {/* Top Bar: Sequence Number & Role */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-zinc-800/80">
-                  <div className="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                    PROJECT 0{index + 1}
+              <div className="space-y-6">
+                {/* Top Metadata Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-zinc-800/80 text-xs font-mono">
+                  <div className="font-semibold text-zinc-950 dark:text-white uppercase tracking-wider">
+                    PROJECT 0{index + 1} · {project.id}
                   </div>
-                  <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                  <div className="text-zinc-500 dark:text-zinc-400">
                     {roleText}
                   </div>
                 </div>
 
-                {/* Main Content Layout */}
-                <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12 items-center">
-                  {/* Metadata & Narrative */}
-                  <div className="space-y-6 text-left">
-                    <div className="space-y-3">
-                      <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white motion-safe:transition-transform duration-250 ease-out group-hover:translate-x-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {/* Main Grid Content */}
+                <div className="grid gap-8 lg:grid-cols-12 items-center">
+                  {/* Text Details */}
+                  <div className="lg:col-span-7 space-y-4 text-left">
+                    <div className="space-y-2">
+                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white flex items-center gap-2">
+                        <span>{project.title}</span>
+                        <span className="text-xs font-mono text-zinc-400" aria-hidden="true">→</span>
+                      </h2>
+                      <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {project.description}
                       </p>
                     </div>
 
                     {/* Highlights */}
-                    <div className="space-y-2.5 pt-2">
-                      {project.highlights?.slice(0, 3).map((highlight) => (
-                        <div key={highlight} className="flex items-start gap-2.5 text-sm text-zinc-600 dark:text-zinc-400">
-                          <span className="text-blue-500 font-bold">•</span>
-                          <span>{highlight}</span>
-                        </div>
+                    {project.highlights && project.highlights.length > 0 && (
+                      <div className="space-y-1.5 pt-2">
+                        {project.highlights.slice(0, 3).map((highlight) => (
+                          <div key={highlight} className="flex items-start gap-2 text-xs md:text-sm text-zinc-600 dark:text-zinc-400">
+                            <span className="font-mono text-zinc-400 dark:text-zinc-500">•</span>
+                            <span>{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Technologies Pills */}
+                    <div className="pt-3 flex flex-wrap gap-1.5">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2.5 py-0.5 text-[11px] font-mono rounded border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"
+                        >
+                          {tech}
+                        </span>
                       ))}
                     </div>
 
-                    {/* Built With */}
-                    <div className="pt-4 space-y-2 border-t border-zinc-100 dark:border-zinc-800/80">
-                      <p className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                        Built With
-                      </p>
-                      <p className="text-xs font-mono text-zinc-700 dark:text-zinc-300 font-medium">
-                        {techText}
-                      </p>
-                    </div>
-
-                    {/* Action */}
+                    {/* Action trigger */}
                     <div className="pt-2">
-                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
-                        <span>View Case Study</span>
-                        <span className="motion-safe:transition-transform duration-180 ease-out group-hover:translate-x-[5px]" aria-hidden="true">→</span>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 dark:text-white">
+                        <span>View Technical Case Study</span>
+                        <span aria-hidden="true">→</span>
                       </span>
                     </div>
                   </div>
 
-                  {/* Screenshot Preview */}
-                  <div className="relative w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[440px] rounded-xl overflow-hidden border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-900 shadow-lg">
+                  {/* Thumbnail / Image Preview */}
+                  <div className="lg:col-span-5 relative w-full h-56 sm:h-64 md:h-72 rounded-md overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
                     {project.thumbnail ? (
                       <Image
                         src={project.thumbnail}
                         alt={`${project.title} screenshot`}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover object-top motion-safe:transition-transform duration-400 ease-out group-hover:scale-[1.06] origin-center"
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                        className="object-cover object-top"
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center text-zinc-400 dark:text-zinc-600">
-                        <span className="text-3xl">📸</span>
+                      <div className="flex h-full flex-col items-center justify-center p-6 text-center text-zinc-400 dark:text-zinc-500 font-mono text-xs space-y-2">
+                        <span className="text-xl">⚙</span>
+                        <span>API Backend Architecture</span>
+                        <span className="text-[10px] text-zinc-500">{project.technologies.slice(0, 4).join(' · ')}</span>
                       </div>
                     )}
                   </div>

@@ -31,7 +31,7 @@ function validate(fields: FormFields): FieldErrors {
     errors.email = 'Enter a valid email address.';
   }
   if (!fields.message.trim() || fields.message.trim().length < 10) {
-    errors.message = 'Write a short message before sending (at least 10 characters).';
+    errors.message = 'Write a message before sending (at least 10 characters).';
   }
   return errors;
 }
@@ -90,144 +90,106 @@ export function Contact() {
   };
 
   const inputBase =
-    'w-full bg-transparent py-3 text-sm text-zinc-950 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 border-b transition-colors duration-200 focus:outline-none';
+    'w-full bg-transparent py-3 text-sm text-zinc-950 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 border-b font-mono transition-colors duration-150 focus:outline-none';
   const inputNormal =
-    'border-zinc-200 dark:border-zinc-800 focus:border-blue-600 dark:focus:border-blue-400';
+    'border-zinc-200 dark:border-zinc-800 focus:border-zinc-950 dark:focus:border-white';
   const inputError =
     'border-red-500 dark:border-red-400 focus:border-red-500';
 
   return (
-    <section className="py-12 md:py-14 lg:py-16 px-4 md:px-8 lg:px-12 max-w-6xl xl:max-w-7xl 2xl:max-w-[1400px] mx-auto space-y-16 animate-fadeIn" id="contact">
+    <section className="py-8 md:py-12 px-6 md:px-10 max-w-6xl xl:max-w-7xl mx-auto space-y-12 animate-fadeIn" id="contact">
       {/* Section Header */}
-      <header className="max-w-3xl space-y-5">
-        <div className="inline-flex items-center gap-3">
-          <span className="text-xs font-mono uppercase tracking-[0.35em] text-blue-600 dark:text-blue-400 font-medium">
-            Connect
-          </span>
-          <span className="h-px flex-1 bg-blue-500/20 dark:bg-blue-500/30" aria-hidden="true" />
+      <header className="border-b border-zinc-200 dark:border-zinc-800 pb-8 space-y-3">
+        <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          Contact & Channels
         </div>
-        <div className="space-y-4">
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-[1.1]">
-            Have something worth building together?
-          </h2>
-          <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
-            I am open to conversations around interface engineering, mobile products, design systems, and thoughtful digital experiences.
-          </p>
-        </div>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight">
+          Get In Touch
+        </h1>
+        <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+          Open to discussions around frontend engineering, Flutter mobile development, design systems, and software projects.
+        </p>
       </header>
 
-      {/* Asymmetric Desktop Composition & Responsive Grid */}
-      <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-start">
-        {/* Left Column: Context, Direct Contact, Professional Links, Signature */}
-        <div className="lg:col-span-6 space-y-10">
-          {/* Status & Location Metadata */}
-          <div className="grid sm:grid-cols-2 gap-6 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/70">
-            <div className="space-y-1">
-              <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-                Status
-              </span>
-              <p className="text-sm font-medium text-zinc-900 dark:text-white">
-                Open to opportunities
-              </p>
-            </div>
-            <div className="space-y-1">
-              <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-                Location
-              </span>
-              <p className="text-sm font-medium text-zinc-900 dark:text-white">
-                Indonesia
-              </p>
-            </div>
-          </div>
-
-          {/* Primary Contact: Email */}
-          <div className="space-y-3 pt-6 border-t border-zinc-200/80 dark:border-zinc-800/70">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-              Direct
+      {/* Grid Layout */}
+      <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        {/* Left Column: Direct Links */}
+        <div className="lg:col-span-5 space-y-8">
+          {/* Direct Email */}
+          <div className="space-y-2 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+              Direct Email
             </span>
             <div>
               <a
                 href={PRIMARY_CONTACT.url}
-                className="group inline-flex items-center gap-2 text-lg md:text-xl font-semibold tracking-tight text-zinc-950 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="text-lg md:text-xl font-mono font-bold tracking-tight text-zinc-950 dark:text-white hover:underline block"
               >
-                <span>{PRIMARY_CONTACT.displayValue}</span>
-                <span className="text-sm font-mono text-zinc-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
-                  ↗
-                </span>
+                {PRIMARY_CONTACT.displayValue}
               </a>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-                Primary communication channel
+              <p className="mt-1 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                Primary contact channel
               </p>
             </div>
           </div>
 
           {/* Professional Links */}
-          <div className="space-y-3 pt-6 border-t border-zinc-200/80 dark:border-zinc-800/70">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-              Professional
+          <div className="space-y-3 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+              Professional Profiles
             </span>
-            <div className="flex flex-col gap-3 text-sm font-medium">
+            <div className="space-y-2 text-sm font-mono">
               {PROFESSIONAL_LINKS.map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-between text-zinc-800 dark:text-zinc-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="flex items-center justify-between text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white hover:underline transition-colors"
                 >
                   <span>{link.name}</span>
-                  <span className="text-xs font-mono text-zinc-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
-                    ↗
-                  </span>
+                  <span className="text-xs text-zinc-400">↗</span>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Secondary Link: Instagram */}
-          <div className="space-y-3 pt-6 border-t border-zinc-200/80 dark:border-zinc-800/70">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          {/* Secondary Links */}
+          <div className="space-y-3 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
               Elsewhere
             </span>
-            <div className="flex flex-col gap-3 text-xs font-medium">
+            <div className="space-y-2 text-xs font-mono">
               {SECONDARY_LINKS.map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-between text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                  className="flex items-center justify-between text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:underline transition-colors"
                 >
-                  <span>{link.name}</span>
-                  <span className="font-mono text-zinc-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
-                    ↗
-                  </span>
+                  <span>{link.name} ({link.displayValue})</span>
+                  <span className="text-zinc-400">↗</span>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Signature Moment */}
-          <div className="pt-8 border-t border-zinc-200/80 dark:border-zinc-800/70 space-y-1.5">
-            <p className="text-sm font-semibold tracking-tight text-zinc-950 dark:text-white">
-              RAHMAT IVALDY
-            </p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-              Frontend Developer · Mobile Developer · UI/UX Designer
-            </p>
-            <p className="text-[11px] text-zinc-400 dark:text-zinc-500 font-mono">
-              Indonesia
-            </p>
+          {/* Developer Details */}
+          <div className="space-y-1 font-mono text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="font-bold text-zinc-950 dark:text-white uppercase">RAHMAT IVALDY</p>
+            <p>Frontend · Mobile · UI/UX</p>
+            <p>Indonesia</p>
           </div>
         </div>
 
-        {/* Right Column: Editorial Contact Form */}
-        <div className="lg:col-span-6 space-y-6 pt-2">
+        {/* Right Column: Minimal Form */}
+        <div className="lg:col-span-7 space-y-6">
           <div className="space-y-1">
-            <h3 className="text-xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+            <h2 className="text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
               Send a Message
-            </h3>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+            </h2>
+            <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
               Direct message to my inbox
             </p>
           </div>
@@ -236,19 +198,14 @@ export function Contact() {
             <div
               id="contact-form-success"
               aria-live="polite"
-              className="py-8 space-y-4 border-t border-b border-zinc-200/80 dark:border-zinc-800/70 animate-fadeIn"
+              className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-md bg-white dark:bg-[#141417] space-y-3 animate-fadeIn"
             >
-              <div className="space-y-1">
-                <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400">
-                  Message Sent
-                </span>
-                <p className="text-base font-semibold text-zinc-950 dark:text-white">
-                  Thanks for reaching out.
-                </p>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  Your message has reached me. I&apos;ll get back to you as soon as I can.
-                </p>
-              </div>
+              <span className="text-xs font-mono uppercase tracking-widest text-zinc-950 dark:text-white font-bold">
+                Message Received
+              </span>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Thank you for your message. I will respond to your email as soon as possible.
+              </p>
               <button
                 type="button"
                 id="contact-send-another"
@@ -256,9 +213,9 @@ export function Contact() {
                   setStatus('idle');
                   setTimeout(() => nameRef.current?.focus(), 50);
                 }}
-                className="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+                className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 dark:text-white hover:underline cursor-pointer pt-2 block"
               >
-                Send another message →
+                Send Another Message →
               </button>
             </div>
           ) : (
@@ -269,12 +226,12 @@ export function Contact() {
               className="space-y-6"
             >
               {/* Name Field */}
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <label
                   htmlFor="contact-name"
-                  className="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                  className="block text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold"
                 >
-                  Name <span className="text-blue-600 dark:text-blue-400" aria-hidden="true">*</span>
+                  Name *
                 </label>
                 <input
                   ref={nameRef}
@@ -282,7 +239,7 @@ export function Contact() {
                   name="name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Your name"
+                  placeholder="Your Name"
                   value={fields.name}
                   onChange={handleChange}
                   disabled={status === 'sending'}
@@ -291,19 +248,19 @@ export function Contact() {
                   className={`${inputBase} ${errors.name ? inputError : inputNormal}`}
                 />
                 {errors.name && (
-                  <p id="contact-name-error" className="text-xs font-mono text-red-500 dark:text-red-400">
+                  <p id="contact-name-error" className="text-xs font-mono text-red-500 dark:text-red-400 mt-1">
                     {errors.name}
                   </p>
                 )}
               </div>
 
               {/* Email Field */}
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <label
                   htmlFor="contact-email"
-                  className="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                  className="block text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold"
                 >
-                  Email <span className="text-blue-600 dark:text-blue-400" aria-hidden="true">*</span>
+                  Email Address *
                 </label>
                 <input
                   id="contact-email"
@@ -319,25 +276,25 @@ export function Contact() {
                   className={`${inputBase} ${errors.email ? inputError : inputNormal}`}
                 />
                 {errors.email && (
-                  <p id="contact-email-error" className="text-xs font-mono text-red-500 dark:text-red-400">
+                  <p id="contact-email-error" className="text-xs font-mono text-red-500 dark:text-red-400 mt-1">
                     {errors.email}
                   </p>
                 )}
               </div>
 
               {/* Message Field */}
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <label
                   htmlFor="contact-message"
-                  className="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                  className="block text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold"
                 >
-                  Message <span className="text-blue-600 dark:text-blue-400" aria-hidden="true">*</span>
+                  Message *
                 </label>
                 <textarea
                   id="contact-message"
                   name="message"
-                  rows={5}
-                  placeholder="Tell me briefly about what you're working on..."
+                  rows={4}
+                  placeholder="Details about your inquiry..."
                   value={fields.message}
                   onChange={handleChange}
                   disabled={status === 'sending'}
@@ -346,7 +303,7 @@ export function Contact() {
                   className={`${inputBase} resize-none ${errors.message ? inputError : inputNormal}`}
                 />
                 {errors.message && (
-                  <p id="contact-message-error" className="text-xs font-mono text-red-500 dark:text-red-400">
+                  <p id="contact-message-error" className="text-xs font-mono text-red-500 dark:text-red-400 mt-1">
                     {errors.message}
                   </p>
                 )}
@@ -369,22 +326,9 @@ export function Contact() {
                   id="contact-submit"
                   type="submit"
                   disabled={status === 'sending'}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+                  className="px-5 py-2.5 rounded-md bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {status === 'sending' ? (
-                    <span className="flex items-center gap-2">
-                      <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                      </svg>
-                      Sending…
-                    </span>
-                  ) : (
-                    <>
-                      Send Message
-                      <span aria-hidden="true">→</span>
-                    </>
-                  )}
+                  {status === 'sending' ? 'Sending Message…' : 'Submit Message →'}
                 </button>
               </div>
             </form>
@@ -392,26 +336,28 @@ export function Contact() {
         </div>
       </div>
 
-      {/* De-emphasized Portfolio Loop Navigation */}
-      <footer className="pt-6 border-t border-zinc-200/60 dark:border-zinc-800/50 flex flex-wrap items-center justify-between gap-4 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-        <div className="flex flex-wrap items-center gap-6">
+      {/* Navigation Footer */}
+      <footer className="pt-6 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+        <div className="flex items-center gap-4">
           <button
             type="button"
             onClick={() => setActiveSection('projects')}
-            className="hover:text-zinc-900 dark:hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 cursor-pointer"
+            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
           >
-            Selected work →
+            Explore Projects →
           </button>
           <button
             type="button"
             onClick={() => setActiveSection('overview')}
-            className="hover:text-zinc-900 dark:hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 cursor-pointer"
+            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
           >
             Back to Overview →
           </button>
         </div>
 
-        <p>Rahmat Workspace · Portfolio Loop</p>
+        <p className="text-zinc-400 dark:text-zinc-500">
+          Rahmat Workspace · Communication Channels
+        </p>
       </footer>
     </section>
   );

@@ -5,7 +5,6 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { ContentArea } from './ContentArea';
 import { StatusBar } from './StatusBar';
-import { CommandPalette } from '@/components/sections/CommandPalette';
 import { CustomCursor } from '@/components/visual/CustomCursor';
 
 interface WorkspaceLayoutProps {
@@ -45,7 +44,7 @@ export function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
   };
 
   return (
-    <div className="flex flex-col h-dvh min-h-0 w-screen overflow-hidden bg-slate-50 dark:bg-[#0a0a0b] text-zinc-900 dark:text-zinc-100 font-sans relative transition-colors duration-150">
+    <div className="flex flex-col h-dvh min-h-0 w-screen overflow-hidden bg-zinc-100 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 font-sans relative transition-colors duration-150">
       {/* Upper part containing sidebar and content area */}
       <div className="flex-1 min-h-0 flex overflow-hidden">
         {/* Sidebar Navigation - handles desktop and mobile slide-out */}
@@ -64,7 +63,7 @@ export function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
 
         {/* Main Workspace Frame */}
         <main className="flex-1 min-w-0 min-h-0 flex flex-col h-full overflow-hidden">
-          {/* Header Bar Bar */}
+          {/* Header Bar */}
           <Header
             isSidebarOpen={isSidebarOpen}
             onMenuToggle={() => setSidebarOpen(!isSidebarOpen)}
@@ -79,9 +78,6 @@ export function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
 
       {/* Status Bar */}
       <StatusBar />
-
-      {/* Global Search Workspace Modal */}
-      <CommandPalette />
 
       {/* Interactive Custom Animated Cursor */}
       <CustomCursor />

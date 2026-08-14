@@ -12,7 +12,7 @@ export function CustomCursor() {
   const rawMouseX = useMotionValue(-100);
   const rawMouseY = useMotionValue(-100);
 
-  // Spring physics for smooth outer trailing fluid ring
+  // Spring physics for smooth outer trailing ring
   const springConfig = { damping: 24, stiffness: 250, mass: 0.5 };
   const smoothX = useSpring(rawMouseX, springConfig);
   const smoothY = useSpring(rawMouseY, springConfig);
@@ -66,9 +66,9 @@ export function CustomCursor() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden select-none" aria-hidden="true">
-      {/* Outer Fluid Magnetic Trailing Ring */}
+      {/* Outer Trailing Ring */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border border-blue-500/40 dark:border-blue-400/50 bg-blue-500/10 dark:bg-blue-400/10 backdrop-blur-[0.5px] will-change-transform"
+        className="fixed top-0 left-0 rounded-full border border-zinc-400/40 dark:border-zinc-600/50 bg-zinc-500/10 dark:bg-zinc-400/10 backdrop-blur-[0.5px] will-change-transform"
         style={{
           x: smoothX,
           y: smoothY,
@@ -76,19 +76,19 @@ export function CustomCursor() {
           translateY: '-50%',
         }}
         animate={{
-          width: isHovered ? 54 : isMouseDown ? 24 : 34,
-          height: isHovered ? 54 : isMouseDown ? 24 : 34,
+          width: isHovered ? 48 : isMouseDown ? 20 : 30,
+          height: isHovered ? 48 : isMouseDown ? 20 : 30,
           scale: isMouseDown ? 0.85 : 1,
           borderColor: isHovered
-            ? 'rgba(59, 130, 246, 0.75)'
-            : 'rgba(59, 130, 246, 0.35)',
+            ? 'rgba(113, 113, 122, 0.8)'
+            : 'rgba(113, 113, 122, 0.4)',
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
       />
 
-      {/* Inner Precision Glowing Dot */}
+      {/* Inner Precision Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.9)] will-change-transform"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-zinc-950 dark:bg-white will-change-transform"
         style={{
           x: rawMouseX,
           y: rawMouseY,
@@ -96,7 +96,7 @@ export function CustomCursor() {
           translateY: '-50%',
         }}
         animate={{
-          scale: isHovered ? 1.75 : isMouseDown ? 0.5 : 1,
+          scale: isHovered ? 1.5 : isMouseDown ? 0.5 : 1,
           opacity: isHovered ? 0.85 : 1,
         }}
         transition={{ duration: 0.15 }}

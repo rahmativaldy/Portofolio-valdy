@@ -11,8 +11,8 @@ export function Card({ children, className = '', hover = false, interactive = fa
   return (
     <div
       className={`
-        surface-card text-zinc-900 dark:text-zinc-100 p-6 transition-colors duration-150 overflow-hidden
-        ${hover ? 'hover:shadow-md hover:transform hover:-translate-y-[2px] dark:hover:shadow-lg transition-all duration-300' : ''}
+        bg-white dark:bg-[#141417] border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 p-5 rounded-md transition-colors duration-150 overflow-hidden
+        ${hover ? 'hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors' : ''}
         ${interactive ? 'cursor-pointer' : ''}
         ${className}
       `}

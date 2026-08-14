@@ -40,12 +40,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-[#111113] border border-zinc-200 dark:border-white/10 rounded-2xl shadow-2xl animate-scaleIn">
+      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-[#141417] border border-zinc-200 dark:border-zinc-800 rounded-md shadow-2xl">
         {/* Close button */}
         <button
           id={`project-modal-close-${project.id}`}
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-150 cursor-pointer"
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,7 +55,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Hero image preview */}
         {project.thumbnail && (
-          <div className="relative w-full h-64 md:h-72 bg-zinc-100 dark:bg-zinc-900 rounded-t-2xl overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
+          <div className="relative w-full h-64 md:h-72 bg-zinc-100 dark:bg-zinc-900 rounded-t-md overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
             <Image
               src={project.thumbnail}
               alt={`${project.title} screenshot`}
@@ -69,28 +69,28 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         <div className="p-6 md:p-8 space-y-8 text-left">
           {/* Header Metadata */}
-          <div className="space-y-3">
-            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-              Case Study · {project.title}
+          <div className="space-y-2">
+            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+              Technical Case Study · {project.id}
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
               {project.title}
             </h2>
-            <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {project.description}
             </p>
           </div>
 
           {/* Key Technologies */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+          <div className="space-y-2 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
               Technologies Used
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2.5 py-1 rounded-md text-xs font-mono bg-zinc-100 dark:bg-zinc-800/80 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/60"
+                  className="px-2.5 py-0.5 rounded text-xs font-mono bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800"
                 >
                   {tech}
                 </span>
@@ -100,15 +100,15 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Highlights */}
           {project.highlights && project.highlights.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-zinc-950 dark:text-white">
-                Selected Features & Capabilities
+            <div className="space-y-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+                Selected Features & Architecture Highlights
               </h3>
-              <div className="grid gap-2.5 sm:grid-cols-2">
+              <div className="grid gap-2 sm:grid-cols-2">
                 {project.highlights.map((highlight) => (
                   <div
                     key={highlight}
-                    className="p-3.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/60 text-xs md:text-sm text-zinc-700 dark:text-zinc-300"
+                    className="p-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs text-zinc-700 dark:text-zinc-300 font-mono"
                   >
                     • {highlight}
                   </div>
@@ -118,13 +118,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           )}
 
           {/* Challenges & Learnings */}
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 pt-2 border-t border-zinc-200 dark:border-zinc-800">
             {project.challenges && project.challenges.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-sm font-semibold text-zinc-950 dark:text-white">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
                   Challenges Overcome
                 </h3>
-                <div className="space-y-2.5 text-xs md:text-sm text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
                   {project.challenges.map((challenge, idx) => (
                     <p key={idx} className="pl-3 border-l-2 border-zinc-300 dark:border-zinc-700 leading-relaxed">
                       {challenge}
@@ -136,12 +136,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {project.learnings && project.learnings.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-sm font-semibold text-zinc-950 dark:text-white">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
                   Key Learnings
                 </h3>
-                <div className="space-y-2.5 text-xs md:text-sm text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
                   {project.learnings.map((learning, idx) => (
-                    <p key={idx} className="pl-3 border-l-2 border-blue-500 dark:border-blue-400 leading-relaxed">
+                    <p key={idx} className="pl-3 border-l-2 border-zinc-900 dark:border-zinc-100 leading-relaxed">
                       {learning}
                     </p>
                   ))}
@@ -152,14 +152,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Links */}
           {(project.github || project.link) && (
-            <div className="pt-2 flex flex-wrap gap-3">
+            <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap gap-3">
               {project.github && (
                 <a
                   id={`project-modal-github-${project.id}`}
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 dark:bg-white px-5 py-2.5 text-xs font-semibold text-white dark:text-zinc-950 transition-colors hover:bg-zinc-800 dark:hover:bg-zinc-100"
+                  className="inline-flex items-center gap-2 rounded-md bg-zinc-950 dark:bg-white px-4 py-2 text-xs font-mono font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
                 >
                   View Repository →
                 </a>
@@ -170,9 +170,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-5 py-2.5 text-xs font-semibold text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                  className="inline-flex items-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-4 py-2 text-xs font-mono font-semibold text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
                 >
-                  Live Preview ↗
+                  Live Demo ↗
                 </a>
               )}
             </div>

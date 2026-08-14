@@ -301,40 +301,40 @@ export function InteractiveCanvas() {
             y1="560"
             x2="520"
             y2="680"
-            className="stroke-blue-500/20 dark:stroke-blue-400/30 ambient-motion-a"
+            className="stroke-zinc-300/40 dark:stroke-zinc-700/40"
           />
         </g>
 
-        {/* Layer 2: Interactive Blueprint Parallax Layers */}
+        {/* Layer 2: Blueprint Parallax Layers */}
         <g className="desktop-only-svg">
-          {/* Blueprint Open Corner Handles (Frame layer: up to ±8px displacement) */}
-          <g className="blueprint-frame stroke-blue-600/60 dark:stroke-blue-400/70">
-            <path d="M60 80 H90 M60 80 V110" className="ambient-motion-b" />
+          {/* Blueprint Open Corner Handles */}
+          <g className="blueprint-frame stroke-zinc-400/50 dark:stroke-zinc-600/50">
+            <path d="M60 80 H90 M60 80 V110" />
             <path d="M580 80 H550 M580 80 V110" />
             <path d="M60 300 H90 M60 300 V270" />
             <path d="M580 300 H550 M580 300 V270" />
           </g>
 
-          {/* Dotted Alignment Guide (Ambient pulse C) */}
+          {/* Dotted Alignment Guide */}
           <line
             x1="60"
             y1="190"
             x2="580"
             y2="190"
             strokeDasharray="3 3"
-            className="blueprint-frame stroke-blue-500/30 dark:stroke-blue-400/40 ambient-motion-c"
+            className="blueprint-frame stroke-zinc-300/40 dark:stroke-zinc-700/40"
           />
 
-          {/* Connection Line Layer (Pushed down +220px to route under hero text) */}
+          {/* Connection Line Layer */}
           <path
             ref={lineRef}
             d="M520 680 L680 640 C740 620 940 660 1020 660"
-            className="blueprint-line blueprint-line-living stroke-blue-500 dark:stroke-blue-400 transition-opacity duration-200"
+            className="blueprint-line stroke-zinc-400 dark:stroke-zinc-600 transition-opacity duration-200"
             strokeWidth={1.4}
             fill="none"
           />
 
-          {/* Proximity Nodes Layer (Pushed down +220px to align with path) */}
+          {/* Proximity Nodes Layer */}
           <g className="blueprint-nodes">
             {/* Node 1 Proximity Anchor */}
             <circle
@@ -342,7 +342,7 @@ export function InteractiveCanvas() {
               cx="520"
               cy="680"
               r="4"
-              className="fill-blue-500 dark:fill-blue-400 stroke-blue-600 dark:stroke-blue-300 transition-transform duration-200"
+              className="fill-zinc-700 dark:fill-zinc-300 stroke-zinc-900 dark:stroke-zinc-100 transition-transform duration-200"
             />
 
             {/* Node 2 Proximity Anchor */}
@@ -351,16 +351,16 @@ export function InteractiveCanvas() {
               cx="940"
               cy="660"
               r="3.5"
-              className="fill-blue-500 dark:fill-blue-400 stroke-blue-600 dark:stroke-blue-300 transition-transform duration-200"
+              className="fill-zinc-700 dark:fill-zinc-300 stroke-zinc-900 dark:stroke-zinc-100 transition-transform duration-200"
             />
           </g>
 
-          {/* Dimension Indicator & Coordinate Indicator (Coords layer: up to 20px displacement) */}
+          {/* Dimension Indicator & Coordinate Indicator */}
           <g className="blueprint-coords interactive-canvas-meta">
-            <text x="520" y="72" textAnchor="end" className="fill-blue-600 dark:fill-blue-400 font-semibold">
+            <text x="520" y="72" textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400 font-semibold">
               520 × 220
             </text>
-            <text x="64" y="72" textAnchor="start" className="fill-blue-600 dark:fill-blue-400 font-semibold">
+            <text x="64" y="72" textAnchor="start" className="fill-zinc-500 dark:fill-zinc-400 font-semibold">
               X: 60 Y: 80
             </text>
           </g>
@@ -370,7 +370,7 @@ export function InteractiveCanvas() {
         <g className="mobile-only-svg">
           <line x1="40" y1="80" x2="320" y2="80" />
           <line x1="40" y1="180" x2="280" y2="180" strokeDasharray="2 2" />
-          <circle cx="280" cy="180" r="3" className="fill-blue-500/60 dark:fill-blue-400/70" />
+          <circle cx="280" cy="180" r="3" className="fill-zinc-400 dark:fill-zinc-600" />
           <line x1="40" y1="360" x2="240" y2="360" />
         </g>
       </svg>

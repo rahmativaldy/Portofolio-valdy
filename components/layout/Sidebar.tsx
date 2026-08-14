@@ -47,16 +47,19 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed md:relative inset-y-0 left-0 z-50 md:z-auto w-72 lg:w-80 border-r border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#0e0e10] flex flex-col h-full min-h-0 text-zinc-500 dark:text-zinc-400 select-none transition-transform duration-200 motion-reduce:transition-none overflow-hidden ${
+      className={`fixed md:relative inset-y-0 left-0 z-50 md:z-auto w-80 min-w-[320px] max-w-[320px] border-r border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#0f0f11] flex flex-col h-full min-h-0 text-zinc-500 dark:text-zinc-400 select-none transition-transform duration-200 motion-reduce:transition-none overflow-hidden ${
         isOpen ? 'translate-x-0 md:flex' : '-translate-x-full md:hidden'
       }`}
     >
       {/* Sidebar top bar */}
-      <div className="h-14 border-b border-zinc-200 dark:border-white/10 flex items-center justify-end px-5 shrink-0">
+      <div className="h-14 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-5 shrink-0">
+        <span className="text-xs font-mono font-medium tracking-wider uppercase text-zinc-400 dark:text-zinc-500">
+          Workspace
+        </span>
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="hidden md:inline-flex items-center justify-center p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors duration-150 motion-reduce:transition-none"
+          className="hidden md:inline-flex items-center justify-center p-2 rounded-md text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors duration-150 motion-reduce:transition-none"
           aria-label="Collapse sidebar"
           title="Collapse sidebar"
         >
@@ -67,15 +70,15 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       </div>
 
       {/* Fixed Profile Identity Block */}
-      <div className="shrink-0 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-2">
+      <div className="shrink-0 border-b border-zinc-200 dark:border-zinc-800 py-3">
         <ProfileIdentity />
       </div>
 
       {/* Dedicated Scrollable Navigation Container */}
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
-        <nav className="p-4 pt-3 space-y-1.5" role="navigation" aria-label="Sidebar Navigation">
-          <div className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider px-3 mb-2">
-            Workspace
+        <nav className="p-3 space-y-1" role="navigation" aria-label="Sidebar Navigation">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1.5 font-medium">
+            Navigation
           </div>
           {NAV_ITEMS.map((item, index) => {
             const isActive = activeSection === item.id;
@@ -87,16 +90,16 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 onClick={() => {
                   handleNavigation(item.id);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-180 group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/80 dark:focus-visible:ring-blue-400/80 ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs font-mono tracking-tight rounded-md transition-colors group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
                   isActive 
-                    ? 'bg-blue-500/10 dark:bg-blue-500/15 text-zinc-950 dark:text-white font-semibold border-l-2 border-blue-500 pl-[10px]' 
-                    : 'text-zinc-500 dark:text-zinc-400 hover:bg-blue-500/5 dark:hover:bg-blue-500/10 hover:text-zinc-900 dark:hover:text-zinc-200'
+                    ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 font-semibold shadow-xs' 
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-100'
                 }`}
               >
-                <div className={`w-5 h-5 shrink-0 flex items-center justify-center motion-safe:transition-transform duration-180 ease-out motion-safe:group-hover:translate-x-[2px] ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300'}`}>
-                  <NavIcon id={item.id} className="w-[18px] h-[18px]" />
+                <div className={`w-4 h-4 shrink-0 flex items-center justify-center ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
+                  <NavIcon id={item.id} className="w-4 h-4" />
                 </div>
-                <span className="motion-safe:transition-transform duration-180 ease-out motion-safe:group-hover:translate-x-[2px]">{item.label}</span>
+                <span>{item.label}</span>
               </button>
             );
           })}
