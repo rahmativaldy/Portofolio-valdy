@@ -1,0 +1,75 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+
+export function StatusBar() {
+  const [time, setTime] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(
+        now.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })
+      );
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <footer className="h-6 bg-slate-100 dark:bg-[#0e0e10] border-t border-zinc-200 dark:border-white/10 text-[11px] flex items-center justify-between px-3 text-zinc-500 dark:text-zinc-400 select-none transition-colors duration-150 shrink-0">
+      {/* Left side: Status indicators */}
+      <div className="flex items-center gap-3">
+        {/* Branch / Status */}
+        <div className="flex items-center gap-1 hover:text-zinc-800 dark:hover:text-zinc-200 cursor-pointer">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+          <span>main</span>
+        </div>
+
+        <span className="text-zinc-300 dark:text-zinc-800">|</span>
+
+        {/* Live Availability */}
+        <div className="flex items-center gap-1.5">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+          </span>
+          <span>Open to opportunities</span>
+        </div>
+      </div>
+
+      {/* Right side: Editor configuration and local time */}
+      <div className="flex items-center gap-3">
+        {/* Technologies / Mode indicators */}
+        <div className="hidden sm:flex items-center gap-2">
+          <span>TypeScript</span>
+          <span className="text-zinc-300 dark:text-zinc-800">•</span>
+          <span>React 19</span>
+          <span className="text-zinc-300 dark:text-zinc-800">•</span>
+          <span>Next.js 16</span>
+          <span className="text-zinc-300 dark:text-zinc-800">•</span>
+          <span>UTF-8</span>
+        </div>
+
+        <span className="hidden sm:inline text-zinc-300 dark:text-zinc-800">|</span>
+
+        {/* Live Local Time */}
+        <div className="flex items-center gap-1 font-mono">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{time || '--:--:--'}</span>
+        </div>
+      </div>
+    </footer>
+  );
+}

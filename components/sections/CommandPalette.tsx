@@ -1,163 +1,174 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useWorkspace } from '@/context/WorkspaceContext';
+import { NAV_ITEMS } from '@/data/navigation';
+import { PROJECTS } from '@/data/projects';
+import { NavIcon } from '@/components/icons/NavIcons';
 
-interface CommandItem {
-  id: string;
-  label: string;
-  description?: string;
-  action: () => void;
-}
+export function CommandPalette() {
+  const {
+    isCommandPaletteOpen: open,
+    setCommandPaletteOpen: setOpen,
+    setActiveSection,
+  } = useWorkspace();
 
-interface CommandPaletteProps {
-  setActiveSection: (section: string) => void;
-}
+  const [query, setQuery] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-export function CommandPalette({ setActiveSection }: CommandPaletteProps) {
-  const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  // Global keydown listener for ⌘K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setOpen(!open);
+      }
+      if (e.key === 'Escape' && open) {
+        setOpen(false);
+      }
+    };
 
-  const commands: CommandItem[] = [
-    {
-      id: 'overview',
-      label: 'Overview',
-      description: 'View dashboard overview and statistics',
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, setOpen]);
+
+  // Focus input when modal opens
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+        setQuery('');
+        setSelectedIndex(0);
+      }, 10);
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
+
+  if (!open) return null;
+
+  // Filter navigation items
+  const filteredNav = NAV_ITEMS.filter((item) =>
+    item.label.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  // Filter project items
+  const filteredProjects = PROJECTS.filter(
+    (p) =>
+      p.title.toLowerCase().includes(query.toLowerCase()) ||
+      p.technologies.some((t) => t.toLowerCase().includes(query.toLowerCase())),
+  );
+
+  const allItems = [
+    ...filteredNav.map((item) => ({
+      id: item.id,
+      label: item.label,
+      type: 'navigation' as const,
       action: () => {
-        setActiveSection('overview');
+        setActiveSection(item.id);
         setOpen(false);
       },
-    },
-    {
-      id: 'about',
-      label: 'About',
-      description: 'Read the developer story and biography',
-      action: () => {
-        setActiveSection('about');
-        setOpen(false);
-      },
-    },
-    {
-      id: 'projects',
-      label: 'Projects',
-      description: 'Explore completed and active projects',
+    })),
+    ...filteredProjects.map((p) => ({
+      id: p.id,
+      label: p.title,
+      type: 'project' as const,
       action: () => {
         setActiveSection('projects');
         setOpen(false);
       },
-    },
-    {
-      id: 'skills',
-      label: 'Skills',
-      description: 'Check categorized list of skills and tools',
-      action: () => {
-        setActiveSection('skills');
-        setOpen(false);
-      },
-    },
-    {
-      id: 'experience',
-      label: 'Experience',
-      description: 'View independent learning and project timeline',
-      action: () => {
-        setActiveSection('experience');
-        setOpen(false);
-      },
-    },
-    {
-      id: 'contact',
-      label: 'Contact',
-      description: 'Find real developer contact channels',
-      action: () => {
-        setActiveSection('contact');
-        setOpen(false);
-      },
-    },
+    })),
   ];
 
-  const filtered = commands.filter((cmd) =>
-    cmd.label.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleItemClick = (index: number) => {
+    allItems[index]?.action();
+  };
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setOpen((prev) => !prev);
+  const handleInputKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1) % Math.max(allItems.length, 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev - 1 + allItems.length) % Math.max(allItems.length, 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (allItems[selectedIndex]) {
+        allItems[selectedIndex].action();
       }
-      if (e.key === 'Escape') {
-        setOpen(false);
-      }
-    };
-
-    const handleOpenPalette = () => {
-      setOpen(true);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('open-command-palette', handleOpenPalette);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('open-command-palette', handleOpenPalette);
-    };
-  }, []);
-
-  if (!open) {
-    return null;
-  }
+    }
+  };
 
   return (
-    <>
-      {/* Overlay */}
+    <div
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-[15vh] px-4 animate-fadeIn"
+      onClick={() => setOpen(false)}
+    >
       <div
-        className="fixed inset-0 bg-black/60 z-50 animate-fadeIn"
-        onClick={() => setOpen(false)}
-      />
+        className="w-full max-w-xl bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Search Input Bar */}
+        <div className="flex items-center px-4 border-b border-zinc-800">
+          <svg className="w-4 h-4 text-zinc-400 shrink-0 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
+            onKeyDown={handleInputKeyDown}
+            placeholder="Search workspace sections or projects..."
+            className="w-full py-4 bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none"
+          />
+          <kbd className="px-1.5 py-0.5 text-[10px] font-mono text-zinc-400 bg-zinc-800 border border-zinc-700 rounded">
+            ESC
+          </kbd>
+        </div>
 
-      {/* Command Palette container */}
-      <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 w-full max-w-lg z-50 px-4">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-2xl overflow-hidden transition-colors duration-150">
-          {/* Input */}
-          <div className="flex items-center gap-3 px-4 border-b border-zinc-200 dark:border-zinc-800/80">
-            <svg className="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              autoFocus
-              type="text"
-              placeholder="Search commands..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full py-4 bg-transparent text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none"
-            />
-          </div>
-
-          {/* Results */}
-          <div className="max-h-80 overflow-y-auto p-2 space-y-0.5">
-            {filtered.length > 0 ? (
-              filtered.map((cmd) => (
+        {/* Results List */}
+        <div className="max-h-80 overflow-y-auto p-2 space-y-1">
+          {allItems.length === 0 ? (
+            <div className="p-4 text-center text-xs text-zinc-500 font-mono">
+              No results found for &quot;{query}&quot;
+            </div>
+          ) : (
+            allItems.map((item, idx) => {
+              const isSelected = idx === selectedIndex;
+              return (
                 <button
-                  key={cmd.id}
-                  onClick={cmd.action}
-                  className="w-full px-3 py-2.5 text-left rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition flex items-center justify-between text-xs cursor-pointer group"
+                  key={`${item.type}-${item.id}`}
+                  onClick={() => handleItemClick(idx)}
+                  onMouseEnter={() => setSelectedIndex(idx)}
+                  className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center justify-between text-xs font-medium transition-colors ${
+                    isSelected
+                      ? 'bg-blue-500/15 text-white'
+                      : 'text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200'
+                  }`}
                 >
-                  <div>
-                    <div className="text-zinc-700 dark:text-zinc-200 font-semibold group-hover:text-zinc-900 dark:group-hover:text-zinc-100">{cmd.label}</div>
-                    {cmd.description && (
-                      <div className="text-zinc-500 mt-0.5 text-[11px]">{cmd.description}</div>
+                  <div className="flex items-center gap-2.5">
+                    {item.type === 'navigation' ? (
+                      <div className="w-4 h-4 text-zinc-400 flex items-center justify-center">
+                        <NavIcon id={item.id} className="w-4 h-4" />
+                      </div>
+                    ) : (
+                      <span className="font-mono text-[10px] text-blue-400">PROJ</span>
                     )}
+                    <span>{item.label}</span>
                   </div>
-                  <span className="text-[10px] text-zinc-400 dark:text-zinc-650 font-mono">Select</span>
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase">
+                    {item.type}
+                  </span>
                 </button>
-              ))
-            ) : (
-              <div className="px-4 py-8 text-center text-xs text-zinc-500">
-                No commands found
-              </div>
-            )}
-          </div>
+              );
+            })
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,77 +1,146 @@
 'use client';
 
+import { useWorkspace } from '@/context/WorkspaceContext';
+
 export function About() {
+  const { setActiveSection } = useWorkspace();
+
   return (
-    <div className="py-12 px-4 md:px-8 max-w-4xl mx-auto space-y-8 animate-fadeIn" id="about">
-      {/* Section Header */}
-      <div>
-        <div className="mb-3 inline-flex items-center gap-2">
-          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-          <span className="text-blue-400 text-xs font-semibold uppercase tracking-wider">About</span>
+    <section className="py-12 md:py-14 lg:py-16 px-4 md:px-8 lg:px-12 max-w-6xl xl:max-w-7xl mx-auto animate-fadeIn" id="about">
+      <div className="space-y-12">
+        <div className="inline-flex items-center gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+          <span className="uppercase tracking-[0.35em] text-blue-600 dark:text-blue-400 font-medium">Profile</span>
+          <span className="h-px flex-1 bg-blue-500/20 dark:bg-blue-500/30" aria-hidden="true" />
         </div>
-        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
-          Behind the Workspace
-        </h2>
-      </div>
 
-      {/* Natural writing — no buzzwords */}
-      <div className="space-y-6 text-zinc-700 dark:text-zinc-300 text-base leading-relaxed max-w-3xl">
-        <p>
-          I got into programming because I wanted to build things — not to become a developer, just
-          to make stuff that worked. That curiosity eventually turned into a real obsession with
-          Flutter and mobile development. There&apos;s something satisfying about compiling to a device
-          and seeing your UI respond exactly as you intended.
-        </p>
+        <div className="grid gap-10 xl:grid-cols-[1.4fr_1fr] 2xl:gap-14 items-start">
+          <div className="space-y-10">
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <p className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
+                  About
+                </p>
+                <h1 className="text-[clamp(3rem,6vw,5.5rem)] leading-[0.9] font-semibold tracking-[-0.04em] text-zinc-950 dark:text-white">
+                  RAHMAT
+                  <br />
+                  IVALDY
+                </h1>
+                <p className="max-w-3xl text-xl md:text-2xl leading-[1.1] text-zinc-700 dark:text-zinc-300">
+                  Frontend Developer. Mobile Developer. UI/UX Designer.
+                </p>
+              </div>
 
-        <p>
-          Most of my time goes into Flutter work right now. I&apos;ve spent a lot of hours learning
-          the BLoC pattern — not because a tutorial told me to, but because I kept running into
-          problems with setState getting messy as apps grew. Clean Architecture was another one of
-          those things I resisted at first and then couldn&apos;t imagine working without.
-        </p>
+              <div className="grid gap-6 text-base leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-2xl">
+                <p>
+                  I started with mobile interfaces because I wanted to build real products, not just
+                  experiment with code. Building NusaGo Mobile taught me how a screen should behave on
+                  a device, how state flows through an app, and why architecture matters when the UI grows.
+                </p>
 
-        <p>
-          On the web side, Next.js is where I spend my time. I built this portfolio specifically
-          to learn the App Router properly, and it turned into something I&apos;m actually happy
-          with. TypeScript caught enough real bugs during that process to convert me completely —
-          I&apos;m not going back to plain JavaScript on anything serious.
-        </p>
+                <p>
+                  On the web, I use Next.js, React, TypeScript, and Tailwind to bring the same clarity to
+                  reusable layouts, responsive states, and accessible interactions. I treat design and
+                  implementation as one process, not separate steps.
+                </p>
 
-        <p>
-          I&apos;ve got a background in UI/UX design too, which changes how I think about frontend work.
-          Before writing a component I usually have a clear picture of what it should feel like to
-          use it, not just what it should look like. That probably explains why I spend more time
-          on spacing and interaction details than most people think is reasonable.
-        </p>
+                <p>
+                  UI/UX work changes the way I code. I think about hierarchy, spacing, and interaction
+                  rhythm before writing markup, and I keep implementation constraints in mind while I
+                  shape the interface.
+                </p>
 
-        <p>
-          Outside of code: I read a lot about how products are built and why certain design decisions
-          get made. I find the reasoning behind tools like Raycast, Linear, and Vercel more interesting
-          than the tools themselves. That&apos;s where a lot of the design inspiration for this site came from.
-        </p>
-      </div>
+                <p>
+                  My work is grounded in hands-on projects like NusaGo Mobile and Rahmat Workspace. Those
+                  experiences keep the portfolio honest and help me choose practical solutions over
+                  clever ones.
+                </p>
+              </div>
+            </div>
 
-      {/* Currently learning callout */}
-      <div className="p-4 border border-zinc-200 dark:border-zinc-800/60 rounded-xl bg-white dark:bg-zinc-900/20">
-        <div className="text-[11px] font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2">
-          Currently Digging Into
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+              <button
+                type="button"
+                onClick={() => setActiveSection('projects')}
+                className="inline-flex items-center gap-2 font-semibold text-blue-600 dark:text-blue-300 transition motion-safe:transition-transform duration-200 hover:-translate-x-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 cursor-pointer"
+              >
+                Selected work
+                <span aria-hidden="true">→</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveSection('experience')}
+                className="inline-flex items-center gap-2 font-medium text-zinc-600 dark:text-zinc-300 transition motion-safe:transition-transform duration-200 hover:-translate-x-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 cursor-pointer"
+              >
+                My journey
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <aside className="space-y-10 text-zinc-600 dark:text-zinc-300">
+            <div className="grid gap-6">
+              <div>
+                <p className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400 mb-4">
+                  Profile details
+                </p>
+                <dl className="grid gap-4 text-sm">
+                  <div>
+                    <dt className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
+                      Location
+                    </dt>
+                    <dd className="mt-1 text-zinc-950 dark:text-white font-medium">Indonesia</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
+                      Practice
+                    </dt>
+                    <dd className="mt-1 text-zinc-950 dark:text-white font-medium">Frontend · Mobile · UI/UX</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
+                      Tools
+                    </dt>
+                    <dd className="mt-1 text-zinc-950 dark:text-white font-medium">Flutter · Next.js · TypeScript · Tailwind · Figma</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-500 dark:text-zinc-400">
+                      Status
+                    </dt>
+                    <dd className="mt-1 text-zinc-950 dark:text-white font-medium">Open to opportunities</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="border-t border-zinc-200/70 dark:border-zinc-800/60 pt-6">
+                <p className="text-xs font-mono uppercase tracking-[0.35em] text-zinc-400 dark:text-zinc-500 mb-4">
+                  Currently exploring
+                </p>
+                <ul className="grid gap-3 text-sm text-zinc-600 dark:text-zinc-300">
+                  {[
+                    'Next.js App Router and page architecture',
+                    'Flutter animations and reusable mobile components',
+                    'System design for consistent interfaces',
+                    'Interaction detail and responsive states',
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1.5 block h-1.5 w-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </aside>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {[
-            'Next.js App Router',
-            'React Server Components',
-            'Flutter Animations',
-            'System Design',
-          ].map((item) => (
-            <span
-              key={item}
-              className="px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs rounded-md border border-zinc-200 dark:border-zinc-700/60"
-            >
-              {item}
-            </span>
-          ))}
+
+        <div className="border-t border-zinc-200/70 dark:border-zinc-800/60 pt-8">
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-3xl leading-relaxed">
+            I keep design and development close together because the best interfaces are the ones that
+            can be built cleanly and used comfortably. This profile is a record of the work I can stand
+            behind: projects that were coded, shaped, and refined as one connected process.
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

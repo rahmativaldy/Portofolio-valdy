@@ -1,73 +1,262 @@
 @import "tailwindcss";
 
-/* Color System */
+/* Color System — Phase 9 Professional UI Palette */
 :root {
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-border: #e2e8f0;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #64748b;
-  --color-accent: #2563eb;
+  --workspace-bg: #fafafa;
+  --workspace-sidebar: #f4f4f5;
+  --workspace-surface: #ffffff;
+  --workspace-surface-elevated: #f4f4f5;
+  --workspace-border: #e4e4e7;
+  
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-muted: #60a5fa;
+  --accent-surface: #eff6ff;
+  --accent-border: #bfdbfe;
+
+  --color-bg: var(--workspace-bg);
+  --color-surface: var(--workspace-surface);
+  --color-border: var(--workspace-border);
+  --color-text-primary: #18181b;
+  --color-text-secondary: #52525b;
+  --color-accent: var(--accent);
+  --accent-foreground: #ffffff;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .dark {
-  --color-bg: #09090b;
-  --color-surface: #18181b;
-  --color-border: #27272a;
-  --color-text-primary: #f4f4f5;
+  --workspace-bg: #0a0a0b;
+  --workspace-sidebar: #0e0e10;
+  --workspace-surface: #111113;
+  --workspace-surface-elevated: #161618;
+  --workspace-border: rgba(255, 255, 255, 0.08);
+  
+  --accent: #3b82f6;
+  --accent-strong: #60a5fa;
+  --accent-muted: #2563eb;
+  --accent-surface: rgba(59, 130, 246, 0.1);
+  --accent-border: rgba(59, 130, 246, 0.25);
+
+  --color-bg: var(--workspace-bg);
+  --color-surface: var(--workspace-surface);
+  --color-border: var(--workspace-border);
+  --color-text-primary: #fafafa;
   --color-text-secondary: #a1a1aa;
-  --color-accent: #3b82f6;
+  --color-accent: var(--accent);
+  --accent-foreground: #ffffff;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Motion Tokens — Phase 9.2 Interactive Motion Pass */
+:root {
+  --motion-fast: 180ms;
+  --motion-base: 280ms;
+  --motion-slow: 550ms;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: var(--ease-out-expo);
+  --ease-out: var(--ease-standard);
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-@keyframes slideInUp {
-  from {
+@keyframes testMotionKeyframes {
+  0% {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(40px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes slideInDown {
-  from {
+@keyframes sidebarAvatarEnter {
+  0% {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: scale(0.9);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
+  100% {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-@keyframes shimmer {
+@keyframes sidebarContentEnter {
   0% {
-    background-position: -1000px 0;
+    opacity: 0;
+    transform: translateY(8px);
   }
   100% {
-    background-position: 1000px 0;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceEyebrow {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceName {
+  0% {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceHeroStatement {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceDescription {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceLinks {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes modalPanelEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dashLoop {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes lineDashDrift {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes ambientA {
+  0%, 100% { transform: translate3d(12px, -8px, 0); }
+  50% { transform: translate3d(-12px, 8px, 0); }
+}
+
+@keyframes ambientB {
+  0%, 100% { transform: translate3d(-10px, 10px, 0); }
+  50% { transform: translate3d(10px, -10px, 0); }
+}
+
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.18; }
+  50% { opacity: 0.42; }
+}
+
+@keyframes ambientDriftA {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(12px, -8px, 0);
+  }
+}
+
+@keyframes ambientDriftB {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-10px, 10px, 0);
+  }
+}
+
+@keyframes ambientPulseC {
+  0%, 100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.42;
   }
 }
 
@@ -81,6 +270,7 @@
 /* Base Styles */
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
@@ -90,25 +280,43 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-feature-settings: "cv01" 1;
 }
 
-/* Scrollbar Styling */
+/* Headings */
+h1 { font-size: 1.875rem; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.5rem; line-height: 1.15; font-weight: 700; }
+h3 { font-size: 1.125rem; line-height: 1.2; font-weight: 600; }
+
+/* Card surface helper */
+.surface-card {
+  background: var(--workspace-surface);
+  border: 1px solid var(--workspace-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Refined Sleek Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e2638;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
+  background: var(--accent);
 }
 
 /* Selection */
@@ -117,37 +325,280 @@ body {
   color: white;
 }
 
-::-moz-selection {
-  background-color: var(--color-accent);
-  color: white;
-}
-
-/* Utility Classes */
+/* Utility Classes & Section Reveals */
 .animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn var(--motion-base) var(--ease-smooth);
 }
 
-.animate-slideInUp {
-  animation: slideInUp 0.6s ease-out;
+.animate-sectionEnter {
+  will-change: transform, opacity;
+  animation: sectionEnter 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.animate-slideInDown {
-  animation: slideInDown 0.6s ease-out;
+.animate-sectionExit {
+  will-change: transform, opacity;
+  animation: sectionExit 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.animate-scaleIn {
-  animation: scaleIn 0.4s ease-out;
+.animate-modalEnter {
+  will-change: transform, opacity;
+  animation: modalPanelEnter 220ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.transition-all {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Sidebar Profile Entrance Animations */
+.animate-sidebar-avatar {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: sidebarAvatarEnter 450ms cubic-bezier(0.22, 1, 0.36, 1) 0ms forwards;
 }
 
-.transition-fast {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+.animate-sidebar-name {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: sidebarContentEnter 400ms cubic-bezier(0.22, 1, 0.36, 1) 0ms forwards;
 }
 
-/* Typography Utilities */
+.animate-sidebar-role {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: sidebarContentEnter 400ms cubic-bezier(0.22, 1, 0.36, 1) 80ms forwards;
+}
+
+.animate-sidebar-status {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: sidebarContentEnter 400ms cubic-bezier(0.22, 1, 0.36, 1) 160ms forwards;
+}
+
+/* Overview Entrance Animations strictly matching exact staggered timing sequence */
+.animate-enter-eyebrow {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceEyebrow 600ms cubic-bezier(0.22, 1, 0.36, 1) 380ms forwards;
+}
+
+.animate-enter-name-1 {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceName 700ms cubic-bezier(0.22, 1, 0.36, 1) 480ms forwards;
+}
+
+.animate-enter-name-2 {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceName 700ms cubic-bezier(0.22, 1, 0.36, 1) 560ms forwards;
+}
+
+.animate-enter-statement {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceHeroStatement 650ms cubic-bezier(0.22, 1, 0.36, 1) 680ms forwards;
+}
+
+.animate-enter-work-heading {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceSlideRight 650ms cubic-bezier(0.22, 1, 0.36, 1) 520ms forwards;
+}
+
+.animate-enter-description {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceDescription 650ms cubic-bezier(0.22, 1, 0.36, 1) 800ms forwards;
+}
+
+.animate-enter-project-1 {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceSlideRight 650ms cubic-bezier(0.22, 1, 0.36, 1) 650ms forwards;
+}
+
+.animate-enter-links {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceLinks 600ms cubic-bezier(0.22, 1, 0.36, 1) 900ms forwards;
+}
+
+.animate-enter-project-2 {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: entranceSlideRight 650ms cubic-bezier(0.22, 1, 0.36, 1) 780ms forwards;
+}
+
+/* Masked Text Reveal Helper */
+.text-mask-container {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.text-mask-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Interactive Canvas Styles & Parallax Layers */
+.interactive-canvas-root {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.interactive-canvas-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.interactive-canvas-root * {
+  vector-effect: non-scaling-stroke;
+}
+
+/* SVG Responsive Group Display Rules */
+.desktop-only-svg {
+  display: none;
+}
+@media (min-width: 768px) {
+  .desktop-only-svg {
+    display: inline;
+  }
+}
+
+.mobile-only-svg {
+  display: inline;
+}
+@media (min-width: 768px) {
+  .mobile-only-svg {
+    display: none;
+  }
+}
+
+/* Canvas Parallax Layers consuming explicit pixel CSS variables */
+.blueprint-frame {
+  transform: translate3d(var(--motion-frame-x, 0px), var(--motion-frame-y, 0px), 0);
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.blueprint-line {
+  transform: translate3d(var(--motion-line-x, 0px), var(--motion-line-y, 0px), 0);
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.blueprint-nodes {
+  transform: translate3d(var(--motion-node-x, 0px), var(--motion-node-y, 0px), 0);
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.blueprint-coords {
+  transform: translate3d(var(--motion-coord-x, 0px), var(--motion-coord-y, 0px), 0);
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* Living interface stroke dash animation */
+.animate-dash-loop,
+.blueprint-line-living {
+  stroke-dasharray: 4 8;
+  animation: dashLoop 10s linear infinite;
+}
+
+/* Ambient Motion Layers */
+.animate-ambient-a,
+.ambient-motion-a {
+  animation: ambientA 14s ease-in-out infinite;
+}
+
+.animate-ambient-b,
+.ambient-motion-b {
+  animation: ambientB 16s ease-in-out infinite;
+}
+
+.animate-ambient-pulse,
+.ambient-motion-c {
+  animation: ambientPulse 14s ease-in-out infinite;
+}
+
+/* Node Proximity Glow Effect */
+.node-glow {
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.45));
+}
+
+/* Light theme opacities */
+.interactive-canvas-grid line,
+.interactive-canvas-lines path,
+.interactive-canvas-geometry circle,
+.interactive-canvas-geometry path,
+.interactive-canvas-signature line,
+.interactive-canvas-signature path,
+.interactive-canvas-mobile-only line,
+.interactive-canvas-mobile-only circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.12;
+}
+
+.interactive-canvas-meta text {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  fill: currentColor;
+  opacity: 0.35;
+  letter-spacing: 0.05em;
+}
+
+/* Dark theme opacities */
+.dark .interactive-canvas-grid line,
+.dark .interactive-canvas-lines path,
+.dark .interactive-canvas-geometry circle,
+.dark .interactive-canvas-geometry path,
+.dark .interactive-canvas-signature line,
+.dark .interactive-canvas-signature path,
+.dark .interactive-canvas-mobile-only line,
+.dark .interactive-canvas-mobile-only circle {
+  opacity: 0.18;
+}
+
+.dark .interactive-canvas-meta text {
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sidebar-avatar,
+  .animate-sidebar-name,
+  .animate-sidebar-role,
+  .animate-sidebar-status,
+  .animate-enter-eyebrow,
+  .animate-enter-name-1,
+  .animate-enter-name-2,
+  .animate-enter-statement,
+  .animate-enter-description,
+  .animate-enter-links,
+  .animate-enter-work-heading,
+  .animate-enter-project-1,
+  .animate-enter-project-2,
+  .blueprint-frame,
+  .blueprint-line,
+  .blueprint-nodes,
+  .blueprint-coords,
+  .blueprint-line-living,
+  .animate-dash-loop,
+  .ambient-motion-a,
+  .ambient-motion-b,
+  .ambient-motion-c,
+  .animate-ambient-a,
+  .animate-ambient-b,
+  .animate-ambient-pulse {
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
 .text-balance {
   text-wrap: balance;
 }
@@ -160,7 +611,4 @@ body {
   line-height: 1.375;
 }
 
-/* Section Divider */
-.section-divider {
-  border-color: rgba(255, 255, 255, 0.05);
-}
+

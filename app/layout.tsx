@@ -20,9 +20,9 @@ const BASE_URL = 'https://rahmativaldy.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: 'Rahmat Ivaldy | Frontend Developer & Mobile Developer',
+  title: 'Rahmat Ivaldy | Frontend Developer & Mobile Developer, UI/UX Designer',
   description:
-    'Frontend Developer, Mobile Developer, and UI/UX Designer focused on Flutter, Next.js, TypeScript, and modern web experiences.',
+    'Rahmat Ivaldy is a Frontend and Mobile Developer, UI/UX Designer building polished experiences with Flutter, Next.js, React, TypeScript, and thoughtful product design.',
   keywords: [
     'Flutter Developer',
     'Frontend Developer',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     'Mobile Developer',
     'UI UX Designer',
     'Rahmat Ivaldy',
-    'RahmatOS',
+    'Rahmat Workspace',
   ],
   authors: [{ name: 'Rahmat Ivaldy', url: BASE_URL }],
   creator: 'Rahmat Ivaldy',
@@ -46,18 +46,18 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Rahmat Ivaldy | Frontend Developer & Mobile Developer',
+    title: 'Rahmat Ivaldy | Frontend Developer & Mobile Developer, UI/UX Designer',
     description:
-      'Frontend Developer, Mobile Developer, and UI/UX Designer focused on Flutter, Next.js, TypeScript, and modern web experiences.',
+      'Rahmat Ivaldy is a Frontend and Mobile Developer, UI/UX Designer building polished experiences with Flutter, Next.js, React, TypeScript, and thoughtful product design.',
     url: BASE_URL,
-    siteName: 'RahmatOS — Rahmat Ivaldy Portfolio',
+    siteName: 'Rahmat Workspace',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Rahmat Ivaldy | Frontend & Mobile Developer',
-        type: 'image/png',
+        type: 'image/webp',
       },
     ],
     locale: 'en_US',
@@ -65,10 +65,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rahmat Ivaldy | Frontend Developer & Mobile Developer',
+    title: 'Rahmat Ivaldy | Frontend Developer & Mobile Developer, UI/UX Designer',
     description:
-      'Frontend Developer, Mobile Developer, and UI/UX Designer focused on Flutter, Next.js, TypeScript, and modern web experiences.',
-    images: ['/og-image.png'],
+      'Rahmat Ivaldy is a Frontend and Mobile Developer, UI/UX Designer building polished experiences with Flutter, Next.js, React, TypeScript, and thoughtful product design.',
+    images: ['/og-image.webp'],
   },
   icons: {
     icon: '/favicon.ico',
@@ -82,7 +82,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Rahmat Ivaldy',
-  jobTitle: 'Frontend Developer & Mobile Developer',
+  jobTitle: 'Frontend Developer & Mobile Developer, UI/UX Designer',
   url: BASE_URL,
   email: 'rahmativaldy65@gmail.com',
   knowsAbout: ['Flutter', 'Next.js', 'TypeScript', 'React', 'Firebase', 'UI/UX Design'],
@@ -104,21 +104,26 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
       <head>
-        {/* Theme initializer — runs before paint to avoid FOUC */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){}})()`,
-          }}
-        />
+        {/* Theme initializer — run before hydration so the browser matches the default dark theme immediately */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function () {
+            try {
+              var theme = localStorage.getItem('theme') || 'dark';
+              document.documentElement.classList.toggle('dark', theme === 'dark');
+            } catch (e) {
+              // Ignore if localStorage is unavailable
+            }
+          })();`}
+        </Script>
 
         {/* JSON-LD Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <Script id="json-ld" type="application/ld+json" strategy="beforeInteractive">
+          {JSON.stringify(jsonLd)}
+        </Script>
 
         {/* Google Analytics (loads only when NEXT_PUBLIC_GA_ID is set) */}
         {GA_ID && (

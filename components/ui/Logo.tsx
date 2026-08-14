@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface LogoProps {
-  /** Show the full 'RahmatOS' name or just the monogram 'RO' */
+  /** Show the full brand name or just the monogram */
   variant?: 'full' | 'mark';
   /** Badge label shown beside the name — defaults to 'v2' */
   version?: string;
@@ -9,7 +9,7 @@ interface LogoProps {
 }
 
 /**
- * RahmatOS text-based logo.
+ * Minimal personal brand mark for Rahmat Workspace.
  * Uses pure CSS — no image dependency, theme-aware.
  */
 export function Logo({ variant = 'full', version = 'v2', className = '' }: LogoProps) {
@@ -17,23 +17,23 @@ export function Logo({ variant = 'full', version = 'v2', className = '' }: LogoP
     return (
       <span
         className={`inline-flex items-center justify-center w-8 h-8 rounded-md bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 font-mono text-sm font-bold select-none tracking-tighter ${className}`}
-        aria-label="RahmatOS"
+        aria-label="Rahmat Workspace"
       >
-        RO
+        RI
       </span>
     );
   }
 
   return (
-    <span className={`inline-flex items-center gap-2 select-none ${className}`} aria-label="RahmatOS">
+    <span className={`inline-flex items-center gap-2 select-none ${className}`} aria-label="Rahmat Workspace">
       {/* Monogram badge */}
       <span className="w-7 h-7 rounded-md bg-zinc-900 dark:bg-zinc-100 flex items-center justify-center font-mono text-[11px] font-bold text-zinc-100 dark:text-zinc-900 tracking-tighter flex-shrink-0">
-        RO
+        RI
       </span>
       {/* Wordmark */}
       <span className="font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight text-sm">
         Rahmat
-        <span className="text-zinc-400 dark:text-zinc-500">OS</span>
+        <span className="text-zinc-400 dark:text-zinc-500">Workspace</span>
       </span>
       {/* Version pill */}
       {version && (

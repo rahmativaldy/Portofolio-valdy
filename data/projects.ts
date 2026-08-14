@@ -1,18 +1,4 @@
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  highlights?: string[];
-  challenges?: string[];
-  learnings?: string[];
-  link?: string;
-  github?: string;
-  /** Path relative to /public */
-  thumbnail?: string;
-  /** Additional gallery images relative to /public */
-  gallery?: string[];
-}
+import { Project } from '@/types';
 
 export const PROJECTS: Project[] = [
   {
@@ -41,14 +27,14 @@ export const PROJECTS: Project[] = [
       'Firebase is great for prototyping but you hit its limits fast when your data relations get complex.',
     ],
     github: 'https://github.com/rahmativaldy',
-    thumbnail: '/projects/nusago/screenshot.png',
-    gallery: ['/projects/nusago/screenshot.png'],
+    thumbnail: '/projects/nusago/screenshot.webp',
+    gallery: ['/projects/nusago/screenshot.webp'],
   },
   {
-    id: 'rahmat-os',
-    title: 'RahmatOS',
+    id: 'rahmat-workspace',
+    title: 'Rahmat Workspace',
     description:
-      'This portfolio — a Personal Developer Workspace built to feel like a minimal OS rather than a typical portfolio site. Heavily inspired by Raycast, Linear, and Vercel\'s design language.',
+      'A modern developer workspace and portfolio built with Next.js, React, TypeScript, and Tailwind CSS. It presents Rahmat Ivaldy as a Frontend and Mobile Developer, UI/UX Designer.',
     technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'App Router'],
     highlights: [
       'Workspace-style tab navigation',
@@ -67,9 +53,53 @@ export const PROJECTS: Project[] = [
       'TypeScript really does make refactoring fearless — the compiler catches the regressions before you do.',
       'Shipping a product you\'d actually use every day gives you a completely different level of quality feedback.',
     ],
-    github: 'https://github.com/rahmativaldy/rahmat-os',
-    link: 'https://rahmat-os.vercel.app',
-    thumbnail: '/projects/rahmatos/screenshot.png',
-    gallery: ['/projects/rahmatos/screenshot.png'],
+    github: 'https://github.com/rahmativaldy',
+    link: 'https://rahmativaldy.com',
+    thumbnail: '/projects/rahmat-workspace/screenshot.webp',
+    gallery: ['/projects/rahmat-workspace/screenshot.webp'],
+  },
+  {
+    id: 'nusago-api',
+    title: 'NusaGo API',
+    description:
+      'A robust, type-safe REST API backend supporting the NusaGo mobile ecosystem. Features structured routing, controller-based validation, and clean layered modules.',
+    technologies: ['Node.js', 'Express', 'TypeScript', 'PostgreSQL', 'Prisma ORM', 'JWT', 'Docker'],
+    highlights: [
+      'Layered modular architecture (routes, controllers, services)',
+      'Relational schema design with PostgreSQL and Prisma',
+      'Secure authentication flow with JSON Web Tokens',
+      'Robust validation middleware using Zod',
+      'Interactive Swagger API documentation',
+    ],
+    challenges: [
+      'Optimizing query performance when fetching property availability with complex date ranges and criteria filters.',
+      'Maintaining precise PostgreSQL schema updates with clean migrations under production-like scenarios.',
+    ],
+    learnings: [
+      'An ORM like Prisma speeds up prototyping, but knowing how to read raw SQL queries is crucial for debugging bottlenecks.',
+      'Rigorous unit testing of middlewares early on saves countless hours of manual API testing.',
+    ],
+    github: 'https://github.com/rahmativaldy',
+  },
+  {
+    id: 'taskflow-dashboard',
+    title: 'TaskFlow Dashboard',
+    description:
+      'A sleek, real-time Kanban project management dashboard designed for high-velocity teams, featuring drag-and-drop workspace columns and instant status sync.',
+    technologies: ['React', 'TypeScript', 'Zustand', 'Tailwind CSS', 'dnd-kit', 'Local Storage'],
+    highlights: [
+      'Fully interactive drag-and-drop column boards',
+      'Reactive local state management with Zustand',
+      'Subtask tracking with dynamic progress bars',
+      'Accessible focus layouts matching modern IDEs',
+    ],
+    challenges: [
+      'Preventing stuttering frame rates during item drag gestures with large task arrays — optimized via selective rendering and debounced stores.',
+    ],
+    learnings: [
+      'Zustand provides a much lighter alternative to Redux Toolkit for UI-heavy state synchronizations.',
+      'Using specialized headless libraries like @dnd-kit/core provides great accessibility support out-of-the-box.',
+    ],
+    github: 'https://github.com/rahmativaldy',
   },
 ];
