@@ -115,17 +115,17 @@ export function Overview() {
               <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 {group.category}
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5">
+              <div className="flex flex-wrap gap-2 sm:gap-2.5">
                 {group.items.map((skill) => (
                   <div
                     key={skill.name}
-                    className="group px-3 py-1.5 h-[34px] border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5 transition-all duration-150 flex items-center gap-2.5"
+                    className="group inline-flex items-center gap-2 px-3 h-[36px] border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-[#18181b] transition-all duration-150 cursor-default"
                   >
                     <TechIcon
                       name={skill.name}
-                      className="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-950 dark:group-hover:text-white shrink-0 transition-colors"
+                      className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-950 dark:group-hover:text-white shrink-0 transition-transform duration-150 group-hover:-translate-y-0.5"
                     />
-                    <span className="text-xs font-mono font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white truncate transition-colors">
+                    <span className="text-[12px] font-mono font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white whitespace-nowrap transition-colors">
                       {skill.name}
                     </span>
                   </div>
@@ -153,140 +153,146 @@ export function Overview() {
         </div>
 
         <div className="space-y-6">
-          {/* Featured Project 01: NusaGo Mobile (Asymmetric Hero Layout) */}
+          {/* Project 01: NusaGo Mobile */}
           {PROJECTS.find((p) => p.id === 'nusago-mobile') && (() => {
             const project = PROJECTS.find((p) => p.id === 'nusago-mobile')!;
             return (
               <div
                 key={project.id}
                 onClick={() => setActiveSection('projects')}
-                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-200 cursor-pointer overflow-hidden p-6 md:p-8"
+                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-350 cursor-pointer overflow-hidden p-5 sm:p-6 md:p-7"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-                  {/* Content Column */}
-                  <div className="lg:col-span-5 space-y-4 order-2 lg:order-1">
-                    <div className="flex items-center gap-3 text-xs font-mono text-zinc-400 dark:text-zinc-500">
-                      <span className="font-bold text-zinc-900 dark:text-zinc-100">01</span>
-                      <span>/</span>
-                      <span className="uppercase tracking-wider">Mobile Application</span>
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
+                  {/* Thumbnail Image Column */}
+                  {project.thumbnail && (
+                    <div className="md:col-span-6">
+                      <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
+                        <Image
+                          src={project.thumbnail}
+                          alt={`${project.title} screenshot`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover object-top transition-transform duration-350 ease-out group-hover:scale-[1.05]"
+                        />
+                      </div>
                     </div>
+                  )}
 
-                    <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white transition-transform duration-200 group-hover:translate-x-1">
+                  {/* Content Column */}
+                  <div className="md:col-span-6 space-y-3.5 md:space-y-4">
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white transition-transform duration-350 ease-out group-hover:translate-x-1">
                       {project.title}
                     </h3>
 
-                    <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-2 max-w-2xl">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
 
-                    <div className="space-y-2 pt-1">
-                      <div className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 font-semibold">
-                        Technologies Used
+                    <div className="space-y-1.5 pt-0.5">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+                        Technologies
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {project.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-0.5 text-[11px] font-mono border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 rounded-sm flex items-center gap-1.5"
+                            className="px-2.5 py-1 text-[11px] font-mono border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 rounded-sm flex items-center gap-1.5"
                           >
-                            <TechIcon name={tech} className="w-3.5 h-3.5 opacity-80" />
-                            <span>{tech}</span>
+                            <TechIcon name={tech} className="w-3.5 h-3.5 opacity-80 shrink-0" />
+                            <span className="whitespace-nowrap">{tech}</span>
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    <div className="pt-2">
-                      <span className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-zinc-950 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                    <div className="pt-2.5 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-100 dark:border-zinc-800/60">
+                      <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 dark:text-zinc-500">
+                        <span className="font-bold text-zinc-900 dark:text-zinc-100">01</span>
+                        <span>/</span>
+                        <span className="uppercase tracking-wider">Mobile Application</span>
+                      </div>
+
+                      <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-950 dark:text-white transition-colors">
                         <span>View project</span>
-                        <span className="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">
+                        <span
+                          className="transition-transform duration-350 ease-out group-hover:translate-x-[5px]"
+                          aria-hidden="true"
+                        >
                           →
                         </span>
                       </span>
                     </div>
                   </div>
-
-                  {/* Thumbnail Image Column (Visual Evidence) */}
-                  {project.thumbnail && (
-                    <div className="lg:col-span-7 order-1 lg:order-2">
-                      <div className="relative w-full h-52 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
-                        <Image
-                          src={project.thumbnail}
-                          alt={`${project.title} screenshot`}
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 560px"
-                          className="object-cover object-top transition-transform duration-300 ease-out group-hover:scale-[1.04]"
-                        />
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             );
           })()}
 
-          {/* Featured Project 02: Rahmat Workspace (Editorial Row) */}
+          {/* Project 02: Rahmat Workspace */}
           {PROJECTS.find((p) => p.id === 'rahmat-workspace') && (() => {
             const project = PROJECTS.find((p) => p.id === 'rahmat-workspace')!;
             return (
               <div
                 key={project.id}
                 onClick={() => setActiveSection('projects')}
-                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-200 cursor-pointer overflow-hidden p-6 md:p-8"
+                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-350 cursor-pointer overflow-hidden p-5 sm:p-6 md:p-7"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
                   {/* Thumbnail Image Column */}
                   {project.thumbnail && (
-                    <div className="lg:col-span-6">
-                      <div className="relative w-full h-48 sm:h-56 md:h-64 lg:h-[250px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
+                    <div className="md:col-span-6">
+                      <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
                         <Image
                           src={project.thumbnail}
                           alt={`${project.title} screenshot`}
                           fill
-                          sizes="(max-width: 1024px) 100vw, 500px"
-                          className="object-cover object-top transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover object-top transition-transform duration-350 ease-out group-hover:scale-[1.05]"
                         />
                       </div>
                     </div>
                   )}
 
                   {/* Content Column */}
-                  <div className="lg:col-span-6 space-y-4">
-                    <div className="flex items-center gap-3 text-xs font-mono text-zinc-400 dark:text-zinc-500">
-                      <span className="font-bold text-zinc-900 dark:text-zinc-100">02</span>
-                      <span>/</span>
-                      <span className="uppercase tracking-wider">Web Application</span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-white transition-transform duration-200 group-hover:translate-x-1">
+                  <div className="md:col-span-6 space-y-3.5 md:space-y-4">
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white transition-transform duration-350 ease-out group-hover:translate-x-1">
                       {project.title}
                     </h3>
 
-                    <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-2 max-w-2xl">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
 
-                    <div className="space-y-2 pt-1">
-                      <div className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 font-semibold">
-                        Technologies Used
+                    <div className="space-y-1.5 pt-0.5">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+                        Technologies
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {project.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-0.5 text-[11px] font-mono border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 rounded-sm flex items-center gap-1.5"
+                            className="px-2.5 py-1 text-[11px] font-mono border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 rounded-sm flex items-center gap-1.5"
                           >
-                            <TechIcon name={tech} className="w-3.5 h-3.5 opacity-80" />
-                            <span>{tech}</span>
+                            <TechIcon name={tech} className="w-3.5 h-3.5 opacity-80 shrink-0" />
+                            <span className="whitespace-nowrap">{tech}</span>
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    <div className="pt-2">
-                      <span className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-zinc-950 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                    <div className="pt-2.5 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-100 dark:border-zinc-800/60">
+                      <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 dark:text-zinc-500">
+                        <span className="font-bold text-zinc-900 dark:text-zinc-100">02</span>
+                        <span>/</span>
+                        <span className="uppercase tracking-wider">Web Application</span>
+                      </div>
+
+                      <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-950 dark:text-white transition-colors">
                         <span>View project</span>
-                        <span className="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">
+                        <span
+                          className="transition-transform duration-350 ease-out group-hover:translate-x-[5px]"
+                          aria-hidden="true"
+                        >
                           →
                         </span>
                       </span>
