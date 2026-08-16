@@ -2,20 +2,30 @@
 
 import React from 'react';
 import { useWorkspace } from '@/context/WorkspaceContext';
+import { SKILL_GROUPS } from '@/data/skills';
+import { TechIcon } from '@/components/icons/TechIcons';
 
 export function About() {
   const { setActiveSection } = useWorkspace();
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-16 text-zinc-900 dark:text-zinc-100 select-none space-y-12 md:space-y-16 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-10 md:space-y-12 animate-fadeIn"
       id="about"
     >
-      {/* Editorial Profile Header */}
-      <header className="border-b border-zinc-200 dark:border-zinc-800 pb-8 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
-            01 / About & Biography
+      {/* 01 / ABOUT */}
+      <section className="space-y-4 pb-2 animate-fadeInUp">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
+          <div className="space-y-1.5">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+              01 / About
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
+              Rahmat Ivaldy
+            </h1>
+            <p className="text-xs md:text-sm font-mono text-zinc-600 dark:text-zinc-400">
+              Frontend Developer · Mobile Developer · UI/UX Designer
+            </p>
           </div>
           <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3.5 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
             <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
@@ -26,195 +36,241 @@ export function About() {
           </div>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white uppercase">
-          Rahmat Ivaldy
-        </h1>
-        <p className="text-sm md:text-base font-mono text-zinc-600 dark:text-zinc-400">
-          Frontend Developer · Mobile Developer · UI/UX Designer
+        <div className="space-y-3 pt-1">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight max-w-3xl">
+            &ldquo;Designing with structure. Building with purpose.&rdquo;
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed max-w-3xl">
+            Specializing in frontend engineering with Next.js, React, and TypeScript, mobile application development with Flutter and Dart, and UI/UX design. I focus on bridging the gap between interface design and software implementation—building structured systems, clean state architecture, and responsive user experiences.
+          </p>
+        </div>
+      </section>
+
+      {/* 02 / WHAT I DO */}
+      <section
+        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
+        style={{ animationDelay: '100ms' }}
+      >
+        <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          02 / What I Do
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800/80 rounded-sm overflow-hidden">
+          {/* Column 01 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 md:p-5 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                01 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Web Development
+              </h4>
+            </div>
+            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              React · Next.js · TypeScript · Tailwind CSS
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Building structured, typed, and responsive web applications with reusable component systems.
+            </p>
+          </div>
+
+          {/* Column 02 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 md:p-5 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                02 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Mobile Development
+              </h4>
+            </div>
+            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              Flutter · Dart · BLoC
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Building cross-platform mobile experiences backed by clean architecture and explicit state flow.
+            </p>
+          </div>
+
+          {/* Column 03 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 md:p-5 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                03 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                UI/UX Design
+              </h4>
+            </div>
+            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              Figma · Responsive Design · Design Systems
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Creating intuitive interfaces, wireframes, and design tokens that transition directly to code.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 03 / APPROACH */}
+      <section
+        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
+        style={{ animationDelay: '200ms' }}
+      >
+        <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          03 / Approach
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800/80 rounded-sm overflow-hidden">
+          {/* Step 01 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                01 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Understand
+              </h4>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Analyze product requirements, define data flow, and clarify technical constraints upfront.
+            </p>
+          </div>
+
+          {/* Step 02 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                02 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Design
+              </h4>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Construct high-fidelity wireframes, interface layouts, and consistent spacing rules in Figma.
+            </p>
+          </div>
+
+          {/* Step 03 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                03 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Build
+              </h4>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Develop clean, modular frontend and mobile code using typed structures and predictable state patterns.
+            </p>
+          </div>
+
+          {/* Step 04 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                04 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Refine
+              </h4>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
+              Test responsiveness, polish interaction details, verify API endpoints, and ensure build stability.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 04 / TOOLKIT */}
+      <section
+        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
+        style={{ animationDelay: '300ms' }}
+      >
+        <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          04 / Toolkit
+        </div>
+
+        <div className="space-y-4">
+          {SKILL_GROUPS.map((group) => (
+            <div key={group.id} className="space-y-2.5">
+              <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                {group.category}
+              </div>
+              <div className="flex flex-wrap gap-2 sm:gap-2.5">
+                {group.items.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="group inline-flex items-center gap-2 px-3 h-[36px] border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-[#18181b] transition-all duration-150 cursor-default"
+                  >
+                    <TechIcon
+                      name={skill.name}
+                      className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-950 dark:group-hover:text-white shrink-0 transition-transform duration-150 group-hover:-translate-y-0.5"
+                    />
+                    <span className="text-[12px] font-mono font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white whitespace-nowrap transition-colors">
+                      {skill.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* NAVIGATION FOOTER */}
+      <section
+        className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeInUp"
+        style={{ animationDelay: '400ms' }}
+      >
+        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+          Rahmat Workspace · Developer Biography &amp; Systems
         </p>
 
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 pt-2 leading-tight max-w-3xl">
-          I design interfaces and build the products behind them.
-        </h2>
-      </header>
-
-      {/* Main Grid: Narrative vs Specifications */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-        {/* Left Column: Biography & Principles */}
-        <div className="lg:col-span-7 space-y-10">
-          {/* Biography Narrative */}
-          <div className="space-y-5 text-sm md:text-base text-zinc-700 dark:text-zinc-300 font-sans leading-relaxed">
-            <p>
-              I started with mobile interfaces because I wanted to build real products, not just experiment with code. Building NusaGo Mobile taught me how a screen should behave on a device, how state flows through an app, and why architecture matters when the UI grows.
-            </p>
-
-            <p>
-              On the web, I use Next.js, React, TypeScript, and Tailwind CSS to bring clarity to reusable layout structures, responsive states, and accessible interactions. I treat visual design and code implementation as one connected process, not separate steps.
-            </p>
-
-            <p>
-              UI/UX design directly influences the way I write software. I evaluate hierarchy, contrast, spacing, and interaction rhythm before writing markup, ensuring technical constraints are considered from the earliest wireframes.
-            </p>
-
-            <p>
-              My practice is grounded in authentic, hands-on projects like NusaGo Mobile and Rahmat Workspace. Those real-world builds keep my engineering decisions practical, honest, and focused on user experience.
-            </p>
-          </div>
-
-          {/* Principles Section */}
-          <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
-            <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
-              Core Engineering Principles
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-1.5">
-                <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">01 / INTEGRATION</div>
-                <div className="text-xs font-bold font-mono text-zinc-950 dark:text-white">Connected Practice</div>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                  Design and code as one unified workflow from Figma layout systems to typed React components.
-                </p>
-              </div>
-
-              <div className="p-4 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-1.5">
-                <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">02 / ARCHITECTURE</div>
-                <div className="text-xs font-bold font-mono text-zinc-950 dark:text-white">Explicit State</div>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                  Predictable state transitions (BLoC streams, Zustand stores) over ad-hoc mutations.
-                </p>
-              </div>
-
-              <div className="p-4 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-1.5">
-                <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">03 / CODE CRAFT</div>
-                <div className="text-xs font-bold font-mono text-zinc-950 dark:text-white">Practical Code</div>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                  Readable, maintainable engineering decisions over unnecessary complexity and abstraction.
-                </p>
-              </div>
-
-              <div className="p-4 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-1.5">
-                <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">04 / INTERFACE</div>
-                <div className="text-xs font-bold font-mono text-zinc-950 dark:text-white">Layout Rhythm</div>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                  Accessible semantic HTML, responsive grid math, and consistent typography hierarchy.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Profile Specifications & Workflow */}
-        <aside className="lg:col-span-5 space-y-6">
-          {/* Specifications Table */}
-          <div className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-4">
-            <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium pb-2 border-b border-zinc-200 dark:border-zinc-800">
-              Profile Specifications
-            </div>
-
-            <dl className="space-y-3.5 text-xs font-mono">
-              <div className="flex flex-col gap-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-2.5">
-                <dt className="text-zinc-400 dark:text-zinc-500 uppercase">Location</dt>
-                <dd className="text-zinc-950 dark:text-white font-medium">Indonesia</dd>
-              </div>
-
-              <div className="flex flex-col gap-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-2.5">
-                <dt className="text-zinc-400 dark:text-zinc-500 uppercase">Disciplines</dt>
-                <dd className="text-zinc-950 dark:text-white font-medium">Frontend · Mobile · UI/UX Design</dd>
-              </div>
-
-              <div className="flex flex-col gap-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-2.5">
-                <dt className="text-zinc-400 dark:text-zinc-500 uppercase">Primary Stack</dt>
-                <dd className="text-zinc-950 dark:text-white font-medium">Next.js · React · TypeScript · Flutter · Dart</dd>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <dt className="text-zinc-400 dark:text-zinc-500 uppercase">Status</dt>
-                <dd className="text-zinc-950 dark:text-white font-medium">Open to opportunities</dd>
-              </div>
-            </dl>
-          </div>
-
-          {/* Design to Code Pipeline */}
-          <div className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-4">
-            <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium pb-2 border-b border-zinc-200 dark:border-zinc-800">
-              Design-to-Code Workflow
-            </div>
-
-            <div className="space-y-3 font-mono text-xs">
-              <div className="flex items-start gap-3">
-                <span className="px-1.5 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold shrink-0">
-                  01
-                </span>
-                <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Design & Wireframing</div>
-                  <div className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans">Figma interface systems, layout math, and interaction flows.</div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="px-1.5 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold shrink-0">
-                  02
-                </span>
-                <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Frontend & Mobile Code</div>
-                  <div className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans">Next.js App Router, React 19, TypeScript, and Flutter/Dart BLoC apps.</div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="px-1.5 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold shrink-0">
-                  03
-                </span>
-                <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Version & Architecture</div>
-                  <div className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans">Git version control, clean modular boundaries, and explicit stores.</div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="px-1.5 py-0.5 rounded-sm bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold shrink-0">
-                  04
-                </span>
-                <div>
-                  <div className="font-semibold text-zinc-900 dark:text-zinc-100">Integration & Validation</div>
-                  <div className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans">REST API integration, Postman testing, and build verification.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-
-      {/* Navigation Footer Controls */}
-      <footer className="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-          Rahmat Workspace · Developer Biography & Practice Statement
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
           <button
             type="button"
             onClick={() => setActiveSection('projects')}
-            className="px-4 py-2 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
-            Explore Projects →
+            <span>Explore Projects</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </button>
           <button
             type="button"
             onClick={() => setActiveSection('experience')}
-            className="px-4 py-2 rounded-sm bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
-            View Journey →
+            <span>View Journey</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </button>
           <button
             type="button"
             onClick={() => setActiveSection('contact')}
-            className="px-4 py-2 rounded-sm bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
-            Get In Touch →
+            <span>Get In Touch</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </button>
         </div>
-      </footer>
+      </section>
     </div>
   );
 }

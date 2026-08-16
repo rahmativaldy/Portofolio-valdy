@@ -2,102 +2,140 @@
 
 import { useWorkspace } from '@/context/WorkspaceContext';
 import { SKILL_GROUPS, WORKFLOW_PIPELINE } from '@/data/skills';
+import { TechIcon } from '@/components/icons/TechIcons';
 
 export function Skills() {
   const { setActiveSection } = useWorkspace();
 
-  return (
-    <section className="py-8 md:py-12 px-6 md:px-10 max-w-6xl xl:max-w-7xl mx-auto space-y-12 animate-fadeIn" id="skills">
-      {/* Section Header */}
-      <header className="border-b border-zinc-200 dark:border-zinc-800 pb-8 space-y-3">
-        <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
-          Toolkit & Technology Inventory
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight">
-          Technologies & Tools
-        </h1>
-        <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
-          A categorized inventory of the technologies, state architectures, frameworks, and workflow tools I use to design, build, and ship digital products.
-        </p>
-      </header>
+  // Map skill groups to section numbers 02-05 to match required numbering schema
+  const sectionLabels: Record<string, string> = {
+    '01': '02 / Frontend Engineering',
+    '02': '03 / Mobile Development',
+    '03': '04 / Backend & Integration',
+    '04': '05 / Design & Workflow',
+  };
 
-      {/* Categorized Inventory Groups */}
-      <div className="space-y-12">
-        {SKILL_GROUPS.map((group) => (
+  const sectionDelays: Record<string, string> = {
+    '01': '100ms',
+    '02': '200ms',
+    '03': '300ms',
+    '04': '400ms',
+  };
+
+  return (
+    <div
+      className="max-w-5xl xl:max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-10 md:space-y-12 animate-fadeIn"
+      id="skills"
+    >
+      {/* 01 / TOOLKIT HEADER */}
+      <section className="space-y-4 pb-2 animate-fadeInUp">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
+          <div className="space-y-1.5">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+              01 / Toolkit
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
+              Technologies &amp; Tools
+            </h1>
+            <p className="text-xs md:text-sm font-mono text-zinc-600 dark:text-zinc-400">
+              Categorized technical inventory and workflow architecture
+            </p>
+          </div>
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3.5 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
+            <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span>22 Core Technologies · Authentic Inventory</span>
+          </div>
+        </div>
+
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed max-w-3xl pt-1">
+          A structured inventory of the languages, frameworks, state architectures, and developer tools used across my frontend, mobile, and UI design practice.
+        </p>
+      </section>
+
+      {/* CATEGORIZED SKILL INVENTORY (SECTIONS 02 - 05) */}
+      {SKILL_GROUPS.map((group) => {
+        const label = sectionLabels[group.id] || `0${parseInt(group.id, 10) + 1} / ${group.category}`;
+        const delay = sectionDelays[group.id] || '100ms';
+
+        return (
           <section
             key={group.id}
-            className="border-t border-zinc-200 dark:border-zinc-800 pt-8 grid gap-6 md:grid-cols-12 items-start"
+            className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
+            style={{ animationDelay: delay }}
           >
-            {/* Sequence ID */}
-            <div className="md:col-span-2 font-mono text-3xl font-light text-zinc-400 dark:text-zinc-600 select-none">
-              {group.id}
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+                {label}
+              </span>
+              <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                {group.description}
+              </span>
             </div>
 
-            {/* Content Area */}
-            <div className="md:col-span-10 space-y-6">
-              <div className="space-y-1.5">
-                <h2 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-                  {group.category}
-                </h2>
-                <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  {group.description}
-                </p>
-              </div>
-
-              {/* Skill Items Grid */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                {group.items.map((item) => (
-                  <div
-                    key={item.name}
-                    className="p-3.5 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#141417] space-y-1"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className={`font-mono text-sm ${item.isPrimary ? 'font-bold text-zinc-950 dark:text-white' : 'font-medium text-zinc-700 dark:text-zinc-300'}`}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {group.items.map((item) => (
+                <div
+                  key={item.name}
+                  className="group p-3.5 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/80 dark:hover:bg-[#16161a] transition-all duration-200 space-y-1.5"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <TechIcon
+                        name={item.name}
+                        className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-950 dark:group-hover:text-white shrink-0 transition-colors"
+                      />
+                      <span className="text-xs font-mono font-bold text-zinc-950 dark:text-white group-hover:text-zinc-950 dark:group-hover:text-white truncate">
                         {item.name}
                       </span>
-                      {item.projectRef && (
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">
-                          {item.projectRef}
-                        </span>
-                      )}
                     </div>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                      {item.context}
-                    </p>
+                    {item.projectRef && (
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 px-2 py-0.5 rounded-sm border border-zinc-200 dark:border-zinc-800 shrink-0">
+                        {item.projectRef}
+                      </span>
+                    )}
                   </div>
-                ))}
-              </div>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                    {item.context}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-              {/* Footnote */}
-              <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 pt-1">
-                Note: {group.footnote}
-              </div>
+            <div className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 pt-0.5">
+              Note: {group.footnote}
             </div>
           </section>
-        ))}
-      </div>
+        );
+      })}
 
-      {/* Workflow Pipeline */}
-      <section className="border-t border-zinc-200 dark:border-zinc-800 pt-8 space-y-6">
-        <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
-          Design to Engineering Workflow Pipeline
+      {/* 06 / WORKFLOW */}
+      <section
+        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
+        style={{ animationDelay: '500ms' }}
+      >
+        <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          06 / Workflow Pipeline
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800/80 rounded-sm overflow-hidden">
           {WORKFLOW_PIPELINE.map((item) => (
             <div
               key={item.step}
-              className="p-4 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#141417] space-y-2"
+              className="group bg-white dark:bg-[#121215] p-4 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200"
             >
               <div className="flex items-center justify-between text-xs font-mono text-zinc-400 dark:text-zinc-500">
-                <span>{item.step}</span>
-                <span className="uppercase">{item.phase}</span>
+                <span className="font-bold text-zinc-900 dark:text-zinc-100">{item.step}</span>
+                <span className="uppercase tracking-wider font-semibold">{item.phase}</span>
               </div>
-              <div>
-                <p className="text-sm font-mono font-bold text-zinc-950 dark:text-white">
-                  {item.tool}
+              <div className="space-y-1">
+                <p className="text-xs sm:text-sm font-mono font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+                  <TechIcon name={item.tool.split(' ')[0]} className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <span>{item.tool}</span>
                 </p>
-                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
                   {item.detail}
                 </p>
               </div>
@@ -106,29 +144,57 @@ export function Skills() {
         </div>
       </section>
 
-      {/* Navigation Footer */}
-      <footer className="pt-6 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
-        <div className="flex items-center gap-4">
+      {/* NAVIGATION FOOTER */}
+      <section
+        className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeInUp"
+        style={{ animationDelay: '600ms' }}
+      >
+        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+          Rahmat Workspace · Toolkit &amp; Workflow Architecture
+        </p>
+
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <button
+            type="button"
+            onClick={() => setActiveSection('overview')}
+            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+          >
+            <span>Back to Overview</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
+          </button>
           <button
             type="button"
             onClick={() => setActiveSection('projects')}
-            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
-            Explore Projects →
+            <span>Explore Projects</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </button>
           <button
             type="button"
-            onClick={() => setActiveSection('experience')}
-            className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+            onClick={() => setActiveSection('contact')}
+            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
-            View Journey →
+            <span>Get In Touch</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </button>
         </div>
-
-        <p className="text-zinc-400 dark:text-zinc-500">
-          Rahmat Workspace · Toolkit & Workflow Architecture
-        </p>
-      </footer>
-    </section>
+      </section>
+    </div>
   );
 }

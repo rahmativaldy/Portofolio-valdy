@@ -306,88 +306,112 @@ export function Overview() {
       </section>
 
       {/* 5. CURRENT FOCUS */}
-      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           04 / Current Focus
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-zinc-200 dark:divide-zinc-800">
-          <div className="space-y-2.5 pr-0 md:pr-6 pb-6 md:pb-0">
-            <div className="text-3xl md:text-4xl font-mono font-bold text-zinc-300 dark:text-zinc-700">
-              01
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800/80 rounded-sm overflow-hidden">
+          {/* Column 01 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 md:p-5 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                01 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Web Engineering
+              </h4>
             </div>
-            <h4 className="text-base md:text-lg font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
-              Web Engineering
-            </h4>
-            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-500">
-              Next.js · React · TypeScript · Tailwind CSS
+            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              Next.js · React · TypeScript
             </div>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
-              Focus on building structured, responsive web interfaces.
+              Building structured and responsive web interfaces.
             </p>
           </div>
 
-          <div className="space-y-2.5 px-0 md:px-6 py-6 md:py-0">
-            <div className="text-3xl md:text-4xl font-mono font-bold text-zinc-300 dark:text-zinc-700">
-              02
+          {/* Column 02 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 md:p-5 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                02 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Mobile Development
+              </h4>
             </div>
-            <h4 className="text-base md:text-lg font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
-              Mobile Development
-            </h4>
-            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-500">
-              Flutter · Dart · BLoC · Clean Architecture
+            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+              Flutter · Dart · BLoC
             </div>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
-              Focus on mobile product implementation and API integration.
+              Building cross-platform mobile experiences.
             </p>
           </div>
 
-          <div className="space-y-2.5 pl-0 md:pl-6 pt-6 md:pt-0">
-            <div className="text-3xl md:text-4xl font-mono font-bold text-zinc-300 dark:text-zinc-700">
-              03
+          {/* Column 03 */}
+          <div className="group bg-white dark:bg-[#121215] p-4 md:p-5 space-y-2 hover:bg-zinc-50 dark:hover:bg-[#16161a] transition-colors duration-200">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
+                03 —
+              </span>
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                UI/UX Design
+              </h4>
             </div>
-            <h4 className="text-base md:text-lg font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
-              UI/UX Systems
-            </h4>
-            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-500">
+            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
               Figma · Design Systems · Responsive UI
             </div>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
-              Focus on connecting interface decisions with implementation.
+              Connecting interface design with implementation.
             </p>
           </div>
         </div>
       </section>
 
       {/* 6. CONTACT CTA */}
-      <section className="border-y border-zinc-200 dark:border-zinc-800 py-8 md:py-12 space-y-5 bg-transparent">
-        <div className="space-y-2.5 max-w-2xl">
-          <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
-            05 / Contact
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight">
-            Have something worth building together?
-          </h3>
-          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-            Available for frontend engineering, mobile app development, and UI/UX design opportunities.
-          </p>
+      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp">
+        <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+          05 / Contact
         </div>
 
-        <div className="flex flex-wrap items-center gap-3.5 text-xs font-mono pt-1">
-          <button
-            type="button"
-            onClick={() => setActiveSection('contact')}
-            className="px-6 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
-          >
-            Get in touch →
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveSection('experience')}
-            className="px-6 py-2.5 rounded-sm bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-          >
-            View my journey →
-          </button>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div className="space-y-1.5 max-w-xl">
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white leading-snug">
+              Have something worth building together?
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+              Let&apos;s connect and discuss the next product, interface, or digital experience.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 shrink-0 pt-1 sm:pt-0">
+            <button
+              type="button"
+              onClick={() => setActiveSection('contact')}
+              className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+            >
+              <span>Get in touch</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveSection('experience')}
+              className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+            >
+              <span>View journey</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+          </div>
         </div>
       </section>
     </div>
