@@ -34,7 +34,7 @@ For any code changes, validate at least:
   - admin-style tables, data grids, or enterprise control panels
   - bright multi-color marketing gradients and unnecessary illustration clutter
   - mini sidebars, navigation rails, breadcrumbs, or persistent branding text beside the hamburger when the sidebar is collapsed
-- When modifying navigation or layout, preserve the existing sidebar/command palette structure unless the work explicitly targets Portfolio V2 redesign.
+- When modifying navigation or layout, preserve the existing sidebar structure unless the work explicitly targets Portfolio V2 redesign.
 
 ## Sidebar and Navigation Guidance
 

@@ -6,13 +6,13 @@ This repository represents the current baseline implementation. Portfolio V2 is 
 
 - Workspace-inspired portfolio shell with sidebar navigation.
 - Content sections for Overview, About, Projects, Skills, Experience, Notes, and Contact.
-- Command palette with keyboard shortcut support (`⌘K` / `Ctrl+K`).
+- Global workspace search with instant section filtering.
 - Dark-first visual theme with light mode support and persisted preference.
 - Contact form with client-side validation and a working `/api/contact` route.
 - Projects page with a stronger selected work presentation and a refined case-study modal.
 - Toolkit page redesigned as an editorial technical inventory with real product context.
 - About section redesigned as a stronger personal profile with a name-first hero and design-aware narrative.
-- Accessible keyboard interactions in the sidebar and command palette.
+- Accessible keyboard interactions in the sidebar and layout controls.
 - SEO metadata, Open Graph, Twitter card, and JSON-LD schema support.
 - Responsive layout with mobile drawer sidebar behavior.
 
@@ -46,7 +46,7 @@ This repository represents the current baseline implementation. Portfolio V2 is 
 - Phase 7: interactive design canvas & motion system — completed. The Overview section now includes an interface blueprint SVG canvas with 3 depth layers, signature hero selection frame parallax, localized proximity LERP, RAF idle auto-pause, document visibility handling, and reduced-motion support.
 - Phase 8: global visual polish & scale system — completed. Implemented a 3-tiered responsive content width system (Wide Visual Tier `max-w-[1400px]`, Standard Editorial Tier `max-w-7xl`, Reading Tier `max-w-6xl`) separating outer composition width from paragraph text measure, enhancing project screenshot scale on 1920px displays while preserving 1366×768 laptop density and typography hierarchy.
 - Phase 8.1: color system & visual identity — completed. Introduced a restrained Electric Blue / Indigo visual identity (`blue-400`, `blue-500`), semantic workspace depth CSS variables (`--workspace-bg`, `--workspace-surface`, `--accent`), active sidebar navigation identity, blueprint proximity node accents, and WCAG-compliant light/dark theme parity.
-- Phase 8.2: sidebar iconography consistency — completed. Replaced all emoji-based navigation icons with a unified 18px outline SVG icon family (`NavIcons.tsx`) with consistent 1.75 stroke-width, fixed `w-5 h-5` container alignment, active Electric Blue interaction states, and shared Command Palette icon mapping.
+- Phase 8.2: sidebar iconography consistency — completed. Replaced all emoji-based navigation icons with a unified 18px outline SVG icon family (`NavIcons.tsx`) with consistent 1.75 stroke-width, fixed `w-5 h-5` container alignment, and active interaction states.
 - Phase 8.3: visual depth & motion enhancement — completed. Enhanced dark workspace background depth (`#080a0f` root, `#111520` cards), hero pointer spotlight gradient tracking, 6–8px blueprint parallax displacement visibility, centralized motion tokens in `globals.css`, 300ms section transition choreography, project media hover micro-interactions, sleek scrollbar styling, and `prefers-reduced-motion` compliance.
 - Audit and consolidate any stale or unused code paths before redesign work.
 - Keep the current workspace shell intact while iterating toward Portfolio V2.

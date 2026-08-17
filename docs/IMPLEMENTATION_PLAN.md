@@ -13,7 +13,6 @@ This plan is based on a direct audit of the current repository state and the est
   - `Header` (`components/layout/Header.tsx`)
   - `ContentArea` (`components/layout/ContentArea.tsx`)
   - `StatusBar` (`components/layout/StatusBar.tsx`)
-  - `CommandPalette` (`components/sections/CommandPalette.tsx`)
 - Navigation state is managed with React context in `context/WorkspaceContext.tsx`.
 - Theme state is managed via `app/layout.tsx` theme initializer script plus the header toggle in `Header.tsx`.
 - Project presentation lives in `components/sections/Projects.tsx` and `components/sections/ProjectModal.tsx`.
@@ -25,7 +24,7 @@ This plan is based on a direct audit of the current repository state and the est
 - `app/layout.tsx` should be preserved and reused for metadata, theme initialization, analytics, and SEO.
 - `app/page.tsx` should continue to render `WorkspaceShell`.
 - `components/layout/ContentArea.tsx` is reusable as the main scrollable content container.
-- `components/layout/StatusBar.tsx`, `components/sections/CommandPalette.tsx`, and `components/ui/*` primitives (`Badge.tsx`, `Button.tsx`, `Card.tsx`, `Logo.tsx`) are reusable.
+- `components/layout/StatusBar.tsx` and `components/ui/*` primitives (`Badge.tsx`, `Button.tsx`, `Card.tsx`, `Logo.tsx`) are reusable.
 - `data/*` and `types/index.ts` are the existing data/content layer and should be preserved.
 - The `/api/contact` route is stable infrastructure that must remain intact.
 
@@ -65,7 +64,7 @@ This plan is based on a direct audit of the current repository state and the est
   - `isCollapsed` on desktop
   - `persisted` state in `localStorage`
   - `prefersReducedMotion`
-- Maintain `WorkspaceContext` for section navigation and command palette state.
+- Maintain `WorkspaceContext` for section navigation state.
 
 ### Sidebar architecture
 
@@ -322,7 +321,7 @@ Likely files:
 
 Tasks:
 - Test desktop, tablet, and mobile layouts.
-- Verify keyboard navigation for sidebar, command palette, project items, and form controls.
+- Verify keyboard navigation for sidebar, search workspace, project items, and form controls.
 - Add or improve ARIA attributes where needed.
 - Confirm content order and focus management in the mobile drawer.
 

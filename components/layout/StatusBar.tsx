@@ -24,7 +24,7 @@ export function StatusBar() {
   }, []);
 
   return (
-    <footer className="h-6 bg-slate-100 dark:bg-[#0e0e10] border-t border-zinc-200 dark:border-white/10 text-[11px] flex items-center justify-between px-3 text-zinc-500 dark:text-zinc-400 select-none transition-colors duration-150 shrink-0">
+    <footer className="h-6 bg-zinc-100 dark:bg-[#0f0f11] border-t border-zinc-200 dark:border-zinc-800 text-[11px] flex items-center justify-between px-3 text-zinc-500 dark:text-zinc-400 select-none transition-colors duration-150 shrink-0">
       {/* Left side: Status indicators */}
       <div className="flex items-center gap-3">
         {/* Branch / Status */}

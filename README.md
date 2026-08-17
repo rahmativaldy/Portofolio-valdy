@@ -26,10 +26,10 @@ This repository is the source for a personal portfolio that emphasizes:
   - `layout.tsx` — root layout, SEO metadata, analytics, theme initializer
   - `page.tsx` — main page entrypoint rendering the workspace shell
   - `api/contact/route.ts` — contact form API route with server validation
-- `components/layout/` — the workspace shell, header, sidebar, content area, status bar, and command palette
+- `components/layout/` — the workspace shell, header, sidebar, content area, and status bar
 - `components/sections/` — portfolio content sections and project modal UI
 - `components/ui/` — reusable UI primitives like badges, buttons, cards, and logo
-- `context/` — application state for active section and command palette
+- `context/` — application state for active section
 - `data/` — static content for navigation, projects, skills, experience, blog notes, and contact links
 - `types/` — TypeScript models for portfolio data
 - `public/` — static assets, thumbnails, favicon
@@ -37,7 +37,7 @@ This repository is the source for a personal portfolio that emphasizes:
 ## Major Features
 
 - workspace-style sidebar navigation with keyboard support
-- command palette accessible with `⌘K`
+- global workspace search field in header
 - theme persistence via `localStorage`
 - Projects section with search, filters, and detail modal
 - Contact channel cards and working submit form backed by `/api/contact`

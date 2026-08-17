@@ -38,14 +38,14 @@ export const PROJECTS: Project[] = [
     technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'App Router'],
     highlights: [
       'Workspace-style tab navigation',
-      'Command Palette (⌘K) with fuzzy search',
+      'Workspace search with instant section filtering',
       'Dark & Light mode with persistence',
       'Responsive layout with mobile drawer',
       'Type-safe data layer',
     ],
     challenges: [
-      'Replicating the Raycast aesthetic in a web context — getting the spacing, shadows and border-radius just right.',
-      'The Command Palette required careful keyboard trap management to stay accessible.',
+      'Replicating the workspace layout aesthetic in a web context — getting the spacing, borders, and typography just right.',
+      'The global search feature required careful focus management to stay accessible.',
       'Next.js App Router has some sharp edges around client/server component boundaries that caught me off-guard.',
     ],
     learnings: [

@@ -30,7 +30,7 @@ export const JOURNEY_MILESTONES: DetailedJourneyMilestone[] = [
     ],
     highlights: [
       'Workspace-style tab navigation and persistent state',
-      'Command Palette (⌘K) keyboard overlay',
+      'Workspace search and section navigation',
       'Custom theme engine with dark/light mode persistence',
     ],
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'App Router'],

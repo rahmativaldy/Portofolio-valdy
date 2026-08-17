@@ -30,7 +30,6 @@ This portfolio is a personal workspace for **Rahmat Ivaldy**. It should feel cal
 - Navigation uses a unified 18px outline SVG icon family (`NavIcons.tsx`) with consistent `1.75` stroke-width and fixed `w-5 h-5` containers.
 - All emoji-based icons have been removed to preserve a clean, professional developer-workspace aesthetic.
 - Inactive icons use neutral zinc (`text-zinc-500 dark:text-zinc-400`); active icons transition to Electric Blue (`text-blue-600 dark:text-blue-400`).
-- Icon mapping is shared identically between the Sidebar navigation and the Command Palette.
 - The sidebar is open by default on first visit in the intended Portfolio V2 direction.
 - Users may collapse the sidebar completely.
 - When collapsed, the sidebar disappears entirely and content uses the available viewport.

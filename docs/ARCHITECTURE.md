@@ -1,4 +1,4 @@
-﻿# Architecture
+# Architecture
 
 This repository is currently implemented as a personal portfolio workspace built in Next.js App Router. The application is structured around a workspace shell with section-based content and a sidebar navigation model.
 
@@ -27,13 +27,10 @@ The portfolio is built around a central client-side shell.
   - Provides shared state values:
     - `activeSection`
     - `setActiveSection`
-    - `isCommandPaletteOpen`
-    - `setCommandPaletteOpen`
-    - `triggerCommandPalette`
-  - Supplies the core application state for navigation and the command palette.
+  - Supplies the core application state for section navigation.
 
 - `components/layout/WorkspaceLayout.tsx`
-  - Composes the overall layout from `Sidebar`, `Header`, `ContentArea`, `StatusBar`, and `CommandPalette`.
+  - Composes the overall layout from `Sidebar`, `Header`, `ContentArea`, and `StatusBar`.
   - Manages the sidebar disclosure state with `isSidebarOpen`.
   - On desktop, the sidebar is open by default and can collapse fully to hide from the layout.
   - On mobile, the sidebar behaves as an off-canvas drawer and closes after section selection.
@@ -46,7 +43,7 @@ The portfolio is built around a central client-side shell.
   - Updates the active section and closes the mobile drawer after selection.
 
 - `components/layout/Header.tsx`
-  - Includes a responsive menu toggle, a command palette trigger, and a theme toggle.
+  - Includes a responsive menu toggle, a global workspace search field, and a theme toggle.
   - On desktop, the menu toggle is hidden when the sidebar is open and reappears as a minimal top-left hamburger when the sidebar is collapsed.
   - Uses `localStorage` to persist theme selection.
   - Toggles the `dark` class on the document element.
@@ -58,11 +55,6 @@ The portfolio is built around a central client-side shell.
 - `components/layout/StatusBar.tsx`
   - Displays a footer status bar with the current time, live availability, and technology labels.
   - Updates the displayed time once per second.
-
-- `components/sections/CommandPalette.tsx`
-  - Renders a command palette overlay when `⌘K` or `Ctrl+K` is pressed.
-  - Filters navigation commands as the user types.
-  - Closes on `Escape` or overlay click.
 
 ## Portfolio Sections
 
