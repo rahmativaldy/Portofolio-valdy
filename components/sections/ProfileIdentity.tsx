@@ -18,7 +18,7 @@ export function ProfileIdentity({
     <div className="flex flex-col items-center text-center px-4 py-2 select-none">
       {/* Avatar Container (160px centered circular portrait) */}
       <div className="relative shrink-0 mb-2 group">
-        <div className="relative w-40 h-40 rounded-full overflow-hidden border-2 border-zinc-300 dark:border-zinc-700 bg-white shadow-xs mx-auto transition-transform duration-200 ease-out group-hover:scale-[1.02]">
+        <div className="relative w-40 h-40 rounded-full overflow-hidden border-2 border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 shadow-xs mx-auto transition-transform duration-200 ease-out group-hover:scale-[1.02]">
           {avatarSrc && !imageError ? (
             <Image
               src={avatarSrc}

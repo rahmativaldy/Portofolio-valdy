@@ -35,17 +35,17 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label={project.title}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/70 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6 bg-black/70 backdrop-blur-sm animate-fadeIn"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-[#141417] border border-zinc-200 dark:border-zinc-800 rounded-md shadow-2xl">
+      <div className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto bg-white dark:bg-[#141417] border border-zinc-200 dark:border-zinc-800 rounded-md shadow-2xl">
         {/* Close button */}
         <button
           id={`project-modal-close-${project.id}`}
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 flex items-center justify-center rounded-md bg-zinc-100/90 dark:bg-zinc-800/90 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,7 +55,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Hero image preview */}
         {project.thumbnail && (
-          <div className="relative w-full h-64 md:h-72 bg-zinc-100 dark:bg-zinc-900 rounded-t-md overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
+          <div className="relative w-full h-48 sm:h-64 md:h-72 bg-zinc-100 dark:bg-zinc-900 rounded-t-md overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
             <Image
               src={project.thumbnail}
               alt={`${project.title} screenshot`}
@@ -67,16 +67,16 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
         )}
 
-        <div className="p-6 md:p-8 space-y-8 text-left">
+        <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 text-left">
           {/* Header Metadata */}
           <div className="space-y-2">
             <div className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
               Technical Case Study · {project.id}
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
               {project.title}
             </h2>
-            <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {project.description}
             </p>
           </div>
@@ -108,7 +108,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 {project.highlights.map((highlight) => (
                   <div
                     key={highlight}
-                    className="p-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs text-zinc-700 dark:text-zinc-300 font-mono"
+                    className="p-2.5 sm:p-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs text-zinc-700 dark:text-zinc-300 font-mono"
                   >
                     • {highlight}
                   </div>
@@ -152,14 +152,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Links */}
           {(project.github || project.link) && (
-            <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap gap-3">
+            <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row gap-2.5 sm:gap-3">
               {project.github && (
                 <a
                   id={`project-modal-github-${project.id}`}
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-zinc-950 dark:bg-white px-4 py-2 text-xs font-mono font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-zinc-950 dark:bg-white px-4 py-2 text-xs font-mono font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
                 >
                   View Repository →
                 </a>
@@ -170,7 +170,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-4 py-2 text-xs font-mono font-semibold text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-4 py-2 text-xs font-mono font-semibold text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
                 >
                   Live Demo ↗
                 </a>

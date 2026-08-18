@@ -95,7 +95,7 @@ function FloatingNodes() {
       <motion.div
         className="absolute w-2.5 h-2.5 rounded-full bg-zinc-400 dark:bg-zinc-500 will-change-transform opacity-40"
         style={{
-          boxShadow: '0 0 12px 2px rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 0 12px 2px rgba(161, 161, 170, 0.2)',
         }}
         initial={{ x: '15vw', y: '25vh' }}
         animate={{
@@ -111,9 +111,9 @@ function FloatingNodes() {
 
       {/* Floating Node 2: Muted Glow */}
       <motion.div
-        className="absolute w-2 h-2 rounded-full bg-zinc-500 dark:bg-zinc-600 will-change-transform opacity-30"
+        className="absolute w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600 will-change-transform opacity-30"
         style={{
-          boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.15)',
+          boxShadow: '0 0 10px 2px rgba(161, 161, 170, 0.15)',
         }}
         initial={{ x: '80vw', y: '70vh' }}
         animate={{
@@ -134,14 +134,14 @@ export default function NotFound() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#09090b] text-zinc-100 flex flex-col items-center justify-center font-sans select-none">
+    <div className="relative w-full h-screen overflow-hidden bg-zinc-50 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col items-center justify-center font-sans select-none transition-colors duration-150">
       {/* 1. BACKGROUND (AMBIENT CANVAS) */}
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+      <div className="absolute inset-0 z-0 opacity-40 dark:opacity-30 pointer-events-none">
         {/* SVG Grid Pattern */}
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <svg className="w-full h-full text-zinc-300/40 dark:text-zinc-800/40" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid-404" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid-404)" />
@@ -155,7 +155,7 @@ export default function NotFound() {
       <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl mx-auto">
         {/* Sub-eyebrow */}
         <FadeIn delay={0.1} duration={0.6}>
-          <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-zinc-500 mb-2 font-semibold">
+          <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 mb-2 font-semibold">
             ERROR // 404_MODULE_NOT_FOUND
           </p>
         </FadeIn>
@@ -168,14 +168,14 @@ export default function NotFound() {
             duration: shouldReduceMotion ? 0.3 : 0.8,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="text-[25vw] sm:text-[20vw] md:text-[18vw] font-black tracking-tighter leading-none text-white cursor-default"
+          className="text-[25vw] sm:text-[20vw] md:text-[18vw] font-black tracking-tighter leading-none text-zinc-950 dark:text-white cursor-default"
         >
           404
         </motion.h1>
 
         {/* Paragraph Description */}
         <FadeIn delay={0.3} duration={0.7} className="mt-2">
-          <p className="text-sm sm:text-base text-zinc-400 font-sans max-w-[320px] sm:max-w-[420px] leading-relaxed">
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-sans max-w-[320px] sm:max-w-[420px] leading-relaxed">
             The workspace component you are looking for has been moved, deleted, or never existed.
           </p>
         </FadeIn>
@@ -185,7 +185,7 @@ export default function NotFound() {
           <MagnetButton>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-sm border border-zinc-800 bg-zinc-900 text-zinc-100 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-white hover:text-zinc-950 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-sm border border-zinc-300 dark:border-zinc-800 bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
               <span>Return to Workspace</span>

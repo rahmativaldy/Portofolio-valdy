@@ -12,24 +12,24 @@ export function Overview() {
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
       id="overview"
     >
       {/* 1. PROFILE / HERO */}
       <section className="space-y-4 pb-2">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
               Developer & Designer Workspace
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
               Rahmat Ivaldy
             </h1>
             <p className="text-xs md:text-sm font-mono text-zinc-600 dark:text-zinc-400">
               Frontend Developer · Mobile Developer · UI/UX Designer
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3.5 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
             <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -39,7 +39,7 @@ export function Overview() {
         </div>
 
         <div className="space-y-2 pt-1">
-          <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-snug max-w-3xl">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-snug max-w-3xl">
             I design interfaces and build the products behind them.
           </h2>
           <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-sans">
@@ -54,8 +54,8 @@ export function Overview() {
           01 / Quick Information
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="p-5 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+          <div className="p-4 sm:p-5 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] space-y-2">
             <div className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 font-semibold">
               Core Disciplines
             </div>
@@ -160,13 +160,13 @@ export function Overview() {
               <div
                 key={project.id}
                 onClick={() => setActiveSection('projects')}
-                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-350 cursor-pointer overflow-hidden p-5 sm:p-6 md:p-7"
+                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-350 cursor-pointer overflow-hidden p-4 sm:p-6 md:p-7"
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center">
                   {/* Thumbnail Image Column */}
                   {project.thumbnail && (
                     <div className="md:col-span-6">
-                      <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
+                      <div className="relative w-full h-48 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
                         <Image
                           src={project.thumbnail}
                           alt={`${project.title} screenshot`}
@@ -235,13 +235,13 @@ export function Overview() {
               <div
                 key={project.id}
                 onClick={() => setActiveSection('projects')}
-                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-350 cursor-pointer overflow-hidden p-5 sm:p-6 md:p-7"
+                className="group border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/50 dark:hover:bg-[#151518] transition-all duration-350 cursor-pointer overflow-hidden p-4 sm:p-6 md:p-7"
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center">
                   {/* Thumbnail Image Column */}
                   {project.thumbnail && (
                     <div className="md:col-span-6">
-                      <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
+                      <div className="relative w-full h-48 sm:h-64 md:h-72 lg:h-[280px] rounded-sm overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900">
                         <Image
                           src={project.thumbnail}
                           alt={`${project.title} screenshot`}
@@ -374,9 +374,9 @@ export function Overview() {
           05 / Contact
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 sm:gap-6">
           <div className="space-y-1.5 max-w-xl">
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white leading-snug">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white leading-snug">
               Have something worth building together?
             </h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
@@ -384,11 +384,11 @@ export function Overview() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0 pt-1 sm:pt-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0 pt-1 sm:pt-0 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setActiveSection('contact')}
-              className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+              className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
             >
               <span>Get in touch</span>
               <span
@@ -401,7 +401,7 @@ export function Overview() {
             <button
               type="button"
               onClick={() => setActiveSection('experience')}
-              className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+              className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
             >
               <span>View journey</span>
               <span

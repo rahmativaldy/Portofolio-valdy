@@ -104,24 +104,24 @@ export function Contact() {
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
       id="contact"
     >
       {/* 01 / CONTACT */}
       <section className="space-y-4 pb-2 animate-fadeInUp">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
               01 / Contact
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
               Let&apos;s build something useful.
             </h1>
             <p className="text-xs md:text-sm font-mono text-zinc-600 dark:text-zinc-400">
               Frontend Developer · Mobile Developer · UI/UX Designer
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3.5 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
             <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -131,7 +131,7 @@ export function Contact() {
         </div>
 
         <div className="space-y-3 pt-1">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight max-w-3xl">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight max-w-3xl">
             &ldquo;Direct communication channels and project inquiry form.&rdquo;
           </h2>
           <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed max-w-3xl">
@@ -211,8 +211,8 @@ export function Contact() {
           </div>
 
           {/* Right Column: Clean Minimal Contact Form */}
-          <div className="lg:col-span-7 p-5 sm:p-6 md:p-8 rounded-sm border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-6">
-            <div className="space-y-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-4">
+          <div className="lg:col-span-7 p-4 sm:p-6 md:p-8 rounded-sm border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-5 sm:space-y-6">
+            <div className="space-y-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-3 sm:pb-4">
               <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
                 Send a Message
               </h3>
@@ -225,7 +225,7 @@ export function Contact() {
               <div
                 id="contact-form-success"
                 aria-live="polite"
-                className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-zinc-50 dark:bg-zinc-900/60 space-y-3 animate-fadeIn"
+                className="p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-zinc-50 dark:bg-zinc-900/60 space-y-3 animate-fadeIn"
               >
                 <span className="text-xs font-mono uppercase tracking-widest text-zinc-950 dark:text-white font-bold block">
                   ✓ Message Received
@@ -355,7 +355,7 @@ export function Contact() {
                     id="contact-submit"
                     type="submit"
                     disabled={status === 'sending'}
-                    className="group inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span>{status === 'sending' ? 'Sending Message…' : 'Submit Message'}</span>
                     {status !== 'sending' && (
@@ -383,11 +383,11 @@ export function Contact() {
           Rahmat Workspace · Communication Channels
         </p>
 
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setActiveSection('projects')}
-            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+            className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
             <span>Explore Projects</span>
             <span
@@ -400,7 +400,7 @@ export function Contact() {
           <button
             type="button"
             onClick={() => setActiveSection('experience')}
-            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+            className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
             <span>View Journey</span>
             <span
@@ -413,7 +413,7 @@ export function Contact() {
           <button
             type="button"
             onClick={() => setActiveSection('blog')}
-            className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+            className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
             <span>Read Notes</span>
             <span
