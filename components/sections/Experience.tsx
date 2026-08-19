@@ -9,11 +9,11 @@ export function Experience() {
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12"
       id="experience"
     >
       {/* 01 / JOURNEY */}
-      <section className="space-y-4 pb-2 animate-fadeInUp">
+      <section className="space-y-4 pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
@@ -46,10 +46,7 @@ export function Experience() {
       </section>
 
       {/* 02 / EXPERIENCE TIMELINE */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-6 animate-fadeInUp"
-        style={{ animationDelay: '100ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-6">
         <div className="flex items-center justify-between">
           <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
             02 / Experience
@@ -156,10 +153,7 @@ export function Experience() {
       </section>
 
       {/* 03 / LEARNING PATH */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-        style={{ animationDelay: '200ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
             03 / Learning Path
@@ -245,10 +239,7 @@ export function Experience() {
       </section>
 
       {/* 04 / APPROACH */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-        style={{ animationDelay: '300ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           04 / Approach
         </div>
@@ -317,10 +308,7 @@ export function Experience() {
       </section>
 
       {/* NAVIGATION FOOTER */}
-      <section
-        className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeInUp"
-        style={{ animationDelay: '400ms' }}
-      >
+      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
           Rahmat Workspace · Chronological Experience
         </p>

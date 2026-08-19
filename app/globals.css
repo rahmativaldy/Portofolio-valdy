@@ -154,6 +154,75 @@ h3 { font-size: 1.125rem; line-height: 1.25; font-weight: 600; }
   animation: fadeInUp 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Infinite Marquee Animation & Mask */
+@keyframes marqueeLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeLeft var(--marquee-duration, 30s) linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeRight var(--marquee-duration, 30s) linear infinite;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 24px,
+    black calc(100% - 24px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 24px,
+    black calc(100% - 24px),
+    transparent 100%
+  );
+}
+
+@media (min-width: 640px) {
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 44px,
+      black calc(100% - 44px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 44px,
+      black calc(100% - 44px),
+      transparent 100%
+    );
+  }
+}
+
 .text-balance {
   text-wrap: balance;
 }
@@ -166,5 +235,28 @@ h3 { font-size: 1.125rem; line-height: 1.25; font-weight: 600; }
   line-height: 1.375;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
+  .marquee-mask {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+    transform: none !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+}
 

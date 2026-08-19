@@ -93,16 +93,16 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 onClick={() => {
                   handleNavigation(item.id);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-xs font-mono tracking-tight rounded-md transition-colors group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
+                className={`w-full flex items-center gap-3 px-3 py-2 text-xs font-mono tracking-tight rounded-md transition-colors duration-200 motion-reduce:transition-none group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
                   isActive 
                     ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold shadow-xs' 
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-100'
                 }`}
               >
-                <div className={`w-4 h-4 shrink-0 flex items-center justify-center ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
+                <div className={`w-4 h-4 shrink-0 flex items-center justify-center transition-colors duration-200 motion-reduce:transition-none ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
                   <NavIcon id={item.id} className="w-4 h-4" />
                 </div>
-                <span>{item.label}</span>
+                <span className="transition-colors duration-200 motion-reduce:transition-none">{item.label}</span>
               </button>
             );
           })}

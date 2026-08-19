@@ -10,11 +10,11 @@ export function About() {
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12"
       id="about"
     >
       {/* 01 / ABOUT */}
-      <section className="space-y-4 pb-2 animate-fadeInUp">
+      <section className="space-y-4 pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
@@ -47,10 +47,7 @@ export function About() {
       </section>
 
       {/* 02 / WHAT I DO */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-        style={{ animationDelay: '100ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           02 / What I Do
         </div>
@@ -62,15 +59,15 @@ export function About() {
               <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
                 01 —
               </span>
-              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
-                Web Development
-              </h4>
+              <h3 className="text-sm md:text-base font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+                Frontend Engineering
+              </h3>
             </div>
-            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+            <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
               React · Next.js · TypeScript · Tailwind CSS
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
-              Building structured, typed, and responsive web applications with reusable component systems.
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
+              Building responsive, accessible web interfaces and design systems with strict TypeScript contracts and reusable UI patterns.
             </p>
           </div>
 
@@ -80,15 +77,15 @@ export function About() {
               <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
                 02 —
               </span>
-              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+              <h3 className="text-sm md:text-base font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
                 Mobile Development
-              </h4>
+              </h3>
             </div>
-            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-              Flutter · Dart · BLoC
+            <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+              Flutter · Dart · BLoC Architecture
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
-              Building cross-platform mobile experiences backed by clean architecture and explicit state flow.
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
+              Developing cross-platform mobile apps for Android and iOS using Clean Architecture and stream-based state management.
             </p>
           </div>
 
@@ -98,25 +95,22 @@ export function About() {
               <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500 shrink-0">
                 03 —
               </span>
-              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
+              <h3 className="text-sm md:text-base font-bold uppercase tracking-tight text-zinc-950 dark:text-white">
                 UI/UX Design
-              </h4>
+              </h3>
             </div>
-            <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-              Figma · Responsive Design · Design Systems
+            <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+              Figma · Design Systems · Prototyping
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-0.5">
-              Creating intuitive interfaces, wireframes, and design tokens that transition directly to code.
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
+              Designing modular UI kits, wireframes, and developer-ready mockups that map directly to code components.
             </p>
           </div>
         </div>
       </section>
 
       {/* 03 / APPROACH */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-        style={{ animationDelay: '200ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           03 / Approach
         </div>
@@ -185,10 +179,7 @@ export function About() {
       </section>
 
       {/* 04 / TOOLKIT */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-        style={{ animationDelay: '300ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           04 / Toolkit
         </div>
@@ -221,10 +212,7 @@ export function About() {
       </section>
 
       {/* NAVIGATION FOOTER */}
-      <section
-        className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeInUp"
-        style={{ animationDelay: '400ms' }}
-      >
+      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
           Rahmat Workspace · Developer Biography &amp; Systems
         </p>

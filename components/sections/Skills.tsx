@@ -15,20 +15,13 @@ export function Skills() {
     '04': '05 / Design & Workflow',
   };
 
-  const sectionDelays: Record<string, string> = {
-    '01': '100ms',
-    '02': '200ms',
-    '03': '300ms',
-    '04': '400ms',
-  };
-
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12"
       id="skills"
     >
       {/* 01 / TOOLKIT HEADER */}
-      <section className="space-y-4 pb-2 animate-fadeInUp">
+      <section className="space-y-4 pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
@@ -58,13 +51,11 @@ export function Skills() {
       {/* CATEGORIZED SKILL INVENTORY (SECTIONS 02 - 05) */}
       {SKILL_GROUPS.map((group) => {
         const label = sectionLabels[group.id] || `0${parseInt(group.id, 10) + 1} / ${group.category}`;
-        const delay = sectionDelays[group.id] || '100ms';
 
         return (
           <section
             key={group.id}
-            className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-            style={{ animationDelay: delay }}
+            className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4"
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
@@ -112,10 +103,7 @@ export function Skills() {
       })}
 
       {/* 06 / WORKFLOW */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp"
-        style={{ animationDelay: '500ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           06 / Workflow Pipeline
         </div>
@@ -145,10 +133,7 @@ export function Skills() {
       </section>
 
       {/* NAVIGATION FOOTER */}
-      <section
-        className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeInUp"
-        style={{ animationDelay: '600ms' }}
-      >
+      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
           Rahmat Workspace · Toolkit &amp; Workflow Architecture
         </p>

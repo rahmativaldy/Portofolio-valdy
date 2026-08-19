@@ -44,11 +44,11 @@ export function Projects() {
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12"
       id="projects"
     >
       {/* 01 / SELECTED PROJECTS HEADER */}
-      <section className="space-y-4 pb-2 animate-fadeInUp">
+      <section className="space-y-4 pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
           <div className="space-y-1.5">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
@@ -76,10 +76,7 @@ export function Projects() {
       </section>
 
       {/* PROJECT SHOWCASE ROWS */}
-      <section
-        className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-6 md:space-y-8 animate-fadeInUp"
-        style={{ animationDelay: '100ms' }}
-      >
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-6 md:space-y-8">
         {PROJECTS.map((project, index) => {
           const category = getProjectCategory(project.id);
           const role = getProjectRole(project.id);
@@ -181,10 +178,7 @@ export function Projects() {
       </section>
 
       {/* NAVIGATION FOOTER */}
-      <section
-        className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fadeInUp"
-        style={{ animationDelay: '200ms' }}
-      >
+      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
           Rahmat Workspace · Selected Case Studies &amp; Projects
         </p>

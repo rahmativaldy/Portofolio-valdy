@@ -6,13 +6,14 @@ import { useWorkspace } from '@/context/WorkspaceContext';
 import { PROJECTS } from '@/data/projects';
 import { SKILL_GROUPS } from '@/data/skills';
 import { TechIcon } from '@/components/icons/TechIcons';
+import { InfiniteTechMarquee } from './InfiniteTechMarquee';
 
 export function Overview() {
   const { setActiveSection } = useWorkspace();
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12 animate-fadeIn"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12"
       id="overview"
     >
       {/* 1. PROFILE / HERO */}
@@ -110,27 +111,16 @@ export function Overview() {
         </div>
 
         <div className="space-y-4">
-          {SKILL_GROUPS.map((group) => (
-            <div key={group.id} className="space-y-2.5">
+          {SKILL_GROUPS.map((group, index) => (
+            <div key={group.id} className="space-y-2">
               <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 {group.category}
               </div>
-              <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                {group.items.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group inline-flex items-center gap-2 px-3 h-[36px] border border-zinc-200 dark:border-zinc-800 rounded-sm bg-white dark:bg-[#121215] hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-[#18181b] transition-all duration-150 cursor-default"
-                  >
-                    <TechIcon
-                      name={skill.name}
-                      className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-950 dark:group-hover:text-white shrink-0 transition-transform duration-150 group-hover:-translate-y-0.5"
-                    />
-                    <span className="text-[12px] font-mono font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white whitespace-nowrap transition-colors">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <InfiniteTechMarquee
+                items={group.items}
+                direction={index % 2 === 0 ? 'left' : 'right'}
+                duration={index === 0 ? 32 : index === 1 ? 28 : index === 2 ? 34 : 30}
+              />
             </div>
           ))}
         </div>
@@ -306,7 +296,7 @@ export function Overview() {
       </section>
 
       {/* 5. CURRENT FOCUS */}
-      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp">
+      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           04 / Current Focus
         </div>
@@ -369,7 +359,7 @@ export function Overview() {
       </section>
 
       {/* 6. CONTACT CTA */}
-      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 space-y-4 animate-fadeInUp">
+      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
         <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
           05 / Contact
         </div>
