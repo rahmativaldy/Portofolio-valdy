@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 
 interface WorkspaceContextType {
   activeSection: string;
@@ -10,7 +10,17 @@ interface WorkspaceContextType {
 const WorkspaceContext = createContext<WorkspaceContextType | undefined>(undefined);
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSection] = useState('overview');
+  const [activeSection, setActiveSectionState] = useState('overview');
+
+  const setActiveSection = useCallback((section: string) => {
+    setActiveSectionState(section);
+    if (typeof document !== 'undefined') {
+      const scrollEl = document.getElementById('workspace-content-area');
+      if (scrollEl) {
+        scrollEl.scrollTop = 0;
+      }
+    }
+  }, []);
 
   return (
     <WorkspaceContext.Provider
@@ -31,3 +41,6 @@ export function useWorkspace() {
   }
   return context;
 }
+
+
+
