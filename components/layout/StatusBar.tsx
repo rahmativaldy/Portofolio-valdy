@@ -6,16 +6,10 @@ export function StatusBar() {
   const [time, setTime] = useState<string>('');
 
   useEffect(() => {
+    const pad = (n: number) => String(n).padStart(2, '0');
     const updateTime = () => {
       const now = new Date();
-      setTime(
-        now.toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        })
-      );
+      setTime(`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`);
     };
 
     updateTime();
@@ -67,7 +61,7 @@ export function StatusBar() {
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>{time || '--:--:--'}</span>
+          <span suppressHydrationWarning>{time || 'Ready'}</span>
         </div>
       </div>
     </footer>

@@ -147,7 +147,7 @@ export function Overview() {
             onClick={() => setActiveSection('projects')}
             className="text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5 font-medium"
           >
-            <span>All Projects ({PROJECTS.length})</span>
+            <span>View all projects</span>
             <span aria-hidden="true">→</span>
           </button>
         </div>

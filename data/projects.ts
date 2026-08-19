@@ -35,7 +35,7 @@ export const PROJECTS: Project[] = [
     title: 'Rahmat Workspace',
     description:
       'A modern developer workspace and portfolio built with Next.js, React, TypeScript, and Tailwind CSS. It presents Rahmat Ivaldy as a Frontend and Mobile Developer, UI/UX Designer.',
-    technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'App Router'],
+    technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'App Router'],
     highlights: [
       'Workspace-style tab navigation',
       'Workspace search with instant section filtering',
