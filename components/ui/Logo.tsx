@@ -12,7 +12,7 @@ interface LogoProps {
  * Minimal personal brand mark for Rahmat Workspace.
  * Uses pure CSS — no image dependency, theme-aware.
  */
-export function Logo({ variant = 'full', version = 'v2', className = '' }: LogoProps) {
+export function Logo({ variant = 'full', version = 'v3', className = '' }: LogoProps) {
   if (variant === 'mark') {
     return (
       <span
@@ -31,9 +31,9 @@ export function Logo({ variant = 'full', version = 'v2', className = '' }: LogoP
         RI
       </span>
       {/* Wordmark */}
-      <span className="font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight text-sm">
+      <span className="font-sans font-medium text-zinc-900 dark:text-zinc-100 tracking-tight text-sm">
         Rahmat
-        <span className="text-zinc-400 dark:text-zinc-500">Workspace</span>
+        <span className="text-zinc-400 dark:text-zinc-500 font-normal"> Workspace</span>
       </span>
       {/* Version pill */}
       {version && (

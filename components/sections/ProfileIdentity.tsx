@@ -50,7 +50,7 @@ export function ProfileIdentity({
 
           {/* Role */}
           <div>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono leading-normal max-w-[260px] text-center">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-normal max-w-[260px] text-center">
               Frontend Developer · Mobile Developer · UI/UX Designer
             </p>
           </div>

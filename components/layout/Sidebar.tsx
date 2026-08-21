@@ -80,7 +80,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       {/* Dedicated Scrollable Navigation Container */}
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
         <nav className="p-3 space-y-1" role="navigation" aria-label="Sidebar Navigation">
-          <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1 font-semibold">
+          <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1.5 font-medium">
             Navigation
           </div>
           {NAV_ITEMS.map((item, index) => {
@@ -93,16 +93,16 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 onClick={() => {
                   handleNavigation(item.id);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-xs font-mono tracking-tight rounded-md transition-colors duration-200 motion-reduce:transition-none group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
+                className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-sans font-medium rounded-md transition-colors duration-150 motion-reduce:transition-none group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
                   isActive 
-                    ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold shadow-xs' 
-                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-100'
+                    ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-medium shadow-xs' 
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-950 dark:hover:text-zinc-100'
                 }`}
               >
-                <div className={`w-4 h-4 shrink-0 flex items-center justify-center transition-colors duration-200 motion-reduce:transition-none ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
+                <div className={`w-4 h-4 shrink-0 flex items-center justify-center transition-colors duration-150 motion-reduce:transition-none ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
                   <NavIcon id={item.id} className="w-4 h-4" />
                 </div>
-                <span className="transition-colors duration-200 motion-reduce:transition-none">{item.label}</span>
+                <span className="transition-colors duration-150 motion-reduce:transition-none">{item.label}</span>
               </button>
             );
           })}

@@ -18,11 +18,11 @@ export function StatusBar() {
   }, []);
 
   return (
-    <footer className="h-6 bg-zinc-100 dark:bg-[#0f0f11] border-t border-zinc-200 dark:border-zinc-800 text-[11px] flex items-center justify-between px-3 text-zinc-500 dark:text-zinc-400 select-none transition-colors duration-150 shrink-0">
+    <footer className="h-6 bg-zinc-100/90 dark:bg-[#0c0c0e] border-t border-zinc-200/80 dark:border-zinc-800/80 text-[11px] font-sans flex items-center justify-between px-3 text-zinc-400 dark:text-zinc-500 select-none transition-colors duration-150 shrink-0">
       {/* Left side: Status indicators */}
       <div className="flex items-center gap-2 sm:gap-3 truncate">
         {/* Branch / Status */}
-        <div className="flex items-center gap-1 hover:text-zinc-800 dark:hover:text-zinc-200 cursor-pointer shrink-0">
+        <div className="flex items-center gap-1 hover:text-zinc-700 dark:hover:text-zinc-300 cursor-pointer shrink-0">
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
           </svg>

@@ -67,30 +67,30 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
         )}
 
-        <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 text-left">
+        <div className="p-5 sm:p-7 md:p-8 space-y-6 sm:space-y-8 text-left">
           {/* Header Metadata */}
           <div className="space-y-2">
-            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+            <div className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
               Technical Case Study · {project.id}
             </div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white font-sans">
               {project.title}
             </h2>
-            <p className="text-xs sm:text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
               {project.description}
             </p>
           </div>
 
           {/* Key Technologies */}
-          <div className="space-y-2 pt-2 border-t border-zinc-200 dark:border-zinc-800">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+          <div className="space-y-2 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
               Technologies Used
             </h3>
             <div className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2.5 py-0.5 rounded text-xs font-mono bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800"
+                  className="px-2.5 py-1 rounded text-xs font-mono bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800"
                 >
                   {tech}
                 </span>
@@ -100,15 +100,15 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Highlights */}
           {project.highlights && project.highlights.length > 0 && (
-            <div className="space-y-3 pt-2 border-t border-zinc-200 dark:border-zinc-800">
-              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
-                Selected Features & Architecture Highlights
+            <div className="space-y-3 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
+                Selected Features &amp; Architecture Highlights
               </h3>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid gap-2.5 sm:grid-cols-2">
                 {project.highlights.map((highlight) => (
                   <div
                     key={highlight}
-                    className="p-2.5 sm:p-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs text-zinc-700 dark:text-zinc-300 font-mono"
+                    className="p-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-sans"
                   >
                     • {highlight}
                   </div>
@@ -118,13 +118,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           )}
 
           {/* Challenges & Learnings */}
-          <div className="grid gap-6 sm:grid-cols-2 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="grid gap-6 sm:grid-cols-2 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80">
             {project.challenges && project.challenges.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
                   Challenges Overcome
                 </h3>
-                <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans">
                   {project.challenges.map((challenge, idx) => (
                     <p key={idx} className="pl-3 border-l-2 border-zinc-300 dark:border-zinc-700 leading-relaxed">
                       {challenge}
@@ -136,10 +136,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             {project.learnings && project.learnings.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
                   Key Learnings
                 </h3>
-                <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans">
                   {project.learnings.map((learning, idx) => (
                     <p key={idx} className="pl-3 border-l-2 border-zinc-900 dark:border-zinc-100 leading-relaxed">
                       {learning}
@@ -152,14 +152,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Links */}
           {(project.github || project.link) && (
-            <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row gap-2.5 sm:gap-3">
+            <div className="pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row gap-3">
               {project.github && (
                 <a
                   id={`project-modal-github-${project.id}`}
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-md bg-zinc-950 dark:bg-white px-4 py-2 text-xs font-mono font-semibold text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-zinc-950 dark:bg-white px-5 py-2.5 text-sm font-sans font-medium text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
                 >
                   View Repository →
                 </a>
@@ -170,7 +170,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-4 py-2 text-xs font-mono font-semibold text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-sm border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-5 py-2.5 text-sm font-sans font-medium text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
                 >
                   Live Demo ↗
                 </a>

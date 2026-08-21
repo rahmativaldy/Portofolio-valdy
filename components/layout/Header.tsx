@@ -388,7 +388,7 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
             aria-expanded={isDropdownOpen && searchQuery.trim() !== ''}
             aria-autocomplete="list"
             aria-controls="search-workspace-dropdown"
-            className="w-40 sm:w-56 md:w-64 pl-8 pr-3 py-1.5 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
+            className="w-40 sm:w-56 md:w-64 pl-8 pr-3 py-1.5 bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 rounded-md text-xs font-sans text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
           />
 
           {/* Search Dropdown */}

@@ -90,7 +90,7 @@ export function Contact() {
   };
 
   const inputBase =
-    'w-full bg-transparent py-2.5 text-xs sm:text-sm text-zinc-950 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 border-b font-mono transition-colors duration-150 focus:outline-none';
+    'w-full bg-transparent py-2.5 text-sm font-sans text-zinc-950 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 border-b transition-colors duration-150 focus:outline-none';
   const inputNormal =
     'border-zinc-200 dark:border-zinc-800 focus:border-zinc-950 dark:focus:border-white';
   const inputError =
@@ -104,23 +104,24 @@ export function Contact() {
 
   return (
     <div
-      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-5 sm:py-6 md:py-10 text-zinc-900 dark:text-zinc-100 select-none space-y-8 sm:space-y-10 md:space-y-12"
+      className="max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-8 sm:py-12 md:py-16 text-zinc-900 dark:text-zinc-100 select-none space-y-12 sm:space-y-16 md:space-y-20"
       id="contact"
     >
-      {/* 01 / CONTACT */}
-      <section className="space-y-4 pb-2">
-        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
-          <div className="space-y-1.5">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
-              01 / Contact
+      {/* 01 / CONTACT HERO */}
+      <section className="space-y-6 sm:space-y-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6 sm:pb-8">
+          <div className="space-y-2">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
+              01 / Communication
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white">
               Let&apos;s build something useful.
             </h1>
-            <p className="text-xs md:text-sm font-mono text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm sm:text-base font-sans text-zinc-600 dark:text-zinc-400 font-normal">
               Frontend Developer · Mobile Developer · UI/UX Designer
             </p>
           </div>
+
           <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
             <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
@@ -130,53 +131,55 @@ export function Contact() {
           </div>
         </div>
 
-        <div className="space-y-3 pt-1">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white leading-tight max-w-3xl">
-            &ldquo;Direct communication channels and project inquiry form.&rdquo;
+        <div className="space-y-4 max-w-3xl">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight">
+            Direct channels and inquiry form.
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed max-w-3xl">
-            Open to discussions around frontend engineering, Flutter mobile development, UI/UX design systems, and product development projects. Reach out directly via email, connect on professional profiles, or send a message below.
+          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+            Open to discussions around frontend engineering, Flutter mobile development, UI/UX design systems, and product development. Reach out directly via email, connect on professional networks, or send a message below.
           </p>
         </div>
       </section>
 
       {/* 02 / CHANNELS & FORM */}
-      <section className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-6">
+      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-8 sm:space-y-10">
         <div className="flex items-center justify-between">
-          <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
-            02 / Contact &amp; Channels
-          </div>
-          <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-            Direct &amp; Message Channels
+          <div className="space-y-1">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
+              02 / Direct Channels &amp; Inquiry
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
+              Connect &amp; Collaborate
+            </h3>
           </div>
         </div>
 
-        {/* Grid Layout: Editorial 2-column on desktop, stacked on mobile/tablet */}
+        {/* Grid Layout: 2-column on desktop, stacked on mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Direct Contact Info & Social Channels */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Primary Email Card */}
-            <div className="p-4 sm:p-5 rounded-sm border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-2">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold">
-                Primary Contact
+            {/* Primary Email Box */}
+            <div className="p-5 sm:p-6 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-2">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
+                Primary Email
               </div>
               <a
                 href={PRIMARY_CONTACT.url}
-                className="text-sm sm:text-base font-mono font-bold tracking-tight text-zinc-950 dark:text-white hover:underline block truncate"
+                className="text-base sm:text-lg font-sans font-bold tracking-tight text-zinc-950 dark:text-white hover:underline block truncate"
               >
                 {PRIMARY_CONTACT.displayValue}
               </a>
-              <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-                Email inquiry · Direct inbox
+              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400">
+                Direct inbox · Fast response
               </p>
             </div>
 
             {/* All Channels List */}
-            <div className="p-4 sm:p-5 rounded-sm border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-3">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold border-b border-zinc-100 dark:border-zinc-800/60 pb-2">
+            <div className="p-5 sm:p-6 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-4">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium border-b border-zinc-100 dark:border-zinc-800/60 pb-2.5">
                 Profiles &amp; Networks
               </div>
-              <div className="space-y-2 font-mono text-xs">
+              <div className="space-y-2.5 text-sm">
                 {allChannels.map((channel) => (
                   <a
                     key={channel.name}
@@ -186,8 +189,8 @@ export function Contact() {
                     className="group flex items-center justify-between py-1 border-b border-zinc-100 dark:border-zinc-800/40 last:border-0 text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white transition-colors"
                   >
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold">{channel.name}</span>
-                      <span className="text-[10px] text-zinc-400 dark:text-zinc-500 uppercase">
+                      <span className="font-sans font-medium">{channel.name}</span>
+                      <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">
                         ({channel.category})
                       </span>
                     </div>
@@ -199,21 +202,21 @@ export function Contact() {
               </div>
             </div>
 
-            {/* Quick Developer Identity Note */}
-            <div className="p-4 rounded-sm border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 space-y-1 font-mono text-xs text-zinc-600 dark:text-zinc-400">
-              <p className="font-bold text-zinc-950 dark:text-white uppercase">Rahmat Ivaldy</p>
+            {/* Developer Identity Note */}
+            <div className="p-4 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 space-y-1 font-sans text-xs text-zinc-600 dark:text-zinc-400">
+              <p className="font-bold text-zinc-950 dark:text-white uppercase font-sans">Rahmat Ivaldy</p>
               <p>Frontend Developer · Mobile Developer · UI/UX Designer</p>
               <p>Indonesia · Remote &amp; Project Collaborations</p>
             </div>
           </div>
 
           {/* Right Column: Clean Minimal Contact Form */}
-          <div className="lg:col-span-7 p-4 sm:p-6 md:p-8 rounded-sm border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-5 sm:space-y-6">
-            <div className="space-y-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-3 sm:pb-4">
-              <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
+          <div className="lg:col-span-7 p-5 sm:p-7 md:p-8 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-6">
+            <div className="space-y-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-4">
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white font-sans">
                 Send a Message
               </h3>
-              <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+              <p className="text-xs sm:text-sm font-sans text-zinc-500 dark:text-zinc-400">
                 Direct inquiry form backed by server validation
               </p>
             </div>
@@ -227,7 +230,7 @@ export function Contact() {
                 <span className="text-xs font-mono uppercase tracking-widest text-zinc-950 dark:text-white font-bold block">
                   ✓ Message Received
                 </span>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
                   Thank you for reaching out! Your message has been received. I will review it and respond to your email address shortly.
                 </p>
                 <div className="pt-2">
@@ -238,7 +241,7 @@ export function Contact() {
                       setStatus('idle');
                       setTimeout(() => nameRef.current?.focus(), 50);
                     }}
-                    className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 dark:text-white hover:underline cursor-pointer"
+                    className="text-sm font-sans font-medium text-zinc-950 dark:text-white hover:underline cursor-pointer"
                   >
                     Send Another Message →
                   </button>
@@ -255,7 +258,7 @@ export function Contact() {
                 <div className="space-y-1">
                   <label
                     htmlFor="contact-name"
-                    className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold"
+                    className="block text-xs font-sans font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
                   >
                     Name *
                   </label>
@@ -284,7 +287,7 @@ export function Contact() {
                 <div className="space-y-1">
                   <label
                     htmlFor="contact-email"
-                    className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold"
+                    className="block text-xs font-sans font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
                   >
                     Email Address *
                   </label>
@@ -312,7 +315,7 @@ export function Contact() {
                 <div className="space-y-1">
                   <label
                     htmlFor="contact-message"
-                    className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold"
+                    className="block text-xs font-sans font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
                   >
                     Message *
                   </label>
@@ -352,7 +355,7 @@ export function Contact() {
                     id="contact-submit"
                     type="submit"
                     disabled={status === 'sending'}
-                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span>{status === 'sending' ? 'Sending Message…' : 'Submit Message'}</span>
                     {status !== 'sending' && (
@@ -372,16 +375,16 @@ export function Contact() {
       </section>
 
       {/* NAVIGATION FOOTER */}
-      <section className="pt-6 md:pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
           Rahmat Workspace · Communication Channels
         </p>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setActiveSection('projects')}
-            className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
+            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
             <span>Explore Projects</span>
             <span
@@ -394,7 +397,7 @@ export function Contact() {
           <button
             type="button"
             onClick={() => setActiveSection('experience')}
-            className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
             <span>View Journey</span>
             <span
@@ -407,7 +410,7 @@ export function Contact() {
           <button
             type="button"
             onClick={() => setActiveSection('blog')}
-            className="group inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
             <span>Read Notes</span>
             <span
