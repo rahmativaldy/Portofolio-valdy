@@ -118,7 +118,7 @@ export function Overview() {
               </div>
               <InfiniteTechMarquee
                 items={group.items}
-                direction={index % 2 === 0 ? 'left' : 'right'}
+                direction={index % 2 === 0 ? 'right' : 'left'}
                 duration={index === 0 ? 32 : index === 1 ? 28 : index === 2 ? 34 : 30}
               />
             </div>

@@ -177,14 +177,27 @@ h3 { font-size: 1.125rem; line-height: 1.25; font-weight: 600; }
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: marqueeLeft var(--marquee-duration, 30s) linear infinite;
+  animation-name: marqueeLeft;
+  animation-duration: var(--marquee-duration, 30s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: marqueeRight var(--marquee-duration, 30s) linear infinite;
+  animation-name: marqueeRight;
+  animation-duration: var(--marquee-duration, 30s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover,
+.marquee-mask:hover .animate-marquee-left,
+.marquee-mask:hover .animate-marquee-right {
+  animation-play-state: paused !important;
 }
 
 .marquee-mask {
