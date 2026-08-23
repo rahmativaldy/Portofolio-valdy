@@ -69,7 +69,7 @@ export function Skills() {
                   {group.category}
                 </h3>
               </div>
-              <span className="text-xs sm:text-sm font-sans text-zinc-500 dark:text-zinc-400">
+              <span className="text-xs sm:text-sm font-sans text-zinc-500 dark:text-zinc-400 max-w-md sm:text-right">
                 {group.description}
               </span>
             </div>
@@ -84,7 +84,7 @@ export function Skills() {
                     <div className="flex items-center gap-2.5 min-w-0">
                       <TechIcon
                         name={item.name}
-                        className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110"
+                        className="w-4 h-4 shrink-0"
                       />
                       <span className="text-sm font-sans font-semibold text-zinc-950 dark:text-white truncate">
                         {item.name}

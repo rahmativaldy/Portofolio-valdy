@@ -154,20 +154,20 @@ h3 { font-size: 1.125rem; line-height: 1.25; font-weight: 600; }
   animation: fadeInUp 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Logo Loop — edge fade mask */
+/* Logo Loop — subtle narrow edge fade mask */
 .logo-loop-mask {
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 28px,
-    black calc(100% - 28px),
+    black 16px,
+    black calc(100% - 16px),
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 28px,
-    black calc(100% - 28px),
+    black 16px,
+    black calc(100% - 16px),
     transparent 100%
   );
 }
@@ -177,15 +177,15 @@ h3 { font-size: 1.125rem; line-height: 1.25; font-weight: 600; }
     mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 48px,
-      black calc(100% - 48px),
+      black 20px,
+      black calc(100% - 20px),
       transparent 100%
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 48px,
-      black calc(100% - 48px),
+      black 20px,
+      black calc(100% - 20px),
       transparent 100%
     );
   }
