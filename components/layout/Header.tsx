@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useWorkspace } from '@/context/WorkspaceContext';
-import { COMMANDS_METADATA } from '@/data/navigation';
+import { useLanguage } from '@/context/LanguageContext';
 import { PROJECTS } from '@/data/projects';
 import { EDITORIAL_NOTES } from '@/data/blog';
 import { JOURNEY_MILESTONES } from '@/data/experience';
@@ -43,109 +43,16 @@ const initialHeaderState: HeaderState = {
 interface SearchItem {
   id: string;
   title: string;
-  category: 'Section' | 'Project' | 'Note' | 'Journey' | 'Skill' | 'Toolkit';
+  category: string;
   sectionId: string;
   sectionLabel: string;
   description?: string;
   keywords?: string[];
 }
 
-const SEARCH_ITEMS: SearchItem[] = [
-  // 1. Navigation / Main Sections
-  ...COMMANDS_METADATA.map((nav) => ({
-    id: `nav-${nav.id}`,
-    title: nav.label,
-    category: 'Section' as const,
-    sectionId: nav.id,
-    sectionLabel: nav.label,
-    description: nav.description,
-    keywords: [nav.label.toLowerCase(), nav.id.toLowerCase(), 'section', 'view', 'navigate'],
-  })),
-
-  // 2. Project Titles & Case Studies
-  ...PROJECTS.map((project) => ({
-    id: `project-${project.id}`,
-    title: project.title,
-    category: 'Project' as const,
-    sectionId: 'projects',
-    sectionLabel: 'Projects',
-    description: project.description,
-    keywords: [
-      ...(project.technologies || []),
-      ...(project.highlights || []),
-      'project',
-      'case study',
-      'work',
-    ],
-  })),
-
-  // 3. Editorial Notes
-  ...EDITORIAL_NOTES.map((note) => ({
-    id: `note-${note.id}`,
-    title: note.title,
-    category: 'Note' as const,
-    sectionId: 'blog',
-    sectionLabel: 'Notes',
-    description: note.summary,
-    keywords: [
-      ...(note.technologies || []),
-      note.category,
-      note.projectContext,
-      'note',
-      'blog',
-      'article',
-      'learning',
-      'decision',
-    ],
-  })),
-
-  // 4. Journey Milestones
-  ...JOURNEY_MILESTONES.map((journey) => ({
-    id: `journey-${journey.id}`,
-    title: journey.title,
-    category: 'Journey' as const,
-    sectionId: 'experience',
-    sectionLabel: 'Journey',
-    description: journey.summary,
-    keywords: [
-      ...(journey.technologies || []),
-      journey.role,
-      journey.period,
-      journey.categoryLabel,
-      'experience',
-      'milestone',
-      'timeline',
-      'history',
-    ],
-  })),
-
-  // 5. Skill Groups (Toolkit categories)
-  ...SKILL_GROUPS.map((group) => ({
-    id: `skill-group-${group.id}`,
-    title: group.category,
-    category: 'Toolkit' as const,
-    sectionId: 'skills',
-    sectionLabel: 'Toolkit',
-    description: group.description,
-    keywords: [...group.items.map((i) => i.name), 'toolkit', 'skill', 'tools', 'group'],
-  })),
-
-  // 6. Individual Skills & Technologies
-  ...SKILL_GROUPS.flatMap((group) =>
-    group.items.map((skill) => ({
-      id: `skill-${group.id}-${skill.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
-      title: skill.name,
-      category: 'Skill' as const,
-      sectionId: 'skills',
-      sectionLabel: 'Toolkit',
-      description: skill.context + (skill.projectRef ? ` · Used in ${skill.projectRef}` : ''),
-      keywords: [group.category, skill.projectRef || '', 'skill', 'technology', 'tool', 'tech'].filter(Boolean),
-    }))
-  ),
-];
-
 export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
   const { setActiveSection } = useWorkspace();
+  const { locale, setLocale, t } = useLanguage();
   const [state, dispatch] = React.useReducer(headerReducer, initialHeaderState);
 
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -184,13 +91,248 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const searchItems: SearchItem[] = React.useMemo(() => {
+    return [
+      // 1. Navigation / Main Sections
+      {
+        id: 'nav-overview',
+        title: t.navigation.overview,
+        category: t.header.categories.section,
+        sectionId: 'overview',
+        sectionLabel: t.navigation.overview,
+        description: t.navigation.overviewDesc,
+        keywords: ['overview', 'ringkasan', 'home', 'beranda', 'dashboard', 'statistic', 'section', 'view', 'navigate'],
+      },
+      {
+        id: 'nav-about',
+        title: t.navigation.about,
+        category: t.header.categories.section,
+        sectionId: 'about',
+        sectionLabel: t.navigation.about,
+        description: t.navigation.aboutDesc,
+        keywords: ['about', 'tentang', 'biography', 'profil', 'developer', 'story', 'section', 'view', 'navigate'],
+      },
+      {
+        id: 'nav-projects',
+        title: t.navigation.projects,
+        category: t.header.categories.section,
+        sectionId: 'projects',
+        sectionLabel: t.navigation.projects,
+        description: t.navigation.projectsDesc,
+        keywords: ['projects', 'proyek', 'work', 'karya', 'case study', 'studi kasus', 'portfolio', 'section', 'view', 'navigate'],
+      },
+      {
+        id: 'nav-skills',
+        title: t.navigation.toolkit,
+        category: t.header.categories.section,
+        sectionId: 'skills',
+        sectionLabel: t.navigation.toolkit,
+        description: t.navigation.toolkitDesc,
+        keywords: ['toolkit', 'skills', 'keahlian', 'tools', 'alat', 'technology', 'teknologi', 'stack', 'section', 'view', 'navigate'],
+      },
+      {
+        id: 'nav-experience',
+        title: t.navigation.journey,
+        category: t.header.categories.section,
+        sectionId: 'experience',
+        sectionLabel: t.navigation.journey,
+        description: t.navigation.journeyDesc,
+        keywords: ['journey', 'experience', 'pengalaman', 'linimasa', 'timeline', 'career', 'karir', 'history', 'section', 'view', 'navigate'],
+      },
+      {
+        id: 'nav-blog',
+        title: t.navigation.notes,
+        category: t.header.categories.section,
+        sectionId: 'blog',
+        sectionLabel: t.navigation.notes,
+        description: t.navigation.notesDesc,
+        keywords: ['notes', 'blog', 'catatan', 'jurnal', 'artikel', 'learnings', 'pembelajaran', 'decisions', 'section', 'view', 'navigate'],
+      },
+      {
+        id: 'nav-contact',
+        title: t.navigation.contact,
+        category: t.header.categories.section,
+        sectionId: 'contact',
+        sectionLabel: t.navigation.contact,
+        description: t.navigation.contactDesc,
+        keywords: ['contact', 'kontak', 'email', 'pesan', 'message', 'inquiry', 'reach', 'section', 'view', 'navigate'],
+      },
+
+      // 2. Project Titles & Case Studies
+      ...PROJECTS.map((project) => {
+        let localizedDesc = project.description;
+        if (project.id === 'nusago-mobile') localizedDesc = t.projects.items.nusagoMobile.description;
+        else if (project.id === 'rahmat-workspace') localizedDesc = t.projects.items.rahmatWorkspace.description;
+        else if (project.id === 'nusago-api') localizedDesc = t.projects.items.nusagoApi.description;
+        else if (project.id === 'taskflow-dashboard') localizedDesc = t.projects.items.taskflow.description;
+
+        return {
+          id: `project-${project.id}`,
+          title: project.title,
+          category: t.header.categories.project,
+          sectionId: 'projects',
+          sectionLabel: t.navigation.projects,
+          description: localizedDesc,
+          keywords: [
+            ...(project.technologies || []),
+            ...(project.highlights || []),
+            'project',
+            'proyek',
+            'case study',
+            'studi kasus',
+            'work',
+            'karya',
+          ],
+        };
+      }),
+
+      // 3. Editorial Notes
+      ...EDITORIAL_NOTES.map((note) => {
+        let localizedTitle = note.title;
+        let localizedSummary = note.summary;
+        if (note.id === 'clean-architecture-flutter') {
+          localizedTitle = t.blog.notes.cleanArchitecture.title;
+          localizedSummary = t.blog.notes.cleanArchitecture.summary;
+        } else if (note.id === 'nextjs-app-router-gotchas') {
+          localizedTitle = t.blog.notes.nextjsAppRouter.title;
+          localizedSummary = t.blog.notes.nextjsAppRouter.summary;
+        } else if (note.id === 'zustand-vs-bloc') {
+          localizedTitle = t.blog.notes.zustandVsBloc.title;
+          localizedSummary = t.blog.notes.zustandVsBloc.summary;
+        }
+
+        return {
+          id: `note-${note.id}`,
+          title: localizedTitle,
+          category: t.header.categories.note,
+          sectionId: 'blog',
+          sectionLabel: t.navigation.notes,
+          description: localizedSummary,
+          keywords: [
+            ...(note.technologies || []),
+            note.category,
+            note.projectContext,
+            'note',
+            'catatan',
+            'blog',
+            'article',
+            'artikel',
+            'learning',
+            'pembelajaran',
+            'decision',
+            'keputusan',
+          ],
+        };
+      }),
+
+      // 4. Journey Milestones
+      ...JOURNEY_MILESTONES.map((journey) => {
+        let localizedTitle = journey.title;
+        let localizedSummary = journey.summary;
+        let localizedRole = journey.role;
+        if (journey.id === '01') {
+          localizedTitle = t.experience.milestones.m01.title;
+          localizedSummary = t.experience.milestones.m01.summary;
+          localizedRole = t.experience.milestones.m01.role;
+        } else if (journey.id === '02') {
+          localizedTitle = t.experience.milestones.m02.title;
+          localizedSummary = t.experience.milestones.m02.summary;
+          localizedRole = t.experience.milestones.m02.role;
+        } else if (journey.id === '03') {
+          localizedTitle = t.experience.milestones.m03.title;
+          localizedSummary = t.experience.milestones.m03.summary;
+          localizedRole = t.experience.milestones.m03.role;
+        }
+
+        return {
+          id: `journey-${journey.id}`,
+          title: localizedTitle,
+          category: t.header.categories.journey,
+          sectionId: 'experience',
+          sectionLabel: t.navigation.journey,
+          description: localizedSummary,
+          keywords: [
+            ...(journey.technologies || []),
+            localizedRole,
+            journey.period,
+            journey.categoryLabel,
+            'experience',
+            'pengalaman',
+            'milestone',
+            'timeline',
+            'linimasa',
+            'history',
+            'riwayat',
+          ],
+        };
+      }),
+
+      // 5. Skill Groups (Toolkit categories)
+      ...SKILL_GROUPS.map((group) => {
+        const sectionMeta =
+          group.id === '01'
+            ? t.skills.sections.frontend
+            : group.id === '02'
+            ? t.skills.sections.mobile
+            : group.id === '03'
+            ? t.skills.sections.backend
+            : t.skills.sections.design;
+
+        return {
+          id: `skill-group-${group.id}`,
+          title: sectionMeta.category,
+          category: t.header.categories.toolkit,
+          sectionId: 'skills',
+          sectionLabel: t.navigation.toolkit,
+          description: sectionMeta.description,
+          keywords: [
+            ...group.items.map((i) => i.name),
+            'toolkit',
+            'skill',
+            'keahlian',
+            'tools',
+            'alat',
+            'group',
+            'kategori',
+          ],
+        };
+      }),
+
+      // 6. Individual Skills & Technologies
+      ...SKILL_GROUPS.flatMap((group) =>
+        group.items.map((skill) => {
+          const itemCtx = t.skills.itemContexts[skill.name] || skill.context;
+          return {
+            id: `skill-${group.id}-${skill.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
+            title: skill.name,
+            category: t.header.categories.skill,
+            sectionId: 'skills',
+            sectionLabel: t.navigation.toolkit,
+            description: itemCtx + (skill.projectRef ? ` · Used in ${skill.projectRef}` : ''),
+            keywords: [
+              group.category,
+              skill.projectRef || '',
+              'skill',
+              'keahlian',
+              'technology',
+              'teknologi',
+              'tool',
+              'alat',
+              'tech',
+            ].filter(Boolean),
+          };
+        })
+      ),
+    ];
+  }, [t]);
+
   const filteredResults = React.useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return [];
 
     const terms = q.split(/\s+/).filter(Boolean);
 
-    const scored = SEARCH_ITEMS.map((item) => {
+    const scored = searchItems.map((item) => {
       const titleLower = item.title.toLowerCase();
       const catLower = item.category.toLowerCase();
       const secLabelLower = item.sectionLabel.toLowerCase();
@@ -257,7 +399,7 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
       .sort((a, b) => b.score - a.score)
       .map((entry) => entry.item)
       .slice(0, 8);
-  }, [searchQuery]);
+  }, [searchQuery, searchItems]);
 
   // Derive clamped active index cleanly to avoid state synchronization in effects
   const activeIndex =
@@ -326,9 +468,9 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
 
   const themeLabel = state.mounted
     ? state.theme === 'dark'
-      ? 'Switch to light mode'
-      : 'Switch to dark mode'
-    : 'Toggle theme';
+      ? t.header.switchToLight
+      : t.header.switchToDark
+    : t.header.toggleTheme;
 
   const toggleTheme = () => {
     const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
@@ -354,7 +496,7 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
           className={`p-2 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition cursor-pointer ${
             isSidebarOpen ? 'md:hidden' : 'md:inline-flex'
           }`}
-          aria-label="Toggle navigation"
+          aria-label={t.header.toggleNav}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -362,7 +504,7 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
         </button>
       </div>
 
-      {/* Right side: Search workspace field & Theme switcher */}
+      {/* Right side: Search workspace field, Language switcher & Theme switcher */}
       <div className="flex items-center gap-3">
         {/* Global Search Workspace Field */}
         <div ref={searchContainerRef} className="relative flex items-center">
@@ -383,7 +525,7 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
               }
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Search workspace..."
+            placeholder={t.header.searchPlaceholder}
             role="combobox"
             aria-expanded={isDropdownOpen && searchQuery.trim() !== ''}
             aria-autocomplete="list"
@@ -437,10 +579,10 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
               ) : (
                 <div className="px-4 py-5 text-center text-zinc-500 dark:text-zinc-400">
                   <p className="font-mono text-xs">
-                    No results found for &ldquo;<span className="text-zinc-800 dark:text-zinc-200 font-medium">{searchQuery.trim()}</span>&rdquo;
+                    {t.header.noResults} &ldquo;<span className="text-zinc-800 dark:text-zinc-200 font-medium">{searchQuery.trim()}</span>&rdquo;
                   </p>
                   <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-1 font-sans">
-                    Search across sections, projects, notes, milestones, or skills
+                    {t.header.noResultsSub}
                   </p>
                 </div>
               )}
@@ -448,10 +590,43 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
           )}
         </div>
 
+        {/* Compact EN | ID Language Switcher */}
+        <div className="flex items-center rounded-md border border-zinc-200 dark:border-zinc-800 p-0.5 bg-zinc-50 dark:bg-zinc-900/80 font-mono text-[11px] shrink-0">
+          <button
+            type="button"
+            onClick={() => setLocale('en')}
+            aria-label="Switch to English"
+            aria-pressed={locale === 'en'}
+            className={`px-1.5 py-0.5 rounded transition-colors cursor-pointer ${
+              locale === 'en'
+                ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-bold shadow-xs'
+                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
+            }`}
+          >
+            EN
+          </button>
+          <span className="text-zinc-300 dark:text-zinc-700 px-0.5 select-none" aria-hidden="true">
+            |
+          </span>
+          <button
+            type="button"
+            onClick={() => setLocale('id')}
+            aria-label="Beralih ke Bahasa Indonesia"
+            aria-pressed={locale === 'id'}
+            className={`px-1.5 py-0.5 rounded transition-colors cursor-pointer ${
+              locale === 'id'
+                ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-bold shadow-xs'
+                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
+            }`}
+          >
+            ID
+          </button>
+        </div>
+
         {/* Theme Toggle Button */}
         <button 
           onClick={toggleTheme}
-          className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition cursor-pointer"
+          className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition cursor-pointer shrink-0"
           aria-label={themeLabel}
           title={themeLabel}
         >
@@ -461,3 +636,4 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
     </header>
   );
 }
+

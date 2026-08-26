@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { useWorkspace } from '@/context/WorkspaceContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { PRIMARY_CONTACT, PROFESSIONAL_LINKS, SECONDARY_LINKS } from '@/data/contact';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -22,27 +23,28 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function validate(fields: FormFields): FieldErrors {
-  const errors: FieldErrors = {};
-  if (!fields.name.trim() || fields.name.trim().length < 2) {
-    errors.name = 'Name is required (at least 2 characters).';
-  }
-  if (!isValidEmail(fields.email)) {
-    errors.email = 'Enter a valid email address.';
-  }
-  if (!fields.message.trim() || fields.message.trim().length < 10) {
-    errors.message = 'Write a message before sending (at least 10 characters).';
-  }
-  return errors;
-}
-
 export function Contact() {
   const { setActiveSection } = useWorkspace();
+  const { t } = useLanguage();
   const [fields, setFields] = useState<FormFields>({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<FormStatus>('idle');
   const [serverError, setServerError] = useState('');
   const nameRef = useRef<HTMLInputElement>(null);
+
+  const validate = (formFields: FormFields): FieldErrors => {
+    const errs: FieldErrors = {};
+    if (!formFields.name.trim() || formFields.name.trim().length < 2) {
+      errs.name = t.contact.form.errors.nameRequired;
+    }
+    if (!isValidEmail(formFields.email)) {
+      errs.email = t.contact.form.errors.emailInvalid;
+    }
+    if (!formFields.message.trim() || formFields.message.trim().length < 10) {
+      errs.message = t.contact.form.errors.messageRequired;
+    }
+    return errs;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -75,7 +77,7 @@ export function Contact() {
 
       if (!res.ok) {
         setServerError(
-          data.error || "Message couldn't be sent. Please try again or contact me directly by email.",
+          data.error || t.contact.form.errors.genericServer,
         );
         setStatus('error');
         return;
@@ -84,7 +86,7 @@ export function Contact() {
       setStatus('success');
       setFields({ name: '', email: '', message: '' });
     } catch {
-      setServerError("Message couldn't be sent. Please try again or contact me directly by email.");
+      setServerError(t.contact.form.errors.genericServer);
       setStatus('error');
     }
   };
@@ -112,13 +114,13 @@ export function Contact() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6 sm:pb-8">
           <div className="space-y-2">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
-              01 / Communication
+              {t.contact.badge}
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              Let&apos;s build something useful.
+              {t.contact.title}
             </h1>
             <p className="text-sm sm:text-base font-sans text-zinc-600 dark:text-zinc-400 font-normal">
-              Frontend Developer · Mobile Developer · UI/UX Designer
+              {t.contact.subtitle}
             </p>
           </div>
 
@@ -127,16 +129,16 @@ export function Contact() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span>Indonesia · Open to opportunities</span>
+            <span>{t.contact.status}</span>
           </div>
         </div>
 
         <div className="space-y-4 max-w-3xl">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight">
-            Direct channels and inquiry form.
+            {t.contact.heroHeading}
           </h2>
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-            Open to discussions around frontend engineering, Flutter mobile development, UI/UX design systems, and product development. Reach out directly via email, connect on professional networks, or send a message below.
+            {t.contact.heroDescription}
           </p>
         </div>
       </section>
@@ -146,10 +148,10 @@ export function Contact() {
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-              02 / Direct Channels &amp; Inquiry
+              {t.contact.channelsTag}
             </span>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              Connect &amp; Collaborate
+              {t.contact.channelsTitle}
             </h3>
           </div>
         </div>
@@ -161,7 +163,7 @@ export function Contact() {
             {/* Primary Email Box */}
             <div className="p-5 sm:p-6 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-2">
               <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                Primary Email
+                {t.contact.primaryEmail}
               </div>
               <a
                 href={PRIMARY_CONTACT.url}
@@ -170,14 +172,14 @@ export function Contact() {
                 {PRIMARY_CONTACT.displayValue}
               </a>
               <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400">
-                Direct inbox · Fast response
+                {t.contact.primaryEmailDesc}
               </p>
             </div>
 
             {/* All Channels List */}
             <div className="p-5 sm:p-6 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-4">
               <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium border-b border-zinc-100 dark:border-zinc-800/60 pb-2.5">
-                Profiles &amp; Networks
+                {t.contact.profilesTitle}
               </div>
               <div className="space-y-2.5 text-sm">
                 {allChannels.map((channel) => (
@@ -205,8 +207,8 @@ export function Contact() {
             {/* Developer Identity Note */}
             <div className="p-4 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 space-y-1 font-sans text-xs text-zinc-600 dark:text-zinc-400">
               <p className="font-bold text-zinc-950 dark:text-white uppercase font-sans">Rahmat Ivaldy</p>
-              <p>Frontend Developer · Mobile Developer · UI/UX Designer</p>
-              <p>Indonesia · Remote &amp; Project Collaborations</p>
+              <p>{t.contact.subtitle}</p>
+              <p>{t.contact.developerLocation}</p>
             </div>
           </div>
 
@@ -214,10 +216,10 @@ export function Contact() {
           <div className="lg:col-span-7 p-5 sm:p-7 md:p-8 rounded-sm border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#121215] space-y-6">
             <div className="space-y-1 border-b border-zinc-100 dark:border-zinc-800/60 pb-4">
               <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white font-sans">
-                Send a Message
+                {t.contact.sendMessageTitle}
               </h3>
               <p className="text-xs sm:text-sm font-sans text-zinc-500 dark:text-zinc-400">
-                Direct inquiry form backed by server validation
+                {t.contact.sendMessageDesc}
               </p>
             </div>
 
@@ -228,10 +230,10 @@ export function Contact() {
                 className="p-5 sm:p-6 border border-zinc-200 dark:border-zinc-800 rounded-sm bg-zinc-50 dark:bg-zinc-900/60 space-y-3 animate-fadeIn"
               >
                 <span className="text-xs font-mono uppercase tracking-widest text-zinc-950 dark:text-white font-bold block">
-                  ✓ Message Received
+                  {t.contact.form.successTitle}
                 </span>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                  Thank you for reaching out! Your message has been received. I will review it and respond to your email address shortly.
+                  {t.contact.form.successMessage}
                 </p>
                 <div className="pt-2">
                   <button
@@ -243,7 +245,7 @@ export function Contact() {
                     }}
                     className="text-sm font-sans font-medium text-zinc-950 dark:text-white hover:underline cursor-pointer"
                   >
-                    Send Another Message →
+                    {t.contact.form.sendAnother}
                   </button>
                 </div>
               </div>
@@ -260,7 +262,7 @@ export function Contact() {
                     htmlFor="contact-name"
                     className="block text-xs font-sans font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
                   >
-                    Name *
+                    {t.contact.form.nameLabel}
                   </label>
                   <input
                     ref={nameRef}
@@ -268,7 +270,7 @@ export function Contact() {
                     name="name"
                     type="text"
                     autoComplete="name"
-                    placeholder="Your Name"
+                    placeholder={t.contact.form.namePlaceholder}
                     value={fields.name}
                     onChange={handleChange}
                     disabled={status === 'sending'}
@@ -289,14 +291,14 @@ export function Contact() {
                     htmlFor="contact-email"
                     className="block text-xs font-sans font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
                   >
-                    Email Address *
+                    {t.contact.form.emailLabel}
                   </label>
                   <input
                     id="contact-email"
                     name="email"
                     type="email"
                     autoComplete="email"
-                    placeholder="you@example.com"
+                    placeholder={t.contact.form.emailPlaceholder}
                     value={fields.email}
                     onChange={handleChange}
                     disabled={status === 'sending'}
@@ -317,13 +319,13 @@ export function Contact() {
                     htmlFor="contact-message"
                     className="block text-xs font-sans font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
                   >
-                    Message *
+                    {t.contact.form.messageLabel}
                   </label>
                   <textarea
                     id="contact-message"
                     name="message"
                     rows={4}
-                    placeholder="Details about your inquiry, project scope, or questions..."
+                    placeholder={t.contact.form.messagePlaceholder}
                     value={fields.message}
                     onChange={handleChange}
                     disabled={status === 'sending'}
@@ -357,7 +359,7 @@ export function Contact() {
                     disabled={status === 'sending'}
                     className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <span>{status === 'sending' ? 'Sending Message…' : 'Submit Message'}</span>
+                    <span>{status === 'sending' ? t.contact.form.sendingBtn : t.contact.form.submitBtn}</span>
                     {status !== 'sending' && (
                       <span
                         className="inline-block transition-transform duration-200 group-hover:translate-x-1"
@@ -377,7 +379,7 @@ export function Contact() {
       {/* NAVIGATION FOOTER */}
       <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-          Rahmat Workspace · Communication Channels
+          {t.contact.footerText}
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
@@ -386,7 +388,7 @@ export function Contact() {
             onClick={() => setActiveSection('projects')}
             className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
           >
-            <span>Explore Projects</span>
+            <span>{t.contact.exploreProjectsCta}</span>
             <span
               className="inline-block transition-transform duration-200 group-hover:translate-x-1"
               aria-hidden="true"
@@ -399,7 +401,7 @@ export function Contact() {
             onClick={() => setActiveSection('experience')}
             className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
-            <span>View Journey</span>
+            <span>{t.contact.viewJourneyCta}</span>
             <span
               className="inline-block transition-transform duration-200 group-hover:translate-x-1"
               aria-hidden="true"
@@ -412,7 +414,7 @@ export function Contact() {
             onClick={() => setActiveSection('blog')}
             className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
           >
-            <span>Read Notes</span>
+            <span>{t.contact.readNotesCta}</span>
             <span
               className="inline-block transition-transform duration-200 group-hover:translate-x-1"
               aria-hidden="true"
@@ -425,3 +427,4 @@ export function Contact() {
     </div>
   );
 }
+

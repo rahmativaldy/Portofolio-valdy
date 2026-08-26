@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useWorkspace } from '@/context/WorkspaceContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { PROJECTS } from '@/data/projects';
 import { SKILL_GROUPS } from '@/data/skills';
 import { TechIcon } from '@/components/icons/TechIcons';
@@ -10,6 +11,22 @@ import { LogoLoop } from '@/components/ui/LogoLoop';
 
 export function Overview() {
   const { setActiveSection } = useWorkspace();
+  const { t } = useLanguage();
+
+  const getSkillCategoryName = (id: string) => {
+    switch (id) {
+      case '01':
+        return t.skills.sections.frontend.category;
+      case '02':
+        return t.skills.sections.mobile.category;
+      case '03':
+        return t.skills.sections.backend.category;
+      case '04':
+        return t.skills.sections.design.category;
+      default:
+        return id;
+    }
+  };
 
   return (
     <div
@@ -21,13 +38,13 @@ export function Overview() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6 sm:pb-8">
           <div className="space-y-2">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
-              Portfolio · Developer &amp; Designer
+              {t.overview.badge}
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white">
               Rahmat Ivaldy
             </h1>
             <p className="text-sm sm:text-base font-sans text-zinc-600 dark:text-zinc-400 font-normal">
-              Frontend Developer · Mobile Developer · UI/UX Designer
+              {t.overview.role}
             </p>
           </div>
 
@@ -36,16 +53,16 @@ export function Overview() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span>Indonesia · Open to opportunities</span>
+            <span>{t.overview.status}</span>
           </div>
         </div>
 
         <div className="space-y-4 max-w-3xl">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight">
-            I design interfaces and build the products behind them.
+            {t.overview.heroHeading}
           </h2>
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-            Specializing in structured web interfaces, cross-platform mobile applications, and polished user experiences using React, Next.js, TypeScript, and Flutter. Focused on clean architecture, responsive design systems, and thoughtful engineering.
+            {t.overview.heroDescription}
           </p>
         </div>
       </section>
@@ -55,10 +72,10 @@ export function Overview() {
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-              01 / Technology Stack
+              {t.overview.techStackTag}
             </span>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              Technologies &amp; Tools
+              {t.overview.techStackTitle}
             </h3>
           </div>
           <button
@@ -66,7 +83,7 @@ export function Overview() {
             onClick={() => setActiveSection('skills')}
             className="text-sm font-sans font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
           >
-            <span>Full Toolkit</span>
+            <span>{t.overview.fullToolkitCta}</span>
             <span aria-hidden="true">→</span>
           </button>
         </div>
@@ -75,7 +92,7 @@ export function Overview() {
           {SKILL_GROUPS.map((group, index) => (
             <div key={group.id} className="space-y-2">
               <div className="text-[11px] font-mono font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                {group.category}
+                {getSkillCategoryName(group.id)}
               </div>
               <LogoLoop
                 items={group.items}
@@ -92,10 +109,10 @@ export function Overview() {
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-              02 / Selected Work
+              {t.overview.selectedWorkTag}
             </span>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              Featured Case Studies
+              {t.overview.selectedWorkTitle}
             </h3>
           </div>
           <button
@@ -103,7 +120,7 @@ export function Overview() {
             onClick={() => setActiveSection('projects')}
             className="text-sm font-sans font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
           >
-            <span>View all projects</span>
+            <span>{t.overview.viewAllProjectsCta}</span>
             <span aria-hidden="true">→</span>
           </button>
         </div>
@@ -139,7 +156,7 @@ export function Overview() {
                     <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 dark:text-zinc-500">
                       <span className="font-semibold text-zinc-900 dark:text-zinc-100">01</span>
                       <span>/</span>
-                      <span className="uppercase tracking-wider">Mobile Application · Flutter</span>
+                      <span className="uppercase tracking-wider">{t.projects.categories.mobile} · Flutter</span>
                     </div>
 
                     <h4 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white transition-transform duration-250 ease-out group-hover:translate-x-1">
@@ -147,12 +164,12 @@ export function Overview() {
                     </h4>
 
                     <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                      {project.description}
+                      {t.projects.items.nusagoMobile.description}
                     </p>
 
                     <div className="space-y-2 pt-1">
                       <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                        Technologies
+                        {t.overview.technologiesTitle}
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {project.technologies.map((tech) => (
@@ -169,7 +186,7 @@ export function Overview() {
 
                     <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/60 flex items-center justify-between">
                       <span className="inline-flex items-center gap-1.5 text-sm font-sans font-medium text-zinc-950 dark:text-white">
-                        <span>Read case study</span>
+                        <span>{t.overview.readCaseStudy}</span>
                         <span
                           className="inline-block transition-transform duration-250 ease-out group-hover:translate-x-1"
                           aria-hidden="true"
@@ -214,7 +231,7 @@ export function Overview() {
                     <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 dark:text-zinc-500">
                       <span className="font-semibold text-zinc-900 dark:text-zinc-100">02</span>
                       <span>/</span>
-                      <span className="uppercase tracking-wider">Web Application · Next.js</span>
+                      <span className="uppercase tracking-wider">{t.projects.categories.web} · Next.js</span>
                     </div>
 
                     <h4 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white transition-transform duration-250 ease-out group-hover:translate-x-1">
@@ -222,12 +239,12 @@ export function Overview() {
                     </h4>
 
                     <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                      {project.description}
+                      {t.projects.items.rahmatWorkspace.description}
                     </p>
 
                     <div className="space-y-2 pt-1">
                       <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                        Technologies
+                        {t.overview.technologiesTitle}
                       </div>
                       <div className="flex flex-wrap gap-1.5">
                         {project.technologies.map((tech) => (
@@ -244,7 +261,7 @@ export function Overview() {
 
                     <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/60 flex items-center justify-between">
                       <span className="inline-flex items-center gap-1.5 text-sm font-sans font-medium text-zinc-950 dark:text-white">
-                        <span>Read case study</span>
+                        <span>{t.overview.readCaseStudy}</span>
                         <span
                           className="inline-block transition-transform duration-250 ease-out group-hover:translate-x-1"
                           aria-hidden="true"
@@ -265,16 +282,16 @@ export function Overview() {
       <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
         <div className="space-y-1">
           <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-            03 / Get in Touch
+            {t.overview.contactTag}
           </span>
           <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-            Have something worth building together?
+            {t.overview.contactHeading}
           </h3>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <p className="text-base text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed max-w-xl">
-            Let&apos;s connect and discuss the next product, interface system, or mobile application.
+            {t.overview.contactDescription}
           </p>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
@@ -283,7 +300,7 @@ export function Overview() {
               onClick={() => setActiveSection('contact')}
               className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
             >
-              <span>Get in touch</span>
+              <span>{t.overview.getInTouchCta}</span>
               <span
                 className="inline-block transition-transform duration-200 group-hover:translate-x-1"
                 aria-hidden="true"
@@ -296,7 +313,7 @@ export function Overview() {
               onClick={() => setActiveSection('experience')}
               className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
             >
-              <span>View journey</span>
+              <span>{t.overview.viewJourneyCta}</span>
               <span
                 className="inline-block transition-transform duration-200 group-hover:translate-x-1"
                 aria-hidden="true"
@@ -310,3 +327,4 @@ export function Overview() {
     </div>
   );
 }
+

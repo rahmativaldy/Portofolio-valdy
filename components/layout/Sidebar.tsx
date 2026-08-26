@@ -1,6 +1,7 @@
 import React from 'react';
 import { NAV_ITEMS } from '@/data/navigation';
 import { useWorkspace } from '@/context/WorkspaceContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { NavIcon } from '@/components/icons/NavIcons';
 import { ProfileIdentity } from '@/components/sections/ProfileIdentity';
 
@@ -11,7 +12,29 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const { activeSection, setActiveSection } = useWorkspace();
+  const { t } = useLanguage();
   const itemRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
+
+  const getLocalizedNavLabel = (id: string, fallback: string) => {
+    switch (id) {
+      case 'overview':
+        return t.navigation.overview;
+      case 'about':
+        return t.navigation.about;
+      case 'projects':
+        return t.navigation.projects;
+      case 'skills':
+        return t.navigation.toolkit;
+      case 'experience':
+        return t.navigation.journey;
+      case 'blog':
+        return t.navigation.notes;
+      case 'contact':
+        return t.navigation.contact;
+      default:
+        return fallback;
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     switch (e.key) {
@@ -54,14 +77,14 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       {/* Sidebar top bar (fixed) */}
       <div className="h-14 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-5 shrink-0">
         <span className="text-xs font-mono font-medium tracking-wider uppercase text-zinc-400 dark:text-zinc-500">
-          Workspace
+          {t.sidebar.workspace}
         </span>
         <button
           type="button"
           onClick={() => setIsOpen(false)}
           className="inline-flex items-center justify-center p-2 rounded-md text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors duration-150 motion-reduce:transition-none cursor-pointer"
-          aria-label="Collapse sidebar"
-          title="Collapse sidebar"
+          aria-label={t.sidebar.collapseSidebar}
+          title={t.sidebar.collapseSidebar}
         >
           <svg className="w-4 h-4 hidden md:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 6l-6 6 6 6" />
@@ -81,10 +104,11 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
         <nav className="p-3 space-y-1" role="navigation" aria-label="Sidebar Navigation">
           <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1.5 font-medium">
-            Navigation
+            {t.sidebar.navigation}
           </div>
           {NAV_ITEMS.map((item, index) => {
             const isActive = activeSection === item.id;
+            const label = getLocalizedNavLabel(item.id, item.label);
             return (
               <button
                 key={item.id}
@@ -102,7 +126,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 <div className={`w-4 h-4 shrink-0 flex items-center justify-center transition-colors duration-150 motion-reduce:transition-none ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
                   <NavIcon id={item.id} className="w-4 h-4" />
                 </div>
-                <span className="transition-colors duration-150 motion-reduce:transition-none">{item.label}</span>
+                <span className="transition-colors duration-150 motion-reduce:transition-none">{label}</span>
               </button>
             );
           })}

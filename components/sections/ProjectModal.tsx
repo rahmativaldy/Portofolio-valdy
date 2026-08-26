@@ -3,6 +3,7 @@
 import { useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Project } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -10,6 +11,8 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const { t } = useLanguage();
+
   const handleEsc = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -29,6 +32,27 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   if (!project) return null;
 
+  const getLocalizedProjectData = (id: string) => {
+    switch (id) {
+      case 'nusago-mobile':
+        return t.projects.items.nusagoMobile;
+      case 'rahmat-workspace':
+        return t.projects.items.rahmatWorkspace;
+      case 'nusago-api':
+        return t.projects.items.nusagoApi;
+      case 'taskflow-dashboard':
+        return t.projects.items.taskflow;
+      default:
+        return null;
+    }
+  };
+
+  const localizedData = getLocalizedProjectData(project.id);
+  const description = localizedData?.description || project.description;
+  const highlights = localizedData?.highlights || project.highlights;
+  const challenges = localizedData?.challenges || project.challenges;
+  const learnings = localizedData?.learnings || project.learnings;
+
   return (
     <div
       id={`project-modal-${project.id}`}
@@ -46,7 +70,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           id={`project-modal-close-${project.id}`}
           onClick={onClose}
           className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 flex items-center justify-center rounded-md bg-zinc-100/90 dark:bg-zinc-800/90 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
-          aria-label="Close modal"
+          aria-label={t.projectModal.closeModal}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -71,20 +95,20 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Header Metadata */}
           <div className="space-y-2">
             <div className="text-xs font-mono font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-              Technical Case Study · {project.id}
+              {t.projectModal.caseStudyTag} · {project.id}
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white font-sans">
               {project.title}
             </h2>
             <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
-              {project.description}
+              {description}
             </p>
           </div>
 
           {/* Key Technologies */}
           <div className="space-y-2 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80">
             <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-              Technologies Used
+              {t.projectModal.technologiesUsed}
             </h3>
             <div className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
@@ -99,13 +123,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Highlights */}
-          {project.highlights && project.highlights.length > 0 && (
+          {highlights && highlights.length > 0 && (
             <div className="space-y-3 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80">
               <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                Selected Features &amp; Architecture Highlights
+                {t.projectModal.highlightsTitle}
               </h3>
               <div className="grid gap-2.5 sm:grid-cols-2">
-                {project.highlights.map((highlight) => (
+                {highlights.map((highlight) => (
                   <div
                     key={highlight}
                     className="p-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-sans"
@@ -119,13 +143,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Challenges & Learnings */}
           <div className="grid gap-6 sm:grid-cols-2 pt-2 border-t border-zinc-200/80 dark:border-zinc-800/80">
-            {project.challenges && project.challenges.length > 0 && (
+            {challenges && challenges.length > 0 && (
               <div className="space-y-3">
                 <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                  Challenges Overcome
+                  {t.projectModal.challengesTitle}
                 </h3>
                 <div className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans">
-                  {project.challenges.map((challenge, idx) => (
+                  {challenges.map((challenge, idx) => (
                     <p key={idx} className="pl-3 border-l-2 border-zinc-300 dark:border-zinc-700 leading-relaxed">
                       {challenge}
                     </p>
@@ -134,13 +158,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
             )}
 
-            {project.learnings && project.learnings.length > 0 && (
+            {learnings && learnings.length > 0 && (
               <div className="space-y-3">
                 <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                  Key Learnings
+                  {t.projectModal.learningsTitle}
                 </h3>
                 <div className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans">
-                  {project.learnings.map((learning, idx) => (
+                  {learnings.map((learning, idx) => (
                     <p key={idx} className="pl-3 border-l-2 border-zinc-900 dark:border-zinc-100 leading-relaxed">
                       {learning}
                     </p>
@@ -161,7 +185,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-sm bg-zinc-950 dark:bg-white px-5 py-2.5 text-sm font-sans font-medium text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
                 >
-                  View Repository →
+                  {t.projectModal.viewRepo}
                 </a>
               )}
               {project.link && (
@@ -172,7 +196,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-sm border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-900 px-5 py-2.5 text-sm font-sans font-medium text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
                 >
-                  Live Demo ↗
+                  {t.projectModal.liveDemo}
                 </a>
               )}
             </div>

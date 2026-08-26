@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ProfileIdentityProps {
   avatarSrc?: string;
@@ -12,6 +13,7 @@ export function ProfileIdentity({
   avatarSrc = '/rahmat-profile.jpg',
   isCollapsed = false,
 }: ProfileIdentityProps) {
+  const { t } = useLanguage();
   const [imageError, setImageError] = React.useState(false);
 
   return (
@@ -51,7 +53,7 @@ export function ProfileIdentity({
           {/* Role */}
           <div>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-normal max-w-[260px] text-center">
-              Frontend Developer · Mobile Developer · UI/UX Designer
+              {t.sidebar.role}
             </p>
           </div>
 
@@ -62,7 +64,7 @@ export function ProfileIdentity({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span>Open to opportunities</span>
+              <span>{t.sidebar.openToWork}</span>
             </div>
           </div>
         </div>

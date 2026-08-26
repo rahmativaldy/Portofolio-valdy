@@ -6,39 +6,56 @@ import { PROJECTS } from '@/data/projects';
 import { Project } from '@/types';
 import { ProjectModal } from './ProjectModal';
 import { useWorkspace } from '@/context/WorkspaceContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { TechIcon } from '@/components/icons/TechIcons';
 
 export function Projects() {
   const { setActiveSection } = useWorkspace();
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const getProjectCategory = (id: string) => {
     switch (id) {
       case 'nusago-mobile':
-        return 'Mobile Application';
+        return t.projects.categories.mobile;
       case 'rahmat-workspace':
-        return 'Web Application';
+        return t.projects.categories.web;
       case 'nusago-api':
-        return 'Backend REST API';
+        return t.projects.categories.api;
       case 'taskflow-dashboard':
-        return 'Web Application';
+        return t.projects.categories.web;
       default:
-        return 'Software Project';
+        return t.projects.categories.software;
     }
   };
 
   const getProjectRole = (id: string) => {
     switch (id) {
       case 'nusago-mobile':
-        return 'Mobile Engineering · UI/UX Design';
+        return t.projects.roles.nusagoMobile;
       case 'rahmat-workspace':
-        return 'Frontend Engineering · UI/UX Design';
+        return t.projects.roles.rahmatWorkspace;
       case 'nusago-api':
-        return 'Backend Engineering · Architecture';
+        return t.projects.roles.nusagoApi;
       case 'taskflow-dashboard':
-        return 'Frontend Engineering · State Systems';
+        return t.projects.roles.taskflow;
       default:
-        return 'Engineering & Design';
+        return t.projects.roles.general;
+    }
+  };
+
+  const getProjectDescription = (id: string, fallback: string) => {
+    switch (id) {
+      case 'nusago-mobile':
+        return t.projects.items.nusagoMobile.description;
+      case 'rahmat-workspace':
+        return t.projects.items.rahmatWorkspace.description;
+      case 'nusago-api':
+        return t.projects.items.nusagoApi.description;
+      case 'taskflow-dashboard':
+        return t.projects.items.taskflow.description;
+      default:
+        return fallback;
     }
   };
 
@@ -52,13 +69,13 @@ export function Projects() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6 sm:pb-8">
           <div className="space-y-2">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
-              01 / Selected Projects
+              {t.projects.badge}
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              Selected Work
+              {t.projects.title}
             </h1>
             <p className="text-sm sm:text-base font-sans text-zinc-600 dark:text-zinc-400 font-normal">
-              Personal projects and technical case studies across mobile and web
+              {t.projects.subtitle}
             </p>
           </div>
 
@@ -67,12 +84,12 @@ export function Projects() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span>{PROJECTS.length} Built Projects · Case Studies</span>
+            <span>{PROJECTS.length} {t.projects.statusCount}</span>
           </div>
         </div>
 
         <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed max-w-3xl">
-          A collection of real-world products and software projects built with Next.js, React, TypeScript, Flutter, and Node.js. Select any project to explore architectural decisions, state management patterns, and technical takeaways.
+          {t.projects.heroDescription}
         </p>
       </section>
 
@@ -81,6 +98,7 @@ export function Projects() {
         {PROJECTS.map((project, index) => {
           const category = getProjectCategory(project.id);
           const role = getProjectRole(project.id);
+          const description = getProjectDescription(project.id, project.description);
 
           return (
             <article
@@ -112,14 +130,14 @@ export function Projects() {
                       {project.title}
                     </h2>
                     <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                      {project.description}
+                      {description}
                     </p>
                   </div>
 
                   {/* Technology Stack */}
                   <div className="space-y-2 pt-1">
                     <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium">
-                      Technologies &amp; Tools
+                      {t.projects.technologiesTitle}
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map((tech) => (
@@ -137,7 +155,7 @@ export function Projects() {
                   {/* Action Link */}
                   <div className="pt-3 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800/60">
                     <span className="inline-flex items-center gap-1.5 text-sm font-sans font-medium text-zinc-950 dark:text-white">
-                      <span>View case study</span>
+                      <span>{t.projects.viewCaseStudy}</span>
                       <span
                         className="inline-block transition-transform duration-250 ease-out group-hover:translate-x-1"
                         aria-hidden="true"

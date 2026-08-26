@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { WorkspaceProvider, useWorkspace } from '@/context/WorkspaceContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 import { WorkspaceLayout } from './WorkspaceLayout';
 import { Overview } from '@/components/sections/Overview';
 import { About } from '@/components/sections/About';
@@ -46,9 +47,11 @@ function WorkspaceInner() {
 
 export function WorkspaceShell() {
   return (
-    <WorkspaceProvider>
-      <WorkspaceInner />
-    </WorkspaceProvider>
+    <LanguageProvider>
+      <WorkspaceProvider>
+        <WorkspaceInner />
+      </WorkspaceProvider>
+    </LanguageProvider>
   );
 }
 

@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function StatusBar() {
+  const { t } = useLanguage();
   const [time, setTime] = useState<string>('');
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function StatusBar() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
           </span>
-          <span className="truncate">Open to opportunities</span>
+          <span className="truncate">{t.statusBar.openToWork}</span>
         </div>
       </div>
 
@@ -61,7 +63,7 @@ export function StatusBar() {
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span suppressHydrationWarning>{time || 'Ready'}</span>
+          <span suppressHydrationWarning>{time || t.statusBar.ready}</span>
         </div>
       </div>
     </footer>

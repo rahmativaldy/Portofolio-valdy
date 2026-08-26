@@ -27,8 +27,8 @@ export const PROJECTS: Project[] = [
       'Firebase is great for prototyping but you hit its limits fast when your data relations get complex.',
     ],
     github: 'https://github.com/rahmativaldy',
-    thumbnail: '/projects/nusago/screenshot.webp',
-    gallery: ['/projects/nusago/screenshot.webp'],
+    thumbnail: '/projects/nusago/a_clean_modern_portfolio_project_showcase_webpage.png',
+    gallery: ['/projects/nusago/a_clean_modern_portfolio_project_showcase_webpage.png'],
   },
   {
     id: 'rahmat-workspace',
