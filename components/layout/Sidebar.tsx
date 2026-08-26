@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { NAV_ITEMS } from '@/data/navigation';
 import { useWorkspace } from '@/context/WorkspaceContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -13,6 +16,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const { activeSection, setActiveSection } = useWorkspace();
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
   const itemRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
 
   const getLocalizedNavLabel = (id: string, fallback: string) => {
@@ -102,8 +106,8 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
 
       {/* Dedicated Scrollable Navigation Container */}
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
-        <nav className="p-3 space-y-1" role="navigation" aria-label="Sidebar Navigation">
-          <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 py-1.5 font-medium">
+        <nav className="relative p-3 space-y-1" role="navigation" aria-label="Sidebar Navigation">
+          <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3.5 py-1.5 font-medium">
             {t.sidebar.navigation}
           </div>
           {NAV_ITEMS.map((item, index) => {
@@ -117,16 +121,45 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 onClick={() => {
                   handleNavigation(item.id);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-sans font-medium rounded-md transition-colors duration-150 motion-reduce:transition-none group text-left cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 ${
-                  isActive 
-                    ? 'bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-medium shadow-xs' 
-                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 hover:text-zinc-950 dark:hover:text-zinc-100'
+                aria-current={isActive ? 'page' : undefined}
+                className={`relative w-full h-10 flex items-center gap-3 px-3.5 text-sm font-sans font-medium rounded-full text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600 transition-colors duration-150 motion-reduce:transition-none group ${
+                  isActive
+                    ? 'text-white dark:text-zinc-950'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'
                 }`}
               >
-                <div className={`w-4 h-4 shrink-0 flex items-center justify-center transition-colors duration-150 motion-reduce:transition-none ${isActive ? 'text-white dark:text-zinc-950' : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'}`}>
+                {/* Active Pill Indicator with layoutId animation */}
+                {isActive && (
+                  <motion.div
+                    layoutId="sidebar-active-pill"
+                    className="absolute inset-0 bg-zinc-950 dark:bg-white rounded-full pointer-events-none z-0 shadow-xs"
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0 }
+                        : {
+                            type: 'tween',
+                            ease: [0.22, 1, 0.36, 1],
+                            duration: 0.35,
+                          }
+                    }
+                  />
+                )}
+
+                {/* Navigation Icon */}
+                <div
+                  className={`relative z-10 w-4 h-4 shrink-0 flex items-center justify-center transition-colors duration-150 motion-reduce:transition-none ${
+                    isActive
+                      ? 'text-white dark:text-zinc-950'
+                      : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200'
+                  }`}
+                >
                   <NavIcon id={item.id} className="w-4 h-4" />
                 </div>
-                <span className="transition-colors duration-150 motion-reduce:transition-none">{label}</span>
+
+                {/* Navigation Label */}
+                <span className="relative z-10 font-medium transition-colors duration-150 motion-reduce:transition-none truncate">
+                  {label}
+                </span>
               </button>
             );
           })}
@@ -135,3 +168,4 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
     </aside>
   );
 }
+
