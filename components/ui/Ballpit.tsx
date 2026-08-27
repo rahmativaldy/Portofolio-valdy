@@ -66,29 +66,29 @@ export interface BallpitProps {
   lightIntensity?: number;
 }
 
-// Subtle monochrome palettes tailored for Rahmat Workspace
+// Subtle monochrome zinc palettes tailored for Rahmat Workspace
 const DARK_THEME_PALETTE = ['#27272a', '#3f3f46', '#18181b', '#52525b', '#202024', '#2e2e36'];
 const LIGHT_THEME_PALETTE = ['#a1a1aa', '#d4d4d8', '#71717a', '#e4e4e7', '#cbd5e1', '#b8b8c2'];
 
 const DEFAULT_CONFIG: BallpitConfig = {
-  count: 36,
+  count: 34,
   colors: DARK_THEME_PALETTE,
   ambientColor: 0x27272a,
-  ambientIntensity: 0.85,
-  lightIntensity: 75,
+  ambientIntensity: 0.75,
+  lightIntensity: 45,
   materialParams: {
-    metalness: 0.35,
-    roughness: 0.55,
-    clearcoat: 0.3,
-    clearcoatRoughness: 0.35,
+    metalness: 0.25,
+    roughness: 0.65,
+    clearcoat: 0.15,
+    clearcoatRoughness: 0.4,
   },
-  minSize: 0.5,
-  maxSize: 1.05,
-  size0: 1.4,
-  gravity: 0.08,
+  minSize: 0.45,
+  maxSize: 1.0,
+  size0: 1.3,
+  gravity: 0.07,
   friction: 0.992,
   wallBounce: 0.85,
-  maxVelocity: 0.06,
+  maxVelocity: 0.05,
   maxX: 5,
   maxY: 5,
   maxZ: 2,
@@ -162,18 +162,19 @@ class ThreeContext {
   private initRenderer() {
     this.canvas.style.display = 'block';
 
-    // Verify context can be created on this canvas before passing to WebGLRenderer
-    const testGl =
-      this.canvas.getContext('webgl2') ||
-      this.canvas.getContext('webgl') ||
+    // Safely acquire rendering context with fallback
+    const gl =
+      this.canvas.getContext('webgl2', { alpha: true, antialias: true, powerPreference: 'high-performance' }) ||
+      this.canvas.getContext('webgl', { alpha: true, antialias: true, powerPreference: 'high-performance' }) ||
       this.canvas.getContext('experimental-webgl');
 
-    if (!testGl) {
-      throw new Error('WebGL context is not available on canvas');
+    if (!gl) {
+      throw new Error('WebGL rendering context could not be created');
     }
 
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
+      context: gl as WebGL2RenderingContext | WebGLRenderingContext,
       powerPreference: 'high-performance',
       antialias: true,
       alpha: true,
@@ -332,13 +333,23 @@ class ThreeContext {
     if (!this.scene) return;
     this.scene.traverse((obj) => {
       const mesh = obj as InstancedMesh;
-      if (mesh.isMesh && mesh.material) {
-        if (Array.isArray(mesh.material)) {
-          mesh.material.forEach((mat) => mat.dispose());
-        } else {
-          mesh.material.dispose();
-        }
+      if (mesh.isMesh) {
         if (mesh.geometry) mesh.geometry.dispose();
+        if (mesh.material) {
+          if (Array.isArray(mesh.material)) {
+            mesh.material.forEach((mat) => {
+              if ('envMap' in mat && mat.envMap && typeof (mat.envMap as { dispose?: () => void }).dispose === 'function') {
+                (mat.envMap as { dispose: () => void }).dispose();
+              }
+              mat.dispose();
+            });
+          } else {
+            if ('envMap' in mesh.material && mesh.material.envMap && typeof (mesh.material.envMap as { dispose?: () => void }).dispose === 'function') {
+              (mesh.material.envMap as { dispose: () => void }).dispose();
+            }
+            mesh.material.dispose();
+          }
+        }
       }
     });
     this.scene.clear();
@@ -351,12 +362,17 @@ class ThreeContext {
     this.timer.dispose();
     this.clear();
     if (this.renderer) {
-      this.renderer.dispose();
+      try {
+        this.renderer.dispose();
+        this.renderer.forceContextLoss();
+      } catch {
+        // Safe disposal fallback
+      }
     }
   }
 }
 
-// Interaction manager with passive pointer movement
+// Global interaction manager with passive pointer movement
 interface InteractionHandler {
   position: Vector2;
   nPosition: Vector2;
@@ -398,8 +414,8 @@ function processInteractions() {
     if (isInside) {
       handler.position.x = cursorClientPos.x - rect.left;
       handler.position.y = cursorClientPos.y - rect.top;
-      handler.nPosition.x = (handler.position.x / rect.width) * 2 - 1;
-      handler.nPosition.y = -(handler.position.y / rect.height) * 2 + 1;
+      handler.nPosition.x = (handler.position.x / Math.max(1, rect.width)) * 2 - 1;
+      handler.nPosition.y = -(handler.position.y / Math.max(1, rect.height)) * 2 + 1;
 
       if (!handler.hover) {
         handler.hover = true;
@@ -721,9 +737,9 @@ export function Ballpit({
       const getAdaptiveCount = () => {
         if (count !== undefined) return count;
         const width = typeof window !== 'undefined' ? window.innerWidth : 1200;
-        if (width < 640) return 14;
-        if (width < 1024) return 24;
-        return 36;
+        if (width < 640) return 14;   // Mobile
+        if (width < 1024) return 22;  // Tablet
+        return 34;                    // Desktop
       };
 
       const initialThemeColors = isDarkMode() ? DARK_THEME_PALETTE : LIGHT_THEME_PALETTE;
@@ -731,8 +747,14 @@ export function Ballpit({
         count: getAdaptiveCount(),
         colors: colors || initialThemeColors,
         ambientColor: isDarkMode() ? 0x27272a : 0xf4f4f5,
-        ambientIntensity: ambientIntensity ?? (isDarkMode() ? 0.85 : 0.95),
-        lightIntensity: lightIntensity ?? (isDarkMode() ? 75 : 90),
+        ambientIntensity: ambientIntensity ?? (isDarkMode() ? 0.75 : 0.85),
+        lightIntensity: lightIntensity ?? (isDarkMode() ? 45 : 55),
+        materialParams: {
+          metalness: 0.25,
+          roughness: 0.65,
+          clearcoat: 0.15,
+          clearcoatRoughness: 0.4,
+        },
         gravity: prefersReducedMotion() ? 0 : (gravity ?? DEFAULT_CONFIG.gravity),
         friction: friction ?? DEFAULT_CONFIG.friction,
         wallBounce: wallBounce ?? DEFAULT_CONFIG.wallBounce,
@@ -795,8 +817,8 @@ export function Ballpit({
         const dark = isDarkMode();
         const newPalette = dark ? DARK_THEME_PALETTE : LIGHT_THEME_PALETTE;
         spheres.config.ambientColor = dark ? 0x27272a : 0xf4f4f5;
-        spheres.config.ambientIntensity = dark ? 0.85 : 0.95;
-        spheres.config.lightIntensity = dark ? 75 : 90;
+        spheres.config.ambientIntensity = dark ? 0.75 : 0.85;
+        spheres.config.lightIntensity = dark ? 45 : 55;
         spheres.ambientLight.color.set(spheres.config.ambientColor);
         spheres.ambientLight.intensity = spheres.config.ambientIntensity;
         spheres.light.intensity = spheres.config.lightIntensity;
@@ -844,13 +866,13 @@ export function Ballpit({
 
   return (
     <div
-      className={`relative w-full h-full overflow-hidden ${className}`}
+      className={`relative w-full h-full overflow-hidden pointer-events-none ${className}`}
       aria-hidden="true"
     >
       <canvas
         ref={canvasRef}
-        className="w-full h-full pointer-events-none"
-        style={{ width: '100%', height: '100%', display: 'block' }}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ display: 'block', width: '100%', height: '100%' }}
       />
     </div>
   );
