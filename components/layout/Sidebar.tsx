@@ -78,15 +78,12 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         isOpen ? 'translate-x-0 md:flex' : '-translate-x-full md:hidden'
       }`}
     >
-      {/* Sidebar top bar (fixed) */}
-      <div className="h-14 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-5 shrink-0">
-        <span className="text-xs font-mono font-medium tracking-wider uppercase text-zinc-400 dark:text-zinc-500">
-          {t.sidebar.workspace}
-        </span>
+      {/* Compact Profile Identity Block with top-right collapse button */}
+      <div className="relative shrink-0 border-b border-zinc-200 dark:border-zinc-800 pt-4 pb-3 px-4">
         <button
           type="button"
           onClick={() => setIsOpen(false)}
-          className="inline-flex items-center justify-center p-2 rounded-md text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors duration-150 motion-reduce:transition-none cursor-pointer"
+          className="absolute top-3 right-3 z-20 inline-flex items-center justify-center p-1.5 rounded-md text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800/60 transition-colors duration-150 motion-reduce:transition-none cursor-pointer"
           aria-label={t.sidebar.collapseSidebar}
           title={t.sidebar.collapseSidebar}
         >
@@ -97,10 +94,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>
-      </div>
 
-      {/* Fixed Profile Identity Block */}
-      <div className="shrink-0 border-b border-zinc-200 dark:border-zinc-800 py-2">
         <ProfileIdentity />
       </div>
 
