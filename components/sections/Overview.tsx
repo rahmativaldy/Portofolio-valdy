@@ -8,6 +8,7 @@ import { PROJECTS } from '@/data/projects';
 import { SKILL_GROUPS } from '@/data/skills';
 import { TechIcon } from '@/components/icons/TechIcons';
 import { LogoLoop } from '@/components/ui/LogoLoop';
+import { Ballpit } from '@/components/ui/Ballpit';
 
 export function Overview() {
   const { setActiveSection } = useWorkspace();
@@ -34,36 +35,43 @@ export function Overview() {
       id="overview"
     >
       {/* 1. HERO / IDENTITY */}
-      <section className="space-y-6 sm:space-y-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6 sm:pb-8">
-          <div className="space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
-              {t.overview.badge}
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              Rahmat Ivaldy
-            </h1>
-            <p className="text-sm sm:text-base font-sans text-zinc-600 dark:text-zinc-400 font-normal">
-              {t.overview.role}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
-            <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <span>{t.overview.status}</span>
-          </div>
+      <section className="relative overflow-hidden space-y-6 sm:space-y-8">
+        {/* Ballpit Interactive Background — Overview Hero Only */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-55 dark:opacity-40 transition-opacity duration-300">
+          <Ballpit />
         </div>
 
-        <div className="space-y-4 max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight">
-            {t.overview.heroHeading}
-          </h2>
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-            {t.overview.heroDescription}
-          </p>
+        <div className="relative z-10 space-y-6 sm:space-y-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-zinc-800/80 pb-6 sm:pb-8">
+            <div className="space-y-2">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
+                {t.overview.badge}
+              </span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                Rahmat Ivaldy
+              </h1>
+              <p className="text-sm sm:text-base font-sans text-zinc-600 dark:text-zinc-400 font-normal">
+                {t.overview.role}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900/90 px-3 py-1.5 rounded-sm border border-zinc-200 dark:border-zinc-800">
+              <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 duration-1000" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span>{t.overview.status}</span>
+            </div>
+          </div>
+
+          <div className="space-y-4 max-w-3xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight">
+              {t.overview.heroHeading}
+            </h2>
+            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+              {t.overview.heroDescription}
+            </p>
+          </div>
         </div>
       </section>
 
