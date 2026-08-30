@@ -160,6 +160,10 @@ export interface TranslationDictionary {
         learnings: string[];
       };
     };
+    footerText: string;
+    backToOverviewCta: string;
+    viewJourneyCta: string;
+    getInTouchCta: string;
   };
   projectModal: {
     caseStudyTag: string;

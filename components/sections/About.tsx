@@ -5,6 +5,7 @@ import { useWorkspace } from '@/context/WorkspaceContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { SKILL_GROUPS } from '@/data/skills';
 import { LogoLoop } from '@/components/ui/LogoLoop';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export function About() {
   const { setActiveSection } = useWorkspace();
@@ -68,219 +69,228 @@ export function About() {
       </section>
 
       {/* 02 / WHAT I DO */}
-      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
-        <div className="space-y-1">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-            {t.about.disciplinesTag}
-          </span>
-          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-            {t.about.disciplinesTitle}
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-2">
-          {/* Discipline 01 */}
-          <div className="space-y-2.5">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.disciplines.webTag}
-            </span>
-            <h4 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.disciplines.webTitle}
-            </h4>
-            <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-              {t.about.disciplines.webTools}
-            </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
-              {t.about.disciplines.webDesc}
-            </p>
-          </div>
-
-          {/* Discipline 02 */}
-          <div className="space-y-2.5">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.disciplines.mobileTag}
-            </span>
-            <h4 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.disciplines.mobileTitle}
-            </h4>
-            <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-              {t.about.disciplines.mobileTools}
-            </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
-              {t.about.disciplines.mobileDesc}
-            </p>
-          </div>
-
-          {/* Discipline 03 */}
-          <div className="space-y-2.5">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.disciplines.designTag}
-            </span>
-            <h4 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.disciplines.designTitle}
-            </h4>
-            <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-              {t.about.disciplines.designTools}
-            </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
-              {t.about.disciplines.designDesc}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 03 / APPROACH */}
-      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
-        <div className="space-y-1">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-            {t.about.methodologyTag}
-          </span>
-          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-            {t.about.methodologyTitle}
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-2">
-          {/* Step 01 */}
-          <div className="space-y-2">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.steps.s1Tag}
-            </span>
-            <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.steps.s1Title}
-            </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-              {t.about.steps.s1Desc}
-            </p>
-          </div>
-
-          {/* Step 02 */}
-          <div className="space-y-2">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.steps.s2Tag}
-            </span>
-            <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.steps.s2Title}
-            </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-              {t.about.steps.s2Desc}
-            </p>
-          </div>
-
-          {/* Step 03 */}
-          <div className="space-y-2">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.steps.s3Tag}
-            </span>
-            <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.steps.s3Title}
-            </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-              {t.about.steps.s3Desc}
-            </p>
-          </div>
-
-          {/* Step 04 */}
-          <div className="space-y-2">
-            <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
-              {t.about.steps.s4Tag}
-            </span>
-            <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.steps.s4Title}
-            </h4>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-              {t.about.steps.s4Desc}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 04 / TOOLKIT */}
-      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
-        <div className="flex items-center justify-between">
+      <ScrollReveal delay={0.1}>
+        <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
           <div className="space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-              {t.about.toolkitTag}
+              {t.about.disciplinesTag}
             </span>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.about.toolkitTitle}
+              {t.about.disciplinesTitle}
             </h3>
           </div>
-          <button
-            type="button"
-            onClick={() => setActiveSection('skills')}
-            className="text-sm font-sans font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
-          >
-            <span>{t.about.fullInventoryCta}</span>
-            <span aria-hidden="true">→</span>
-          </button>
-        </div>
 
-        <div className="space-y-4 pt-1">
-          {SKILL_GROUPS.map((group, index) => (
-            <div key={group.id} className="space-y-2">
-              <div className="text-[11px] font-mono font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                {getSkillCategoryName(group.id)}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-2">
+            {/* Discipline 01 */}
+            <div className="space-y-2.5">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.disciplines.webTag}
+              </span>
+              <h4 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.disciplines.webTitle}
+              </h4>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                {t.about.disciplines.webTools}
               </div>
-              <LogoLoop
-                items={group.items}
-                direction={index % 2 === 0 ? 'left' : 'right'}
-                speed={40}
-              />
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
+                {t.about.disciplines.webDesc}
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
+
+            {/* Discipline 02 */}
+            <div className="space-y-2.5">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.disciplines.mobileTag}
+              </span>
+              <h4 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.disciplines.mobileTitle}
+              </h4>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                {t.about.disciplines.mobileTools}
+              </div>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
+                {t.about.disciplines.mobileDesc}
+              </p>
+            </div>
+
+            {/* Discipline 03 */}
+            <div className="space-y-2.5">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.disciplines.designTag}
+              </span>
+              <h4 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.disciplines.designTitle}
+              </h4>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                {t.about.disciplines.designTools}
+              </div>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1">
+                {t.about.disciplines.designDesc}
+              </p>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* 03 / APPROACH */}
+      <ScrollReveal delay={0.1}>
+        <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
+          <div className="space-y-1">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
+              {t.about.methodologyTag}
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
+              {t.about.methodologyTitle}
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-2">
+            {/* Step 01 */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.steps.s1Tag}
+              </span>
+              <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.steps.s1Title}
+              </h4>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                {t.about.steps.s1Desc}
+              </p>
+            </div>
+
+            {/* Step 02 */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.steps.s2Tag}
+              </span>
+              <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.steps.s2Title}
+              </h4>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                {t.about.steps.s2Desc}
+              </p>
+            </div>
+
+            {/* Step 03 */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.steps.s3Tag}
+              </span>
+              <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.steps.s3Title}
+              </h4>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                {t.about.steps.s3Desc}
+              </p>
+            </div>
+
+            {/* Step 04 */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono font-medium text-zinc-400 dark:text-zinc-500">
+                {t.about.steps.s4Tag}
+              </span>
+              <h4 className="text-base font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.steps.s4Title}
+              </h4>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                {t.about.steps.s4Desc}
+              </p>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* 04 / TOOLKIT */}
+      <ScrollReveal delay={0.1}>
+        <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
+                {t.about.toolkitTag}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.about.toolkitTitle}
+              </h3>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveSection('skills')}
+              className="text-sm font-sans font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <span>{t.about.fullInventoryCta}</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div className="space-y-4 pt-1">
+            {SKILL_GROUPS.map((group, index) => (
+              <div key={group.id} className="space-y-2">
+                <div className="text-[11px] font-mono font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                  {getSkillCategoryName(group.id)}
+                </div>
+                <LogoLoop
+                  items={group.items}
+                  direction={index % 2 === 0 ? 'left' : 'right'}
+                  speed={40}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      </ScrollReveal>
 
       {/* NAVIGATION FOOTER */}
-      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-          {t.about.footerText}
-        </p>
+      <ScrollReveal delay={0.1}>
+        <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+            {t.about.footerText}
+          </p>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={() => setActiveSection('projects')}
-            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
-          >
-            <span>{t.about.exploreProjectsCta}</span>
-            <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
+            <button
+              type="button"
+              onClick={() => setActiveSection('projects')}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
             >
-              →
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveSection('experience')}
-            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
-          >
-            <span>{t.about.viewJourneyCta}</span>
-            <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
+              <span>{t.about.exploreProjectsCta}</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveSection('experience')}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
             >
-              →
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveSection('contact')}
-            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
-          >
-            <span>{t.about.getInTouchCta}</span>
-            <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
+              <span>{t.about.viewJourneyCta}</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveSection('contact')}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
             >
-              →
-            </span>
-          </button>
-        </div>
-      </section>
+              <span>{t.about.getInTouchCta}</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+          </div>
+        </section>
+      </ScrollReveal>
     </div>
   );
 }
+
 

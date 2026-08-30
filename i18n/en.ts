@@ -228,6 +228,10 @@ export const en: TranslationDictionary = {
         ],
       },
     },
+    footerText: 'Rahmat Workspace · Selected Case Studies & Projects',
+    backToOverviewCta: 'Back to Overview',
+    viewJourneyCta: 'View Journey',
+    getInTouchCta: 'Get In Touch',
   },
   projectModal: {
     caseStudyTag: 'Technical Case Study',

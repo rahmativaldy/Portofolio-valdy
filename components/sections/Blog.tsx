@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useWorkspace } from '@/context/WorkspaceContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { EDITORIAL_NOTES, EditorialNote } from '@/data/blog';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export function Blog() {
   const { setActiveSection } = useWorkspace();
@@ -99,19 +100,21 @@ export function Blog() {
 
       {/* 02 / TECHNICAL INDEX */}
       <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-8 sm:space-y-10">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
-              {t.blog.indexTag}
+        <ScrollReveal>
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block">
+                {t.blog.indexTag}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                {t.blog.indexTitle}
+              </h3>
+            </div>
+            <span className="text-xs sm:text-sm font-sans text-zinc-500 dark:text-zinc-400">
+              {EDITORIAL_NOTES.length} {t.blog.articleCount}
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-              {t.blog.indexTitle}
-            </h3>
           </div>
-          <span className="text-xs sm:text-sm font-sans text-zinc-500 dark:text-zinc-400">
-            {EDITORIAL_NOTES.length} {t.blog.articleCount}
-          </span>
-        </div>
+        </ScrollReveal>
 
         {/* Index List */}
         <div className="space-y-10 sm:space-y-12">
@@ -121,75 +124,76 @@ export function Blog() {
             const summary = noteData?.summary || note.summary;
 
             return (
-              <article
-                key={note.id}
-                className={`space-y-4 pb-10 sm:pb-12 ${
-                  index !== EDITORIAL_NOTES.length - 1
-                    ? 'border-b border-zinc-200/80 dark:border-zinc-800/80'
-                    : ''
-                }`}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
-                  {/* Left: Sequence & Context */}
-                  <div className="md:col-span-4 space-y-1.5">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white shrink-0"
-                        aria-hidden="true"
-                      />
-                      <span className="text-sm font-mono font-semibold text-zinc-950 dark:text-white">
-                        {t.blog.notePrefix} {note.sequence}
-                      </span>
-                    </div>
-                    <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 pl-3.5">
-                      {note.category} · {note.projectContext}
-                    </div>
-                  </div>
-
-                  {/* Right: Title, Summary & Read Action */}
-                  <div className="md:col-span-8 space-y-4">
-                    <h4 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
-                      {title}
-                    </h4>
-
-                    <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
-                      {summary}
-                    </p>
-
-                    {/* Technologies Tags */}
-                    <div className="pt-1 flex flex-wrap gap-1.5">
-                      {note.technologies.map((tech) => (
+              <ScrollReveal key={note.id} delay={index * 0.08}>
+                <article
+                  className={`space-y-4 pb-10 sm:pb-12 ${
+                    index !== EDITORIAL_NOTES.length - 1
+                      ? 'border-b border-zinc-200/80 dark:border-zinc-800/80'
+                      : ''
+                  }`}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
+                    {/* Left: Sequence & Context */}
+                    <div className="md:col-span-4 space-y-1.5">
+                      <div className="flex items-center gap-2">
                         <span
-                          key={tech}
-                          className="px-2.5 py-0.5 text-xs font-mono rounded-sm border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action Button */}
-                    <div className="pt-2">
-                      <button
-                        type="button"
-                        ref={(el) => {
-                          triggerRefs.current[note.id] = el;
-                        }}
-                        onClick={() => handleOpenNote(note)}
-                        className="group/btn inline-flex items-center gap-1.5 text-sm font-sans font-medium text-zinc-950 dark:text-white hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"
-                      >
-                        <span>{t.blog.readNote}</span>
-                        <span
-                          className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1"
+                          className="w-1.5 h-1.5 rounded-full bg-zinc-950 dark:bg-white shrink-0"
                           aria-hidden="true"
-                        >
-                          →
+                        />
+                        <span className="text-sm font-mono font-semibold text-zinc-950 dark:text-white">
+                          {t.blog.notePrefix} {note.sequence}
                         </span>
-                      </button>
+                      </div>
+                      <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 pl-3.5">
+                        {note.category} · {note.projectContext}
+                      </div>
+                    </div>
+
+                    {/* Right: Title, Summary & Read Action */}
+                    <div className="md:col-span-8 space-y-4">
+                      <h4 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                        {title}
+                      </h4>
+
+                      <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
+                        {summary}
+                      </p>
+
+                      {/* Technologies Tags */}
+                      <div className="pt-1 flex flex-wrap gap-1.5">
+                        {note.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2.5 py-0.5 text-xs font-mono rounded-sm border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 text-zinc-700 dark:text-zinc-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Button */}
+                      <div className="pt-2">
+                        <button
+                          type="button"
+                          ref={(el) => {
+                            triggerRefs.current[note.id] = el;
+                          }}
+                          onClick={() => handleOpenNote(note)}
+                          className="group/btn inline-flex items-center gap-1.5 text-sm font-sans font-medium text-zinc-950 dark:text-white hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+                        >
+                          <span>{t.blog.readNote}</span>
+                          <span
+                            className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1"
+                            aria-hidden="true"
+                          >
+                            →
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </ScrollReveal>
             );
           })}
         </div>
@@ -297,54 +301,57 @@ export function Blog() {
       })()}
 
       {/* NAVIGATION FOOTER */}
-      <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-          {t.blog.footerText}
-        </p>
+      <ScrollReveal delay={0.1}>
+        <section className="pt-8 sm:pt-10 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+            {t.blog.footerText}
+          </p>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={() => setActiveSection('projects')}
-            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
-          >
-            <span>{t.blog.exploreProjectsCta}</span>
-            <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
+            <button
+              type="button"
+              onClick={() => setActiveSection('projects')}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-sans font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
             >
-              →
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveSection('experience')}
-            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
-          >
-            <span>{t.blog.viewJourneyCta}</span>
-            <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
+              <span>{t.blog.exploreProjectsCta}</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveSection('experience')}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
             >
-              →
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveSection('skills')}
-            className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
-          >
-            <span>{t.blog.viewToolkitCta}</span>
-            <span
-              className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
+              <span>{t.blog.viewJourneyCta}</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveSection('skills')}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-sm border border-zinc-200 dark:border-zinc-800 bg-transparent text-zinc-800 dark:text-zinc-200 text-sm font-sans font-medium hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
             >
-              →
-            </span>
-          </button>
-        </div>
-      </section>
+              <span>{t.blog.viewToolkitCta}</span>
+              <span
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </button>
+          </div>
+        </section>
+      </ScrollReveal>
     </div>
   );
 }
+
 

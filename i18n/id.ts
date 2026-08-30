@@ -228,6 +228,10 @@ export const id: TranslationDictionary = {
         ],
       },
     },
+    footerText: 'Rahmat Workspace · Studi Kasus & Proyek Terpilih',
+    backToOverviewCta: 'Kembali ke Ringkasan',
+    viewJourneyCta: 'Lihat Pengalaman',
+    getInTouchCta: 'Hubungi Saya',
   },
   projectModal: {
     caseStudyTag: 'Studi Kasus Teknis',

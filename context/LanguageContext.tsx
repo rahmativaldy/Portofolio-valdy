@@ -50,6 +50,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = useMemo(() => translations[locale] || translations[DEFAULT_LOCALE], [locale]);
 
+  React.useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = locale;
+    }
+  }, [locale]);
+
   const value = useMemo(
     () => ({
       locale,
