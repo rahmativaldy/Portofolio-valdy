@@ -149,6 +149,15 @@ export function Header({ isSidebarOpen, onMenuToggle }: HeaderProps) {
         keywords: ['notes', 'blog', 'catatan', 'jurnal', 'artikel', 'learnings', 'pembelajaran', 'decisions', 'section', 'view', 'navigate'],
       },
       {
+        id: 'nav-guestbook',
+        title: t.navigation.guestbook,
+        category: t.header.categories.section,
+        sectionId: 'guestbook',
+        sectionLabel: t.navigation.guestbook,
+        description: t.navigation.guestbookDesc,
+        keywords: ['guestbook', 'buku tamu', 'pesan', 'message', 'leave a note', 'notes', 'visitor', 'greetings', 'section', 'view', 'navigate'],
+      },
+      {
         id: 'nav-contact',
         title: t.navigation.contact,
         category: t.header.categories.section,

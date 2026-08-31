@@ -9,8 +9,13 @@ interface WorkspaceContextType {
 
 const WorkspaceContext = createContext<WorkspaceContextType | undefined>(undefined);
 
-export function WorkspaceProvider({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSectionState] = useState('overview');
+interface WorkspaceProviderProps {
+  children: ReactNode;
+  initialSection?: string;
+}
+
+export function WorkspaceProvider({ children, initialSection = 'overview' }: WorkspaceProviderProps) {
+  const [activeSection, setActiveSectionState] = useState(initialSection);
 
   const setActiveSection = useCallback((section: string) => {
     setActiveSectionState(section);

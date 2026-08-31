@@ -8,6 +8,7 @@ export interface TranslationDictionary {
     toolkit: string;
     journey: string;
     notes: string;
+    guestbook: string;
     contact: string;
     overviewDesc: string;
     aboutDesc: string;
@@ -15,6 +16,7 @@ export interface TranslationDictionary {
     toolkitDesc: string;
     journeyDesc: string;
     notesDesc: string;
+    guestbookDesc: string;
     contactDesc: string;
   };
   sidebar: {
@@ -343,5 +345,55 @@ export interface TranslationDictionary {
     exploreProjectsCta: string;
     viewJourneyCta: string;
     readNotesCta: string;
+  };
+  guestbook: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    statusCount: string;
+    heroHeading: string;
+    heroDescription: string;
+    auth: {
+      signInTitle: string;
+      google: string;
+      github: string;
+      signedInAs: string;
+      signOut: string;
+    };
+    form: {
+      placeholder: string;
+      submitBtn: string;
+      submittingBtn: string;
+      successToast: string;
+      charCount: string;
+      errors: {
+        tooShort: string;
+        tooLong: string;
+        empty: string;
+        generic: string;
+      };
+    };
+    list: {
+      title: string;
+      count: string;
+      loadMore: string;
+      loadingMore: string;
+      emptyTitle: string;
+      emptySubtitle: string;
+      errorTitle: string;
+      retry: string;
+    };
+    management: {
+      deleteBtn: string;
+      confirmDeleteTitle: string;
+      confirmDeleteMessage: string;
+      confirmDeleteBtn: string;
+      cancelBtn: string;
+      deleting: string;
+    };
+    footerText: string;
+    backToOverviewCta: string;
+    readNotesCta: string;
+    getInTouchCta: string;
   };
 }

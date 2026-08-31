@@ -11,6 +11,7 @@ import { Projects } from '@/components/sections/Projects';
 import { Experience } from '@/components/sections/Experience';
 import { Contact } from '@/components/sections/Contact';
 import { Blog } from '@/components/sections/Blog';
+import { Guestbook } from '@/components/sections/Guestbook';
 
 function WorkspaceInner() {
   const { activeSection } = useWorkspace();
@@ -29,6 +30,8 @@ function WorkspaceInner() {
         return <Experience />;
       case 'blog':
         return <Blog />;
+      case 'guestbook':
+        return <Guestbook />;
       case 'contact':
         return <Contact />;
       default:
@@ -45,10 +48,14 @@ function WorkspaceInner() {
   );
 }
 
-export function WorkspaceShell() {
+interface WorkspaceShellProps {
+  initialSection?: string;
+}
+
+export function WorkspaceShell({ initialSection = 'overview' }: WorkspaceShellProps) {
   return (
     <LanguageProvider>
-      <WorkspaceProvider>
+      <WorkspaceProvider initialSection={initialSection}>
         <WorkspaceInner />
       </WorkspaceProvider>
     </LanguageProvider>

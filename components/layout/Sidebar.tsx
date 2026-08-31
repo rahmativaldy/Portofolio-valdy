@@ -33,6 +33,8 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         return t.navigation.journey;
       case 'blog':
         return t.navigation.notes;
+      case 'guestbook':
+        return t.navigation.guestbook;
       case 'contact':
         return t.navigation.contact;
       default:

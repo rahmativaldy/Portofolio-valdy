@@ -18,6 +18,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'skills', label: 'Toolkit', icon: '', fileName: 'skills.config' },
   { id: 'experience', label: 'Journey', icon: '', fileName: 'experience.log' },
   { id: 'blog', label: 'Notes', icon: '', fileName: 'notes.md' },
+  { id: 'guestbook', label: 'Guestbook', icon: '', fileName: 'guestbook.db' },
   { id: 'contact', label: 'Contact', icon: '', fileName: 'contact.http' },
 ];
 
@@ -51,6 +52,11 @@ export const COMMANDS_METADATA: CommandMetadata[] = [
     id: 'blog',
     label: 'Notes',
     description: 'Read short-form dev notes and learnings',
+  },
+  {
+    id: 'guestbook',
+    label: 'Guestbook',
+    description: 'Read and leave visitor notes and greetings',
   },
   {
     id: 'contact',
