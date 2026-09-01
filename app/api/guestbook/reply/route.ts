@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import { prisma } from '@/lib/db';
 import { cleanText } from '@/lib/sanitize';
 import { LocalGuestbookEntry } from '../route';
 
@@ -70,6 +71,32 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // If Database is configured, update in Prisma
+    if (process.env.DATABASE_URL) {
+      try {
+        const updated = await prisma.guestbookMessage.update({
+          where: { id: messageId },
+          data: {
+            reply: cleanedReply,
+            replyName: 'Rahmat Ivaldy',
+            repliedAt: new Date(),
+          },
+        });
+
+        const replyObj = {
+          id: `reply-${updated.id}`,
+          name: updated.replyName || 'Rahmat Ivaldy',
+          message: updated.reply || cleanedReply,
+          createdAt: (updated.repliedAt || new Date()).toISOString(),
+        };
+
+        return NextResponse.json({ success: true, reply: replyObj }, { status: 200 });
+      } catch (dbErr) {
+        console.warn('[guestbook-reply-api] DB update failed, falling back to local file:', dbErr);
+      }
+    }
+
+    // Local JSON fallback
     const messages = await readLocalMessages();
     const index = messages.findIndex((m) => m.id === messageId);
 
@@ -110,6 +137,25 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Message ID is required.' }, { status: 400 });
     }
 
+    // If Database is configured, clear reply in Prisma
+    if (process.env.DATABASE_URL) {
+      try {
+        await prisma.guestbookMessage.update({
+          where: { id: messageId },
+          data: {
+            reply: null,
+            replyName: null,
+            repliedAt: null,
+          },
+        });
+
+        return NextResponse.json({ success: true }, { status: 200 });
+      } catch (dbErr) {
+        console.warn('[guestbook-reply-api] DB delete failed:', dbErr);
+      }
+    }
+
+    // Local JSON fallback
     const messages = await readLocalMessages();
     const index = messages.findIndex((m) => m.id === messageId);
 

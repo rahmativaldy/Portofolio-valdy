@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
     const limit = Math.min(Math.max(Number(searchParams.get('limit') || 20), 1), 50);
     const cursor = searchParams.get('cursor');
 
-    // If Database is configured, use Prisma
+    // If Database is configured, use Prisma (PostgreSQL / Supabase)
     if (process.env.DATABASE_URL) {
       try {
         const [rawMessages, totalCount] = await Promise.all([
@@ -105,10 +105,18 @@ export async function GET(request: NextRequest) {
           message: item.message,
           createdAt: item.createdAt.toISOString(),
           user: {
-            name: item.user?.name || 'Visitor',
-            image: item.user?.image || null,
+            name: item.name || item.user?.name || 'Visitor',
+            image: item.image || item.user?.image || null,
           },
           isOwner: Boolean(currentUserId && item.userId === currentUserId),
+          reply: item.reply
+            ? {
+                id: `reply-${item.id}`,
+                name: item.replyName || 'Rahmat Ivaldy',
+                message: item.reply,
+                createdAt: item.repliedAt ? item.repliedAt.toISOString() : item.updatedAt.toISOString(),
+              }
+            : null,
         }));
 
         return NextResponse.json(
@@ -224,11 +232,13 @@ export async function POST(request: NextRequest) {
     const userId = session?.user?.id || null;
 
     // If Database is configured, attempt Prisma write
-    if (process.env.DATABASE_URL && userId) {
+    if (process.env.DATABASE_URL) {
       try {
         const created = await prisma.guestbookMessage.create({
           data: {
-            userId,
+            userId: userId || undefined,
+            name: authorName,
+            image: authorImage,
             message: cleanedMessage,
           },
           include: {
@@ -246,10 +256,11 @@ export async function POST(request: NextRequest) {
           message: created.message,
           createdAt: created.createdAt.toISOString(),
           user: {
-            name: created.user?.name || authorName,
-            image: created.user?.image || authorImage,
+            name: created.name || created.user?.name || authorName,
+            image: created.image || created.user?.image || authorImage,
           },
           isOwner: true,
+          reply: null,
         };
 
         return NextResponse.json({ success: true, message: formatted }, { status: 201 });
@@ -281,6 +292,7 @@ export async function POST(request: NextRequest) {
         image: newEntry.image,
       },
       isOwner: true,
+      reply: null,
     };
 
     return NextResponse.json({ success: true, message: formatted }, { status: 201 });
