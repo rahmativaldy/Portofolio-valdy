@@ -328,30 +328,16 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Message ID is required.' }, { status: 400 });
     }
 
-    // Try Prisma first if configured and user is signed in
-    if (process.env.DATABASE_URL && session?.user?.id) {
+    // Delete from Prisma (Supabase) if database is configured
+    if (process.env.DATABASE_URL) {
       try {
-        const existing = await prisma.guestbookMessage.findUnique({
-          where: { id: messageId },
-          select: { id: true, userId: true },
-        });
-
-        if (existing) {
-          if (existing.userId === session.user.id) {
-            await prisma.guestbookMessage.delete({ where: { id: messageId } });
-            return NextResponse.json({ success: true, id: messageId }, { status: 200 });
-          }
-          return NextResponse.json(
-            { error: 'Forbidden. You can only delete your own messages.' },
-            { status: 403 }
-          );
-        }
+        await prisma.guestbookMessage.delete({ where: { id: messageId } });
       } catch (dbErr) {
         console.warn('[guestbook-api] DB delete failed:', dbErr);
       }
     }
 
-    // Fallback: Local JSON file delete
+    // Delete from Local JSON file
     const localMessages = await readLocalMessages();
     const updated = localMessages.filter((m) => m.id !== messageId);
     await saveLocalMessages(updated);

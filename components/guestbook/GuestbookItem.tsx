@@ -147,17 +147,16 @@ export function GuestbookItem({
             </button>
           )}
 
-          {item.isOwner && (
-            <button
-              type="button"
-              onClick={() => onDeleteRequest(item.id)}
-              className="px-2 py-0.5 text-[11px] font-mono text-zinc-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded transition-colors cursor-pointer"
-              title={t.guestbook.management.deleteBtn}
-              aria-label={t.guestbook.management.deleteBtn}
-            >
-              {t.guestbook.management.deleteBtn}
-            </button>
-          )}
+          {/* Delete Message Button */}
+          <button
+            type="button"
+            onClick={() => onDeleteRequest(item.id)}
+            className="px-2 py-0.5 text-[11px] font-mono text-zinc-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded transition-colors cursor-pointer"
+            title={t.guestbook.management.deleteBtn}
+            aria-label={t.guestbook.management.deleteBtn}
+          >
+            {t.guestbook.management.deleteBtn}
+          </button>
         </div>
       </div>
 
