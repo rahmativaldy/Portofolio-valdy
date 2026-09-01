@@ -370,6 +370,7 @@ export interface TranslationDictionary {
       successToast: string;
       charCount: string;
       errors: {
+        nameRequired: string;
         tooShort: string;
         tooLong: string;
         empty: string;

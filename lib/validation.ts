@@ -4,8 +4,10 @@ export const guestbookMessageSchema = z.object({
   name: z
     .string()
     .trim()
-    .max(60, { message: 'Name cannot exceed 60 characters.' })
-    .optional(),
+    .min(2, { message: 'Nama minimal 2 karakter.' })
+    .max(60, { message: 'Nama maksimal 60 karakter.' })
+    .optional()
+    .or(z.literal('')),
   message: z
     .string()
     .trim()

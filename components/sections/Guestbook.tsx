@@ -102,6 +102,26 @@ export function Guestbook() {
     };
   }, [t]);
 
+  useEffect(() => {
+    // Poll for live updates every 4 seconds
+    const interval = setInterval(() => {
+      fetchMessages();
+    }, 4000);
+
+    const onFocus = () => {
+      fetchMessages();
+    };
+
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onFocus);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onFocus);
+    };
+  }, [fetchMessages]);
+
   const handleLoadMore = async () => {
     if (!nextCursor || isLoadingMore) return;
     setIsLoadingMore(true);

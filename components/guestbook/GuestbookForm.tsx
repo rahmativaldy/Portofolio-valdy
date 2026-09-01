@@ -37,11 +37,23 @@ export function GuestbookForm({ user, onMessagePosted }: GuestbookFormProps) {
 
   const charCount = message.length;
   const isOverLimit = charCount > 500;
-  const isValidLength = message.trim().length >= 3 && !isOverLimit;
+  const isNameValid = Boolean(user?.name) || name.trim().length >= 2;
+  const isValidLength = isNameValid && message.trim().length >= 3 && !isOverLimit;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+
+    const trimmedName = name.trim();
+    if (!user && !trimmedName) {
+      setError(t.guestbook.form.errors.nameRequired);
+      return;
+    }
+
+    if (!user && trimmedName.length < 2) {
+      setError(t.guestbook.form.errors.nameRequired);
+      return;
+    }
 
     const trimmedMessage = message.trim();
     if (!trimmedMessage) {

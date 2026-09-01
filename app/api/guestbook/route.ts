@@ -215,10 +215,11 @@ export async function POST(request: NextRequest) {
     }
 
     const cleanedMessage = cleanText(validationResult.data.message);
+    const formName = cleanText(validationResult.data.name || '');
     const authorName =
-      session?.user?.name ||
-      cleanText(validationResult.data.name || '') ||
-      'Pengunjung';
+      formName.length > 0
+        ? formName
+        : session?.user?.name || 'Pengunjung';
     const authorImage = session?.user?.image || null;
     const userId = session?.user?.id || null;
 

@@ -577,14 +577,15 @@ export const id: TranslationDictionary = {
       signOut: 'Keluar',
     },
     form: {
-      nameLabel: 'Nama Anda',
-      namePlaceholder: 'Nama atau inisial Anda (opsional)',
+      nameLabel: 'Nama Anda *',
+      namePlaceholder: 'Nama atau panggilan Anda (contoh: Dimas, Sarah, dll)',
       placeholder: 'Tulis pesan...',
       submitBtn: 'Kirim Pesan',
       submittingBtn: 'Mengirim Pesan...',
       successToast: '✓ Pesan berhasil dikirim',
       charCount: 'karakter',
       errors: {
+        nameRequired: 'Nama wajib diisi (minimal 2 karakter).',
         tooShort: 'Pesan minimal terdiri dari 3 karakter.',
         tooLong: 'Pesan maksimal 500 karakter.',
         empty: 'Silakan tulis pesan sebelum mengirim.',

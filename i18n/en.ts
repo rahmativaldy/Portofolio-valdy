@@ -577,14 +577,15 @@ export const en: TranslationDictionary = {
       signOut: 'Sign out',
     },
     form: {
-      nameLabel: 'Your Name',
-      namePlaceholder: 'Your name or handle (optional)',
+      nameLabel: 'Your Name *',
+      namePlaceholder: 'Your name or handle (e.g. Alex, Sarah)',
       placeholder: 'Write a message...',
       submitBtn: 'Post Message',
       submittingBtn: 'Posting Message...',
       successToast: '✓ Message posted',
       charCount: 'characters',
       errors: {
+        nameRequired: 'Name is required (at least 2 characters).',
         tooShort: 'Message must be at least 3 characters.',
         tooLong: 'Message cannot exceed 500 characters.',
         empty: 'Please write a message before posting.',
