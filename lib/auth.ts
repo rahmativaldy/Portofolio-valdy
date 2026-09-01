@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 import GitHub from 'next-auth/providers/github';
+import type { Provider } from 'next-auth/providers';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from './db';
 
@@ -28,6 +29,26 @@ const googleClientSecret =
   process.env.GOOGLE_CLIENT_SECRET ||
   undefined;
 
+const providers: Provider[] = [];
+
+if (githubClientId && githubClientSecret) {
+  providers.push(
+    GitHub({
+      clientId: githubClientId,
+      clientSecret: githubClientSecret,
+    })
+  );
+}
+
+if (googleClientId && googleClientSecret) {
+  providers.push(
+    Google({
+      clientId: googleClientId,
+      clientSecret: googleClientSecret,
+    })
+  );
+}
+
 // In production, AUTH_SECRET must be set via environment variable.
 // In development, provide a fallback to prevent MissingSecret server crashes when env vars are missing.
 const authSecret =
@@ -40,16 +61,7 @@ const authSecret =
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: process.env.DATABASE_URL ? PrismaAdapter(prisma) : undefined,
   session: { strategy: 'jwt' },
-  providers: [
-    GitHub({
-      clientId: githubClientId,
-      clientSecret: githubClientSecret,
-    }),
-    Google({
-      clientId: googleClientId,
-      clientSecret: googleClientSecret,
-    }),
-  ],
+  providers,
   pages: {
     signIn: '/guestbook',
     error: '/guestbook',

@@ -155,6 +155,54 @@ export function Guestbook() {
     }
   };
 
+  const handleReplySubmit = async (messageId: string, replyText: string, pin?: string): Promise<boolean> => {
+    try {
+      const res = await fetch('/api/guestbook/reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messageId, reply: replyText, pin }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || 'Failed to submit reply.');
+        return false;
+      }
+
+      if (data.reply) {
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId ? { ...msg, reply: data.reply } : msg
+          )
+        );
+      }
+      return true;
+    } catch {
+      alert('Failed to submit reply.');
+      return false;
+    }
+  };
+
+  const handleDeleteReply = async (messageId: string): Promise<boolean> => {
+    try {
+      const res = await fetch(`/api/guestbook/reply?messageId=${encodeURIComponent(messageId)}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId ? { ...msg, reply: null } : msg
+          )
+        );
+        return true;
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  };
+
   const handleSignIn = (provider: 'google' | 'github') => {
     signIn(provider, { callbackUrl: '/guestbook' });
   };
@@ -207,18 +255,19 @@ export function Guestbook() {
         </div>
       </section>
 
-      {/* 02 / AUTH & COMPOSER */}
+      {/* 02 / COMPOSER & AUTH */}
       <section className="space-y-4 max-w-2xl">
+        <GuestbookForm
+          user={sessionUser}
+          onMessagePosted={handleMessagePosted}
+        />
+
         <GuestbookAuth
           user={sessionUser}
           isLoading={isAuthLoading}
           onSignIn={handleSignIn}
           onSignOut={handleSignOut}
         />
-
-        {sessionUser && (
-          <GuestbookForm onMessagePosted={handleMessagePosted} />
-        )}
       </section>
 
       {/* 03 / MESSAGES FEED */}
@@ -233,6 +282,8 @@ export function Guestbook() {
           onLoadMore={handleLoadMore}
           onRetry={fetchMessages}
           onDeleteRequest={handleDeleteRequest}
+          onReplySubmit={handleReplySubmit}
+          onDeleteReply={handleDeleteReply}
         />
       </section>
 

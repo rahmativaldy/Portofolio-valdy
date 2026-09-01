@@ -1,0 +1,24 @@
+[
+  {
+    "id": "msg-1788262739010-hg5ka",
+    "name": "rahmat",
+    "image": null,
+    "message": "hai kak",
+    "createdAt": "2026-09-01T11:38:59.010Z",
+    "userId": null
+  },
+  {
+    "id": "msg-welcome-01",
+    "name": "Rahmat Ivaldy",
+    "image": null,
+    "message": "Halo dan selamat datang di Rahmat Workspace! Terima kasih telah berkunjung. Jangan ragu untuk meninggalkan pesan atau sekadar menyapa di sini.",
+    "createdAt": "2026-09-01T08:00:00.000Z",
+    "isOwner": false,
+    "reply": {
+      "id": "reply-1788262934613",
+      "name": "Rahmat Ivaldy",
+      "message": "Terima kasih sudah berkunjung! Semoga harimu menyenangkan.",
+      "createdAt": "2026-09-01T11:42:14.613Z"
+    }
+  }
+]

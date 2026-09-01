@@ -355,12 +355,15 @@ export interface TranslationDictionary {
     heroDescription: string;
     auth: {
       signInTitle: string;
+      optionalAuthHint: string;
       google: string;
       github: string;
       signedInAs: string;
       signOut: string;
     };
     form: {
+      nameLabel: string;
+      namePlaceholder: string;
       placeholder: string;
       submitBtn: string;
       submittingBtn: string;
@@ -390,6 +393,24 @@ export interface TranslationDictionary {
       confirmDeleteBtn: string;
       cancelBtn: string;
       deleting: string;
+    };
+    reply: {
+      replyBtn: string;
+      cancelBtn: string;
+      submitBtn: string;
+      submittingBtn: string;
+      placeholder: string;
+      authorBadge: string;
+      authorName: string;
+      deleteReplyBtn: string;
+      pinLabel: string;
+      pinPlaceholder: string;
+      successToast: string;
+      errors: {
+        tooShort: string;
+        invalidPin: string;
+        generic: string;
+      };
     };
     footerText: string;
     backToOverviewCta: string;

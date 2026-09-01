@@ -14,6 +14,8 @@ interface GuestbookListProps {
   onLoadMore: () => void;
   onRetry: () => void;
   onDeleteRequest: (id: string) => void;
+  onReplySubmit?: (messageId: string, replyText: string, pin?: string) => Promise<boolean>;
+  onDeleteReply?: (messageId: string) => Promise<boolean>;
 }
 
 export function GuestbookList({
@@ -26,6 +28,8 @@ export function GuestbookList({
   onLoadMore,
   onRetry,
   onDeleteRequest,
+  onReplySubmit,
+  onDeleteReply,
 }: GuestbookListProps) {
   const { t } = useLanguage();
 
@@ -112,6 +116,8 @@ export function GuestbookList({
               key={item.id}
               item={item}
               onDeleteRequest={onDeleteRequest}
+              onReplySubmit={onReplySubmit}
+              onDeleteReply={onDeleteReply}
             />
           ))}
         </div>

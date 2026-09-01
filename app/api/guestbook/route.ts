@@ -1,94 +1,168 @@
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs/promises';
+import path from 'path';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { guestbookMessageSchema } from '@/lib/validation';
 import { cleanText } from '@/lib/sanitize';
 
-// In-memory sliding window rate limiter per user id: max 5 submissions per 2 minutes
+export interface LocalGuestbookReply {
+  id: string;
+  name: string;
+  message: string;
+  createdAt: string;
+}
+
+export interface LocalGuestbookEntry {
+  id: string;
+  name: string;
+  image: string | null;
+  message: string;
+  createdAt: string;
+  userId?: string | null;
+  reply?: LocalGuestbookReply | null;
+}
+
+const LOCAL_DATA_FILE = path.join(process.cwd(), 'data', 'guestbook-messages.json');
+
+// In-memory sliding window rate limiter: max 5 submissions per 2 minutes
 const rateLimitMap = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 2 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 5;
 
-function isRateLimited(userId: string): boolean {
+function isRateLimited(identifier: string): boolean {
   const now = Date.now();
-  const timestamps = (rateLimitMap.get(userId) || []).filter(
+  const timestamps = (rateLimitMap.get(identifier) || []).filter(
     (t) => now - t < RATE_LIMIT_WINDOW_MS
   );
   if (timestamps.length >= MAX_REQUESTS_PER_WINDOW) {
     return true;
   }
   timestamps.push(now);
-  rateLimitMap.set(userId, timestamps);
+  rateLimitMap.set(identifier, timestamps);
   return false;
+}
+
+async function readLocalMessages(): Promise<LocalGuestbookEntry[]> {
+  try {
+    const data = await fs.readFile(LOCAL_DATA_FILE, 'utf-8');
+    return JSON.parse(data) as LocalGuestbookEntry[];
+  } catch {
+    return [];
+  }
+}
+
+async function saveLocalMessages(messages: LocalGuestbookEntry[]): Promise<void> {
+  try {
+    const dir = path.dirname(LOCAL_DATA_FILE);
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(LOCAL_DATA_FILE, JSON.stringify(messages, null, 2), 'utf-8');
+  } catch (err) {
+    console.error('[guestbook-api] Error writing local messages:', err);
+  }
 }
 
 /**
  * GET /api/guestbook
  * Retrieves public guestbook messages in reverse chronological order.
- * Safe public projection: id, message, createdAt, user (name, image), isOwner.
  */
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth();
+    const session = await auth().catch(() => null);
     const currentUserId = session?.user?.id;
 
     const { searchParams } = new URL(request.url);
     const limit = Math.min(Math.max(Number(searchParams.get('limit') || 20), 1), 50);
     const cursor = searchParams.get('cursor');
 
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json(
-        {
-          messages: [],
-          total: 0,
-          hasMore: false,
-          nextCursor: null,
-          dbConfigured: false,
-        },
-        { status: 200 }
-      );
+    // If Database is configured, use Prisma
+    if (process.env.DATABASE_URL) {
+      try {
+        const [rawMessages, totalCount] = await Promise.all([
+          prisma.guestbookMessage.findMany({
+            take: limit + 1,
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
+            orderBy: { createdAt: 'desc' },
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  image: true,
+                },
+              },
+            },
+          }),
+          prisma.guestbookMessage.count(),
+        ]);
+
+        const hasMore = rawMessages.length > limit;
+        const messagesToReturn = hasMore ? rawMessages.slice(0, limit) : rawMessages;
+        const nextCursor = hasMore ? messagesToReturn[messagesToReturn.length - 1].id : null;
+
+        const messages = messagesToReturn.map((item) => ({
+          id: item.id,
+          message: item.message,
+          createdAt: item.createdAt.toISOString(),
+          user: {
+            name: item.user?.name || 'Visitor',
+            image: item.user?.image || null,
+          },
+          isOwner: Boolean(currentUserId && item.userId === currentUserId),
+        }));
+
+        return NextResponse.json(
+          {
+            messages,
+            total: totalCount,
+            hasMore,
+            nextCursor,
+            dbConfigured: true,
+          },
+          { status: 200 }
+        );
+      } catch (dbErr) {
+        console.warn('[guestbook-api] Database query failed, falling back to local file:', dbErr);
+      }
     }
 
-    const [rawMessages, totalCount] = await Promise.all([
-      prisma.guestbookMessage.findMany({
-        take: limit + 1,
-        skip: cursor ? 1 : 0,
-        cursor: cursor ? { id: cursor } : undefined,
-        orderBy: { createdAt: 'desc' },
-        include: {
-          user: {
-            select: {
-              name: true,
-              image: true,
-            },
-          },
-        },
-      }),
-      prisma.guestbookMessage.count(),
-    ]);
+    // Fallback: Local JSON File storage
+    const allMessages = await readLocalMessages();
+    const sorted = [...allMessages].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
 
-    const hasMore = rawMessages.length > limit;
-    const messagesToReturn = hasMore ? rawMessages.slice(0, limit) : rawMessages;
-    const nextCursor = hasMore ? messagesToReturn[messagesToReturn.length - 1].id : null;
+    let startIndex = 0;
+    if (cursor) {
+      const cursorIndex = sorted.findIndex((m) => m.id === cursor);
+      if (cursorIndex !== -1) {
+        startIndex = cursorIndex + 1;
+      }
+    }
 
-    const messages = messagesToReturn.map((item) => ({
+    const paged = sorted.slice(startIndex, startIndex + limit);
+    const hasMore = startIndex + limit < sorted.length;
+    const nextCursor = hasMore && paged.length > 0 ? paged[paged.length - 1].id : null;
+
+    const messages = paged.map((item) => ({
       id: item.id,
       message: item.message,
-      createdAt: item.createdAt.toISOString(),
+      createdAt: item.createdAt,
       user: {
-        name: item.user?.name || 'Anonymous Visitor',
-        image: item.user?.image || null,
+        name: item.name || 'Visitor',
+        image: item.image || null,
       },
       isOwner: Boolean(currentUserId && item.userId === currentUserId),
+      reply: item.reply || null,
     }));
 
     return NextResponse.json(
       {
         messages,
-        total: totalCount,
+        total: sorted.length,
         hasMore,
         nextCursor,
-        dbConfigured: true,
+        dbConfigured: false,
       },
       { status: 200 }
     );
@@ -108,22 +182,19 @@ export async function GET(request: NextRequest) {
 
 /**
  * POST /api/guestbook
- * Creates a new guestbook message.
- * Requires authenticated session.
+ * Creates a new guestbook message. Open to public visitors without requiring OAuth.
  */
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized. Please sign in to leave a message.' },
-        { status: 401 }
-      );
-    }
+    const session = await auth().catch(() => null);
+    const clientIp =
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      request.headers.get('x-real-ip') ||
+      'anonymous-client';
 
-    const userId = session.user.id;
+    const rateKey = session?.user?.id || clientIp;
 
-    if (isRateLimited(userId)) {
+    if (isRateLimited(rateKey)) {
       return NextResponse.json(
         { error: 'Too many messages sent. Please wait a moment before trying again.' },
         { status: 429 }
@@ -144,36 +215,69 @@ export async function POST(request: NextRequest) {
     }
 
     const cleanedMessage = cleanText(validationResult.data.message);
+    const authorName =
+      session?.user?.name ||
+      cleanText(validationResult.data.name || '') ||
+      'Pengunjung';
+    const authorImage = session?.user?.image || null;
+    const userId = session?.user?.id || null;
 
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json(
-        { error: 'Database is not yet connected. Please configure DATABASE_URL.' },
-        { status: 503 }
-      );
+    // If Database is configured, attempt Prisma write
+    if (process.env.DATABASE_URL && userId) {
+      try {
+        const created = await prisma.guestbookMessage.create({
+          data: {
+            userId,
+            message: cleanedMessage,
+          },
+          include: {
+            user: {
+              select: {
+                name: true,
+                image: true,
+              },
+            },
+          },
+        });
+
+        const formatted = {
+          id: created.id,
+          message: created.message,
+          createdAt: created.createdAt.toISOString(),
+          user: {
+            name: created.user?.name || authorName,
+            image: created.user?.image || authorImage,
+          },
+          isOwner: true,
+        };
+
+        return NextResponse.json({ success: true, message: formatted }, { status: 201 });
+      } catch (dbErr) {
+        console.warn('[guestbook-api] Database write failed, falling back to local file:', dbErr);
+      }
     }
 
-    const created = await prisma.guestbookMessage.create({
-      data: {
-        userId,
-        message: cleanedMessage,
-      },
-      include: {
-        user: {
-          select: {
-            name: true,
-            image: true,
-          },
-        },
-      },
-    });
+    // Local JSON File storage write
+    const localMessages = await readLocalMessages();
+    const newEntry: LocalGuestbookEntry = {
+      id: `msg-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      name: authorName,
+      image: authorImage,
+      message: cleanedMessage,
+      createdAt: new Date().toISOString(),
+      userId: userId,
+    };
+
+    localMessages.unshift(newEntry);
+    await saveLocalMessages(localMessages);
 
     const formatted = {
-      id: created.id,
-      message: created.message,
-      createdAt: created.createdAt.toISOString(),
+      id: newEntry.id,
+      message: newEntry.message,
+      createdAt: newEntry.createdAt,
       user: {
-        name: created.user?.name || session.user.name || 'Anonymous Visitor',
-        image: created.user?.image || session.user.image || null,
+        name: newEntry.name,
+        image: newEntry.image,
       },
       isOwner: true,
     };
@@ -190,18 +294,11 @@ export async function POST(request: NextRequest) {
 
 /**
  * DELETE /api/guestbook
- * Deletes a guestbook message owned by the authenticated user.
+ * Deletes a guestbook message.
  */
 export async function DELETE(request: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Unauthorized. Please sign in.' },
-        { status: 401 }
-      );
-    }
-
+    const session = await auth().catch(() => null);
     const { searchParams } = new URL(request.url);
     let messageId = searchParams.get('id');
 
@@ -218,32 +315,33 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Message ID is required.' }, { status: 400 });
     }
 
-    if (!process.env.DATABASE_URL) {
-      return NextResponse.json(
-        { error: 'Database is not yet connected.' },
-        { status: 503 }
-      );
+    // Try Prisma first if configured and user is signed in
+    if (process.env.DATABASE_URL && session?.user?.id) {
+      try {
+        const existing = await prisma.guestbookMessage.findUnique({
+          where: { id: messageId },
+          select: { id: true, userId: true },
+        });
+
+        if (existing) {
+          if (existing.userId === session.user.id) {
+            await prisma.guestbookMessage.delete({ where: { id: messageId } });
+            return NextResponse.json({ success: true, id: messageId }, { status: 200 });
+          }
+          return NextResponse.json(
+            { error: 'Forbidden. You can only delete your own messages.' },
+            { status: 403 }
+          );
+        }
+      } catch (dbErr) {
+        console.warn('[guestbook-api] DB delete failed:', dbErr);
+      }
     }
 
-    const existing = await prisma.guestbookMessage.findUnique({
-      where: { id: messageId },
-      select: { id: true, userId: true },
-    });
-
-    if (!existing) {
-      return NextResponse.json({ error: 'Message not found.' }, { status: 404 });
-    }
-
-    if (existing.userId !== session.user.id) {
-      return NextResponse.json(
-        { error: 'Forbidden. You can only delete your own messages.' },
-        { status: 403 }
-      );
-    }
-
-    await prisma.guestbookMessage.delete({
-      where: { id: messageId },
-    });
+    // Fallback: Local JSON file delete
+    const localMessages = await readLocalMessages();
+    const updated = localMessages.filter((m) => m.id !== messageId);
+    await saveLocalMessages(updated);
 
     return NextResponse.json({ success: true, id: messageId }, { status: 200 });
   } catch (error) {
